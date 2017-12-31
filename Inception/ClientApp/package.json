@@ -1,0 +1,44 @@
+{
+    "name": "Inception",
+    "version": "0.0.0",
+    "license": "MIT",
+    "scripts": {
+        "ng": "ng",
+        "start": "ng serve --extract-css --hmr",
+        "build": "ng build --extract-css",
+        "build:ssr": "npm run build -- --app=ssr --output-hashing=media",
+        "lint": "ng lint"
+    },
+    "private": true,
+    "dependencies": {
+        "@angular-devkit/schematics": "0.0.40",
+        "@angular/animations": "^5.0.0",
+        "@angular/common": "^5.0.0",
+        "@angular/compiler": "^5.0.0",
+        "@angular/core": "^5.0.0",
+        "@angular/forms": "^5.0.0",
+        "@angular/http": "^5.0.0",
+        "@angular/platform-browser": "^5.0.0",
+        "@angular/platform-browser-dynamic": "^5.0.0",
+        "@angular/platform-server": "^5.0.0",
+        "@angular/router": "^5.0.0",
+        "@nguniversal/module-map-ngfactory-loader": "^5.0.0-beta.5",
+        "aspnet-prerendering": "^3.0.1",
+        "bootstrap": "^3.3.7",
+        "core-js": "^2.4.1",
+        "rxjs": "^5.5.2",
+        "zone.js": "^0.8.14"
+    },
+    "devDependencies": {
+        "@angular/cli": "1.6.3",
+        "@angular/compiler-cli": "^5.0.0",
+        "@angular/language-service": "^5.0.0",
+        "@angularclass/hmr": "^2.1.3",
+        "@types/node": "~6.0.60",
+        "codelyzer": "^4.0.1",
+        "protractor": "~5.1.2",
+        "ts-node": "~3.2.0",
+        "tslint": "~5.7.0",
+        "typescript": "2.4.2"
+    }
+}
