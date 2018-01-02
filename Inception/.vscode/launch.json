@@ -3,7 +3,31 @@
    // Use hover for the description of the existing attributes
    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
    "version": "0.2.0",
-   "configurations": [
+   "compounds": 
+   [
+        {
+            "name": "Web + client debug",
+            "configurations": 
+            [ 
+                ".NET Core Launch (web)", 
+                "Launch Chrome" 
+            ]
+        }
+    ],
+   "configurations": 
+   [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome",
+            "url": "http://localhost:5000",
+            "webRoot": "${workspaceRoot}/wwwroot",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": 
+            {
+                "/Views": "${workspaceRoot}/Views"
+            }
+        },
         {
             "name": ".NET Core Launch (web)",
             "type": "coreclr",
@@ -15,24 +39,30 @@
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
-            "launchBrowser": {
+            "launchBrowser": 
+            {
                 "enabled": false,
                 "args": "${auto-detect-url}",
-                "windows": {
+                "windows": 
+                {
                     "command": "cmd.exe",
                     "args": "/C start ${auto-detect-url}"
                 },
-                "osx": {
+                "osx": 
+                {
                     "command": "open"
                 },
-                "linux": {
+                "linux": 
+                {
                     "command": "xdg-open"
                 }
             },
-            "env": {
+            "env": 
+            {
                 "ASPNETCORE_ENVIRONMENT": "Development"
             },
-            "sourceFileMap": {
+            "sourceFileMap": 
+            {
                 "/Views": "${workspaceFolder}/Views"
             }
         },

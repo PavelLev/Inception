@@ -1,12 +1,12 @@
+import { AppModule } from './App/AppModule';
 import { enableProdMode } from '@angular/core';
+import { Environment } from './Environments/environment';
+import { HmrBootstrap } from './HmrBootstrap';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { environment } from './Environments/environment';
-import { HmrBootstrap } from './HmrBootstrap';
-import { AppModule } from './App/AppModule';
 
-
-export function getBaseUrl() {
+export function getBaseUrl() 
+{
     return document.getElementsByTagName('base')[0].href;
 }
 
@@ -14,15 +14,16 @@ const providers = [
     { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] }
 ];
 
-if (environment.production) {
+if (Environment.production) 
+{
     enableProdMode();
 }
 
 const bootstrap = () => platformBrowserDynamic(providers).bootstrapModule(AppModule);
 
-if (environment.hmr) 
+if (Environment.hmr) 
 {
-    if (module[ 'hot' ]) 
+    if (module['hot']) 
     {
         HmrBootstrap(module, bootstrap);
     } 

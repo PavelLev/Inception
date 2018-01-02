@@ -1,42 +1,50 @@
 {
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-    "project": {
+    "project": 
+    {
         "name": "Inception"
     },
-    "apps": [
+    "apps": 
+    [
         {
             "root": "src",
             "outDir": "dist",
-            "assets": [
+            "assets": 
+            [
                 "assets"
             ],
             "index": "index.html",
             "main": "Main.ts",
             "polyfills": "polyfills.ts",
             "tsconfig": "tsconfig.app.json",
-            "styles": [
+            "styles": 
+            [
                 "styles.css",
                 "../node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [],
             "environmentSource": "environments/environment.ts",
-            "environments": {
+            "environments": 
+            {
                 "dev": "environments/environment.ts",
                 "prod": "environments/environment.prod.ts"
             }
         }
     ],
-    "lint": [
+    "lint": 
+    [
         {
             "project": "src/tsconfig.app.json",
             "exclude": "**/node_modules/**"
         }
     ],
-    "defaults": {
-          "styleExt": "css",
-          "component": {},
-          "build": {
-              "progress": true
-          }
+    "defaults": 
+    {
+        "styleExt": "css",
+        "component": {},
+        "build": 
+        {
+            "progress": true
+        }
     }
 }

@@ -4,7 +4,7 @@
     "license": "MIT",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve --extract-css --hmr",
+        "start": "ng serve --hmr --extract-css",
         "build": "ng build --extract-css",
         "build:ssr": "npm run build -- --app=ssr --output-hashing=media",
         "lint": "ng lint"
@@ -39,6 +39,7 @@
         "protractor": "~5.1.2",
         "ts-node": "~3.2.0",
         "tslint": "~5.7.0",
+        "tslint-eslint-rules": "^4.1.1",
         "typescript": "2.4.2"
     }
 }

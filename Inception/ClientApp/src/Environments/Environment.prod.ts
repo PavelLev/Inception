@@ -1,4 +1,4 @@
-export const environment = {
-    production: true,
+export const Environment = {
     hmr: false,
+    production: true,
 };
