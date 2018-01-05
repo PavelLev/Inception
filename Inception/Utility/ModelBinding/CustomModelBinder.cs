@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Threading.Tasks;
+using Inception.Utility.Serialization;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
@@ -38,21 +39,23 @@ namespace Inception.Utility.ModelBinding
 
         public Task BindModelAsync(ModelBindingContext bindingContext)
         {
-            var descriptor = bindingContext.ActionContext.ActionDescriptor;
+            var actionDescriptor = bindingContext.ActionContext.ActionDescriptor;
 
-            var parameterDescriptors = descriptor.Parameters.ToList();
+            var parameterDescriptors = actionDescriptor.Parameters.ToList();
 
-            if (!_typeByActionDescriptor.ContainsKey(descriptor))
+            if (!_typeByActionDescriptor.ContainsKey(actionDescriptor))
             {
-                _typeByActionDescriptor[descriptor] = GenerateType(descriptor, parameterDescriptors);
+                _typeByActionDescriptor[actionDescriptor] = GenerateType(actionDescriptor, parameterDescriptors);
             }
+
+            var type = _typeByActionDescriptor[actionDescriptor];
 
 
             var stream = bindingContext.HttpContext.Request.Body;
             
             if (!_modelBindingIntermediateResultByStream.ContainsKey(stream))
             {
-                _modelBindingIntermediateResultByStream[stream] = ParseBody(stream, _typeByActionDescriptor[descriptor]);
+                _modelBindingIntermediateResultByStream[stream] = ParseBody(stream, _typeByActionDescriptor[actionDescriptor]);
             }
 
 
@@ -60,7 +63,7 @@ namespace Inception.Utility.ModelBinding
 
             var parameterName = bindingContext.FieldName;
 
-            var model = modelBindingIntermediateResult.DeserializedObject[parameterName];
+            var model = type.GetField(parameterName).GetValue(modelBindingIntermediateResult.DeserializedObject);
 
             bindingContext.Result = ModelBindingResult.Success(model);
 
@@ -76,14 +79,15 @@ namespace Inception.Utility.ModelBinding
             return Task.CompletedTask;
         }
 
-        private Type GenerateType(ActionDescriptor descriptor, IEnumerable<ParameterDescriptor> parameterDescriptors)
+        private Type GenerateType(ActionDescriptor actionDescriptor, IEnumerable<ParameterDescriptor> parameterDescriptors)
         {
-            var typeBuilder = _moduleBuilder.DefineType(descriptor.Id, TypeAttributes.Public | TypeAttributes.Class);
+            var typeName = DisplayNameToTypeName(actionDescriptor.DisplayName);
+
+            var typeBuilder = _moduleBuilder.DefineType(typeName, TypeAttributes.Public | TypeAttributes.Class);
 
             foreach (var parameterDescriptor in parameterDescriptors)
             {
-                typeBuilder.DefineField(parameterDescriptor.Name, parameterDescriptor.ParameterType,
-                    FieldAttributes.Public);
+                typeBuilder.DefineField(parameterDescriptor.Name, parameterDescriptor.ParameterType, FieldAttributes.Public);
             }
 
             return typeBuilder.CreateType();
@@ -92,7 +96,12 @@ namespace Inception.Utility.ModelBinding
 
         private ModelBindingIntermediateResult ParseBody(Stream stream, Type type)
         {
-            var jsonSerialiser = new JsonSerializer();
+            var jsonSerialiser = new JsonSerializer
+            {
+                MissingMemberHandling = MissingMemberHandling.Error,
+                ContractResolver = new RequireObjectPropertiesContractResolver() 
+            };
+
 
             using (var streamReader = new StreamReader(stream))
             using (var jsonTextReader = new JsonTextReader(streamReader))
@@ -103,6 +112,17 @@ namespace Inception.Utility.ModelBinding
 
                 return modelBindingIntermediateResult;
             }
+        }
+
+        private string DisplayNameToTypeName(string displayName)
+        {
+            var spaceIndex = displayName.IndexOf(' ');
+
+            var methodName = displayName.Substring(0, spaceIndex);
+
+            var result = $"{methodName}Request";
+
+            return result;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Inception.Utility.ModelBinding
 {
     public class ModelBindingIntermediateResult
     {
-        public ModelBindingIntermediateResult(dynamic deserializedObject)
+        public ModelBindingIntermediateResult(object deserializedObject)
         {
             DeserializedObject = deserializedObject;
 
@@ -18,7 +18,7 @@ namespace Inception.Utility.ModelBinding
             BindingCount++;
         }
 
-        public dynamic DeserializedObject { get; }
+        public object DeserializedObject { get; }
         public int BindingCount { get; private set; }
     }
 }
