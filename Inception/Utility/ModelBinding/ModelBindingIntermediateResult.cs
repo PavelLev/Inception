@@ -6,7 +6,19 @@ namespace Inception.Utility.ModelBinding
 {
     public class ModelBindingIntermediateResult
     {
-        public Dictionary<string, object> ActionParameters { get; } = new Dictionary<string, object>();
-        public int BindingCount { get; set; } = 0;
+        public ModelBindingIntermediateResult(dynamic deserializedObject)
+        {
+            DeserializedObject = deserializedObject;
+
+            BindingCount = 0;
+        }
+
+        public void IncrementBindingCount()
+        {
+            BindingCount++;
+        }
+
+        public dynamic DeserializedObject { get; }
+        public int BindingCount { get; private set; }
     }
 }

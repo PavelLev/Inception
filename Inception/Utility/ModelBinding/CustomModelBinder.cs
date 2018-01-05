@@ -22,16 +22,29 @@ namespace Inception.Utility.ModelBinding
             new Dictionary<ActionDescriptor, Type>();
 
 
+        private readonly AssemblyBuilder _assemblyBuilder;
+
+        private readonly ModuleBuilder _moduleBuilder;
+
+        public CustomModelBinder()
+        {
+            var assemblyName = new AssemblyName(Guid.NewGuid().ToString());
+
+            _assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
+
+            _moduleBuilder = _assemblyBuilder.DefineDynamicModule("MainModule");
+        }
+
 
         public Task BindModelAsync(ModelBindingContext bindingContext)
         {
             var descriptor = bindingContext.ActionContext.ActionDescriptor;
 
-            var parameters = descriptor.Parameters.ToList();
+            var parameterDescriptors = descriptor.Parameters.ToList();
 
             if (!_typeByActionDescriptor.ContainsKey(descriptor))
             {
-                _typeByActionDescriptor[descriptor] = GenerateType(descriptor, parameters);
+                _typeByActionDescriptor[descriptor] = GenerateType(descriptor, parameterDescriptors);
             }
 
 
@@ -39,7 +52,7 @@ namespace Inception.Utility.ModelBinding
             
             if (!_modelBindingIntermediateResultByStream.ContainsKey(stream))
             {
-                _modelBindingIntermediateResultByStream[stream] = ParseBody(parameters, stream);
+                _modelBindingIntermediateResultByStream[stream] = ParseBody(stream, _typeByActionDescriptor[descriptor]);
             }
 
 
@@ -47,14 +60,14 @@ namespace Inception.Utility.ModelBinding
 
             var parameterName = bindingContext.FieldName;
 
-            var model = modelBindingIntermediateResult.ActionParameters[parameterName];
+            var model = modelBindingIntermediateResult.DeserializedObject[parameterName];
 
             bindingContext.Result = ModelBindingResult.Success(model);
 
 
-            modelBindingIntermediateResult.BindingCount++;
+            modelBindingIntermediateResult.IncrementBindingCount();
 
-            if (modelBindingIntermediateResult.BindingCount == parameters.Count)
+            if (modelBindingIntermediateResult.BindingCount == parameterDescriptors.Count)
             {
                 _modelBindingIntermediateResultByStream.Remove(stream);
             }
@@ -63,80 +76,33 @@ namespace Inception.Utility.ModelBinding
             return Task.CompletedTask;
         }
 
-        private Type GenerateType(ActionDescriptor descriptor, List<ParameterDescriptor> parameters)
+        private Type GenerateType(ActionDescriptor descriptor, IEnumerable<ParameterDescriptor> parameterDescriptors)
         {
-            var assemblyName = new AssemblyName(descriptor.Id);
+            var typeBuilder = _moduleBuilder.DefineType(descriptor.Id, TypeAttributes.Public | TypeAttributes.Class);
 
+            foreach (var parameterDescriptor in parameterDescriptors)
+            {
+                typeBuilder.DefineField(parameterDescriptor.Name, parameterDescriptor.ParameterType,
+                    FieldAttributes.Public);
+            }
 
+            return typeBuilder.CreateType();
         }
 
 
-        private ModelBindingIntermediateResult ParseBody(List<ParameterDescriptor> parameters, Stream stream)
+        private ModelBindingIntermediateResult ParseBody(Stream stream, Type type)
         {
-            var modelBindingIntermediateResult = new ModelBindingIntermediateResult();
-
             var jsonSerialiser = new JsonSerializer();
 
             using (var streamReader = new StreamReader(stream))
             using (var jsonTextReader = new JsonTextReader(streamReader))
             {
-                // Start object
-                jsonTextReader.Read();
+                var deserializedObject = jsonSerialiser.Deserialize(jsonTextReader, type);
 
-                while (parameters.Count > 0)
-                {
-                    jsonTextReader.Read();
-                    if (jsonTextReader.TokenType != JsonToken.PropertyName)
-                    {
-                        throw new JsonSerializationException(
-                            $"Expected property name at line {jsonTextReader.LineNumber}, position {jsonTextReader.LinePosition}");
-                    }
+                var modelBindingIntermediateResult = new ModelBindingIntermediateResult(deserializedObject);
 
-
-                    var parameterToMatch = parameters.First(parameter => parameter.Name == jsonTextReader.Path);
-
-
-                    object value = null;
-
-                    if (
-                        parameterToMatch.ParameterType.IsPrimitive
-                        ||
-                        parameterToMatch.ParameterType == typeof(decimal)
-                        ||
-                        parameterToMatch.ParameterType == typeof(string)
-                        ||
-                        parameterToMatch.ParameterType == typeof(DateTime)
-                    )
-                    {
-                        jsonTextReader.Read();
-
-                        ;
-
-                    }
-
-                    if (value.GetType() != parameterToMatch.ParameterType)
-                    {
-                        throw new JsonSerializationException(
-                            $"Expected value of type {parameterToMatch.ParameterType}, actual value has type {value.GetType()} at line {jsonTextReader.LineNumber}, position {jsonTextReader.LinePosition}");
-                    }
-
-                    modelBindingIntermediateResult.ActionParameters[parameterToMatch.Name] = value;
-
-                    parameters.Remove(parameterToMatch);
-                }
-
-
-                // End object
-                jsonTextReader.Read();
-
-                if (jsonTextReader.TokenType != JsonToken.EndObject)
-                {
-                    throw new JsonSerializationException(
-                        $"Expected end object at line {jsonTextReader.LineNumber}, position {jsonTextReader.LinePosition}");
-                }
+                return modelBindingIntermediateResult;
             }
-
-            return modelBindingIntermediateResult;
         }
     }
 }
