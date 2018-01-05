@@ -11,7 +11,6 @@
     },
     "private": true,
     "dependencies": {
-        "@angular-devkit/schematics": "0.0.40",
         "@angular/animations": "^5.0.0",
         "@angular/common": "^5.0.0",
         "@angular/compiler": "^5.0.0",
@@ -31,6 +30,7 @@
     },
     "devDependencies": {
         "@angular-devkit/core": "0.0.22",
+        "@angular-devkit/schematics": "0.0.42",
         "@angular/cli": "1.6.3",
         "@angular/compiler-cli": "^5.0.0",
         "@angular/language-service": "^5.0.0",
