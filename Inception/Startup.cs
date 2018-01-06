@@ -1,5 +1,8 @@
+using Inception.Utility;
+using Inception.Utility.ModelBinding;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,7 +21,11 @@ namespace Inception
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(mvcOptions =>
+            {
+                mvcOptions.ModelBinderProviders.Insert(0, new CustomModelBinderProvider());
+
+            });
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -46,7 +53,7 @@ namespace Inception
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
+                    template: "api/{controller}/{action=Index}/{id?}");
             });
 
             app.UseSpa(spa =>
