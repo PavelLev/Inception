@@ -1,8 +1,9 @@
-using Inception.Utility;
+using System;
+using DryIoc;
+using DryIoc.Microsoft.DependencyInjection;
 using Inception.Utility.ModelBinding;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,19 +20,35 @@ namespace Inception
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(mvcOptions =>
-            {
-                mvcOptions.ModelBinderProviders.Insert(0, new CustomModelBinderProvider());
+            var container = new Container(
+                rules => rules.With(propertiesAndFields: PropertiesAndFields.Of)
+                )
+                .WithDependencyInjectionAdapter(
+                    throwIfUnresolved: type => type.Name.EndsWith("Controller")
+                );
 
-            });
+            container.Register<CompositionRoot>();
+            container.Resolve<CompositionRoot>();
+
+            services.AddMvc(mvcOptions =>
+                {
+                    mvcOptions.ModelBinderProviders.Insert(0, container.Resolve<ICustomModelBinderProvider>());
+                })
+                .AddControllersAsServices();
+
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
+                {
+                    configuration.RootPath = "ClientApp/dist";
+                });
+
+
+            container.Populate(services);
+
+            return container.Resolve<IServiceProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,24 +67,24 @@ namespace Inception
             app.UseSpaStaticFiles();
 
             app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "api/{controller}/{action=Index}/{id?}");
-            });
+                {
+                    routes.MapRoute(
+                        name: "default",
+                        template: "api/{controller}/{action=Index}/{id?}");
+                });
 
             app.UseSpa(spa =>
-            {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
-
-                spa.Options.SourcePath = "ClientApp";
-
-                if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
-            });
+                    // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                    // see https://go.microsoft.com/fwlink/?linkid=864501
+
+                    spa.Options.SourcePath = "ClientApp";
+
+                    if (env.IsDevelopment())
+                    {
+                        spa.UseAngularCliServer(npmScript: "start");
+                    }
+                });
         }
     }
 }

@@ -14,8 +14,6 @@ namespace Inception.Utility.ModelBinding
 {
     public class CustomModelBinder: ICustomModelBinder
     {
-        public static CustomModelBinder Instance { get; } = new CustomModelBinder();
-
         private readonly Dictionary<Stream, ModelBindingIntermediateResult> _modelBindingIntermediateResultByStream =
             new Dictionary<Stream, ModelBindingIntermediateResult>();
 
