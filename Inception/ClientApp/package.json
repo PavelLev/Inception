@@ -3,11 +3,11 @@
     "version": "0.0.0",
     "license": "MIT",
     "scripts": {
-        "ng": "ng",
-        "start": "ng serve --hmr --extract-css",
-        "build": "ng build --extract-css",
+        "ng": ".\\node_modules\\.bin\\ng",
+        "start": ".\\node_modules\\.bin\\ng serve --hmr --extract-css",
+        "build": ".\\node_modules\\.bin\\ng build --extract-css",
         "build:ssr": "npm run build -- --app=ssr --output-hashing=media",
-        "lint": "ng lint"
+        "lint": ".\\node_modules\\.bin\\ng lint"
     },
     "private": true,
     "dependencies": {
