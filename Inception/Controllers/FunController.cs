@@ -9,6 +9,11 @@ namespace Inception.Controllers
             return x + y + funClass.z;
         }
 
+        public string DoNothing(string x, string y)
+        {
+            return x + y;
+        }
+
         public class FunClass
         {
             public string z;
