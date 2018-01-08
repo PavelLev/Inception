@@ -17,7 +17,8 @@ import { AlertModule, ButtonsModule } from 'ngx-bootstrap';
         HomeComponent,
     ],
     imports: [
-        AlertModule.forRoot(), ButtonsModule.forRoot(),
+        AlertModule.forRoot(), 
+        ButtonsModule.forRoot(),
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
         HttpClientModule,
         FormsModule,
