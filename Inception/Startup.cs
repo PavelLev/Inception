@@ -2,6 +2,7 @@ using System;
 using DryIoc;
 using DryIoc.Microsoft.DependencyInjection;
 using Inception.Utility.ModelBinding;
+using Inception.Utility.ModelBinding.ActionConstraint;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -26,7 +27,7 @@ namespace Inception
                 rules => rules.With(propertiesAndFields: PropertiesAndFields.Of)
                 )
                 .WithDependencyInjectionAdapter(
-                    throwIfUnresolved: type => type.Name.EndsWith("Controller")
+                    throwIfUnresolved: type => true
                 );
 
             container.Register<CompositionRoot>();
@@ -34,6 +35,8 @@ namespace Inception
 
             services.AddMvc(mvcOptions =>
                 {
+                    mvcOptions.Conventions.Add(container.Resolve<ICustomActionModelConvention>());
+
                     mvcOptions.ModelBinderProviders.Insert(0, container.Resolve<ICustomModelBinderProvider>());
                 })
                 .AddControllersAsServices();
