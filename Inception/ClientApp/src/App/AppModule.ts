@@ -7,6 +7,7 @@ import { AppComponent } from './AppComponent';
 import { NavigationMenuComponent } from './NavigationMenu/NavigationMenuComponent';
 import { HomeComponent } from './Home/HomeComponent';
 import { AppRouting } from './AppRouting';
+import { AlertModule, ButtonsModule } from 'ngx-bootstrap';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { AppRouting } from './AppRouting';
         HomeComponent,
     ],
     imports: [
+        AlertModule.forRoot(), ButtonsModule.forRoot(),
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
         HttpClientModule,
         FormsModule,
