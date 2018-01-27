@@ -3,10 +3,13 @@ import { TestingService } from "../Services";
 import { ActivatedRoute } from "@angular/router";
 import { SiteTestResult } from "./SiteTestResult";
 
-@Component({
-    selector: "TestResultHistoryList",
-    templateUrl: "TestResultHistoryListComponent.html"
-})
+@Component
+    (
+    {
+        selector: "TestResultHistoryList",
+        templateUrl: "TestResultHistoryListComponent.html"
+    }
+    )
 
 export class TestResultHistoryListComponent implements OnInit
 {

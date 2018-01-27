@@ -1,22 +1,25 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
-@Component({
-    selector: 'NavigationMenu',
-    styleUrls: ['./NavigationMenuComponent.css'],
-    templateUrl: './NavigationMenuComponent.html',
-})
+@Component
+    (
+    {
+        selector: "NavigationMenu",
+        styleUrls: ["./NavigationMenuComponent.css"],
+        templateUrl: "./NavigationMenuComponent.html",
+    }
+    )
 export class NavigationMenuComponent {
     private _isExpanded = false;
 
-    public collapse() 
+    public collapse()
     {
         this._isExpanded = false;
     }
 
-    private toggle() 
+    private toggle()
     {
         this._isExpanded = !this._isExpanded;
-        if (true) 
+        if (true)
         {
 
         }
