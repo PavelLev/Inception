@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { SiteTestResult } from "../Models";
-import { Service } from "../Services";
+import { TestingService } from "../Services";
 import { ActivatedRoute } from "@angular/router";
+import { SiteTestResult } from "./SiteTestResult";
 
 @Component
     (
@@ -16,14 +16,14 @@ export class TestResultHistoryComponent implements OnInit
     @Input()
     public SiteTestResult: SiteTestResult;
 
-    constructor(private service: Service, private route: ActivatedRoute)
+    constructor(private _testingService: TestingService, private route: ActivatedRoute)
     {
 
     }
 
     public ngOnInit()
     {
-        this.SiteTestResult = this.service.getSiteTestResult(this.route.snapshot.params["id"]);
+        this.SiteTestResult = this._testingService.GetSiteTestResult(this.route.snapshot.params["id"]);
         console.log(this.SiteTestResult);
     }
 }

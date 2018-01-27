@@ -1,5 +1,6 @@
-<div class="col-md-10" *ngIf="linkTestResult !== null && linkTestResult !== undefined">
-    <span>{{linkTestResult.ResponseTime}}</span>
+<div class="col-md-10" *ngIf="LinkTestResult !== null && LinkTestResult !== undefined">
+    <span>ResponseTime: {{LinkTestResult.ResponseTime}}</span>
+    <br>
+    <span>URL: {{LinkTestResult.Url}}</span>
     <hr />
-    <span>{{linkTestResult.Url}}</span>
 </div>

@@ -11,11 +11,12 @@ import { AppRouting } from "./AppRouting";
 import { AlertModule, ButtonsModule } from "ngx-bootstrap";
 import { TestResultHistoryListComponent } from "./Home/TestResultHistoryListComponent";
 import { Resolver } from "./Resolver";
-import { Service } from "./Services";
+import { TestingService } from "./Services";
 import { TestResultHistoryComponent } from "./Home/TestResultHistoryComponent";
 import { LinkTestResultComponent } from "./Home/LinkTestResultComponent";
 
-@NgModule({
+@NgModule
+({
     bootstrap: [AppComponent],
     declarations: [
         AppComponent,
@@ -35,7 +36,7 @@ import { LinkTestResultComponent } from "./Home/LinkTestResultComponent";
     ],
     providers: [
         Resolver,
-        Service
+        TestingService
     ]
 })
 export class AppModule { }

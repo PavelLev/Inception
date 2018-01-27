@@ -1,10 +1,11 @@
-import { LinkTestResult, SiteTestResult } from "./Models";
 import { Observable } from "rxjs/Observable";
 import { Subject } from "rxjs/Subject";
 import { Injectable } from "@angular/core";
+import { LinkTestResult } from "./Home/LinkTestResult";
+import { SiteTestResult } from "./Home/SiteTestResult";
 
 @Injectable()
-export class Service {
+export class TestingService {
 
     public getLinkTestResults(): Observable<LinkTestResult[]>
     {
@@ -20,7 +21,7 @@ export class Service {
         return subject;
     }
 
-    public getSiteTestResult(id: string): SiteTestResult
+    public GetSiteTestResult(id: string): SiteTestResult
     {
         return TestSiteTestResult.find(x => x.Id === id);
     }

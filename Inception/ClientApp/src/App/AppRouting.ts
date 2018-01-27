@@ -8,9 +8,10 @@ const Routes: Routes = [
     { path: "", component: HomeComponent, pathMatch: "full" }
 ];
 
-@NgModule({
-    imports: [RouterModule.forRoot(Routes)],
+@NgModule
+({
     exports: [RouterModule],
+    imports: [RouterModule.forRoot(Routes)]
 })
 export class AppRouting { }
 

@@ -1,18 +1,20 @@
 import { OnInit, Component } from "@angular/core";
-import { Service } from "../Services";
-import { SiteTestResult } from "../Models";
+import { TestingService } from "../Services";
+import { SiteTestResult } from "./SiteTestResult";
 
-@Component(
+@Component
+    (
     {
         selector: "Home",
         templateUrl: "./HomeComponent.html",
     }
-)
+    )
+
 export class HomeComponent implements OnInit
 {
     public SiteTestResult: SiteTestResult;
 
-    constructor(private service: Service)
+    constructor(private _testingService: TestingService)
     {
 
     }
@@ -24,6 +26,6 @@ export class HomeComponent implements OnInit
 
     public GetTestResultHistoryList()
     {
-        this.SiteTestResult = this.service.getSiteTestResult("1");
+        this.SiteTestResult = this._testingService.GetSiteTestResult("1");
     }
 }
