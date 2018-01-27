@@ -3,10 +3,15 @@
 <div class="row">
     <div class="col-md-10">
         <div class="input-group">
-            <input (ngModel)="siteUrl" name="siteUrl" id="siteUrl" type="text" class="form-control" placeholder="Please enter site url..." />
+            <input (ngModel)="siteUrl" name="siteUrl" id="siteUrl" type="text" class="form-control" placeholder="Please enter site url..." (ngModelChange)="GetTestResultHistoryList()"/>
             <span class="input-group-btn">
-                <button type="submit" class="btn btn-warning btn-default">Test</button>
+                <button type="submit" class="btn btn-warning btn-default" (click)="GetTestResultHistoryList()">Test</button>
             </span>
         </div>
+    </div>
 </div>
+<div class="row">
+    <TestResultHistoryList [SiteTestResult]="SiteTestResult" id="test-result-history-list-item"></TestResultHistoryList>
 </div>
+
+
