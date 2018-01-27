@@ -21,7 +21,7 @@ export class TestResultHistoryListComponent implements OnInit
     public ngOnInit()
     {
        // this.siteTestResult = this.route.snapshot.data["siteTestResult"];
-        //this.SiteTestResult = this.service.getSiteTestResult("1");
+       // this.SiteTestResult = this.service.getSiteTestResult("1");
     }
 }
 

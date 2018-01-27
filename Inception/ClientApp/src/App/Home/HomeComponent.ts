@@ -13,10 +13,14 @@ export class HomeComponent implements OnInit
     public SiteTestResult: SiteTestResult;
 
     constructor(private service: Service)
-    {}
+    {
+
+    }
 
     public ngOnInit(): void
-    {}
+    {
+
+    }
 
     public GetTestResultHistoryList()
     {

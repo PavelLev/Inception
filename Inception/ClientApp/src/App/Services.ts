@@ -23,16 +23,6 @@ export class Service {
     public getSiteTestResult(id: string): SiteTestResult
     {
         return TestSiteTestResult.find(x => x.Id === id);
-        // const subject = new Subject<SiteTestResult>();
-        // setTimeout(() =>
-        // {
-        //     subject.next(TestSiteTestResult);
-        //     subject.complete();
-        // },
-        //     100);
-
-
-        // return subject;
     }
 }
 

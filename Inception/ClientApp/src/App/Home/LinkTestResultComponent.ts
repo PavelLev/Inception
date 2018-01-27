@@ -21,7 +21,6 @@ export class LinkTestResultComponent implements OnInit
 
     public ngOnInit()
     {
-        console.log("LinkTestResultComponent init");
         console.log(this.linkTestResult);
     }
 }
