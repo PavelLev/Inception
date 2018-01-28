@@ -1,7 +1,7 @@
 export class LinkTestOverview
 {
-    public url: string;
-    public minimumResponseTime: number;
-    public maximumResponseTime: number;
+    public Url: string;
+    public MinimumResponseTime: number;
+    public MaximumResponseTime: number;
 
 }

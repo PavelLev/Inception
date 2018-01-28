@@ -2,8 +2,8 @@ import { LinkTestOverview } from "./LinkTestOverview";
 
 export class SiteTestOverview
 {
-    public domainName: string;
-    public linkTestOverviews: LinkTestOverview[];
-    public firstTestedOn: Date;
-    public lastTestedOn: Date;
+    public DomainName: string;
+    public LinkTestOverviews: LinkTestOverview[];
+    public FirstTestedOn: Date;
+    public LastTestedOn: Date;
 }
