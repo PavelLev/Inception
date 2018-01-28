@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit
 
     }
 
-    public GetTestResultHistoryList()
+    public ShowTestResultHistoryList(): void
     {
         this.SiteTestResult = this._testingService.GetSiteTestResult("1");
     }

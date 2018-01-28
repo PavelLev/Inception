@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Resolve } from "@angular/router";
 import { TestingService } from "./Services";
+import { SiteTestResult } from "./Home/SiteTestResult";
 
 @Injectable()
 export class Resolver implements Resolve<any>
@@ -10,7 +11,7 @@ export class Resolver implements Resolve<any>
 
     }
 
-    public resolve()
+    public resolve(): SiteTestResult
     {
         return this._testingService.GetSiteTestResult("1");
     }

@@ -16,14 +16,14 @@ export class TestResultHistoryListComponent implements OnInit
     @Input()
     public SiteTestResult: SiteTestResult;
 
-    constructor(private _testingService: TestingService, private route: ActivatedRoute)
+    constructor(private _testingService: TestingService, private _activatedRoute: ActivatedRoute)
     {
 
     }
 
 
 
-    public ngOnInit()
+    public ngOnInit(): void
     {
 
     }

@@ -16,14 +16,14 @@ export class TestResultHistoryComponent implements OnInit
     @Input()
     public SiteTestResult: SiteTestResult;
 
-    constructor(private _testingService: TestingService, private route: ActivatedRoute)
+    constructor(private _testingService: TestingService, private _activatedRoute: ActivatedRoute)
     {
 
     }
 
-    public ngOnInit()
+    public ngOnInit(): void
     {
-        this.SiteTestResult = this._testingService.GetSiteTestResult(this.route.snapshot.params["id"]);
+        this.SiteTestResult = this._testingService.GetSiteTestResult(this._activatedRoute.snapshot.params["id"]);
         console.log(this.SiteTestResult);
     }
 }

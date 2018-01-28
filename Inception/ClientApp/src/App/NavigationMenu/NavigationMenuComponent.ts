@@ -8,15 +8,16 @@ import { Component } from "@angular/core";
         templateUrl: "./NavigationMenuComponent.html",
     }
     )
-export class NavigationMenuComponent {
-    private _isExpanded = false;
+export class NavigationMenuComponent
+{
+    private _isExpanded: boolean;
 
-    public collapse()
+    public collapse(): void
     {
         this._isExpanded = false;
     }
 
-    private toggle()
+    private toggle(): void
     {
         this._isExpanded = !this._isExpanded;
         if (true)

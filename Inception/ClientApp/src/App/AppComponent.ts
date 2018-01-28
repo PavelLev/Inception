@@ -9,5 +9,5 @@ import { Component } from "@angular/core";
     }
     )
 export class AppComponent {
-    public title = "app";
+    public title: string = "app";
 }
