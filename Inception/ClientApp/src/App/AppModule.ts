@@ -14,7 +14,7 @@ import { Resolver } from "./Resolver";
 import { TestingService } from "./Services";
 import { TestResultHistoryComponent } from "./Home/TestResultHistoryComponent";
 import { LinkTestResultComponent } from "./Home/LinkTestResultComponent";
-import { SiteOverviewComponent } from "./Home/SiteOverviewComponent";
+import { SiteTestOverviewComponent } from "./Home/SiteTestOverviewComponent";
 
 @NgModule
     (
@@ -31,7 +31,7 @@ import { SiteOverviewComponent } from "./Home/SiteOverviewComponent";
             TestResultHistoryListComponent,
             TestResultHistoryComponent,
             LinkTestResultComponent,
-            SiteOverviewComponent
+            SiteTestOverviewComponent
         ],
         imports:
         [
