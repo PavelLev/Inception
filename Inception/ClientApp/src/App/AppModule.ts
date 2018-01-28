@@ -14,6 +14,7 @@ import { Resolver } from "./Resolver";
 import { TestingService } from "./Services";
 import { TestResultHistoryComponent } from "./Home/TestResultHistoryComponent";
 import { LinkTestResultComponent } from "./Home/LinkTestResultComponent";
+import { SiteOverviewComponent } from "./Home/SiteOverviewComponent";
 
 @NgModule
     (
@@ -22,16 +23,17 @@ import { LinkTestResultComponent } from "./Home/LinkTestResultComponent";
         [
             AppComponent
         ],
-        declarations: 
+        declarations:
         [
             AppComponent,
             NavigationMenuComponent,
             HomeComponent,
             TestResultHistoryListComponent,
             TestResultHistoryComponent,
-            LinkTestResultComponent
+            LinkTestResultComponent,
+            SiteOverviewComponent
         ],
-        imports: 
+        imports:
         [
             AlertModule.forRoot(),
             ButtonsModule.forRoot(),
@@ -45,7 +47,7 @@ import { LinkTestResultComponent } from "./Home/LinkTestResultComponent";
             FormsModule,
             AppRouting
         ],
-        providers: 
+        providers:
         [
             Resolver,
             TestingService
@@ -53,7 +55,7 @@ import { LinkTestResultComponent } from "./Home/LinkTestResultComponent";
     }
     )
 
-export class AppModule 
+export class AppModule
 {
 
 }
