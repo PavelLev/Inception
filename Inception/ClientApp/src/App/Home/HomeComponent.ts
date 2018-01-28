@@ -1,15 +1,31 @@
 import { OnInit, Component } from "@angular/core";
+import { TestingService } from "../Services";
+import { SiteTestResult } from "./SiteTestResult";
 
-@Component(
+@Component
+    (
     {
         selector: "Home",
         templateUrl: "./HomeComponent.html",
     }
-)
-export class HomeComponent implements OnInit 
+    )
+
+export class HomeComponent implements OnInit
 {
-    public ngOnInit(): void 
+    public SiteTestResult: SiteTestResult;
+
+    constructor(private _testingService: TestingService)
     {
-        console.log("Home onInit");
+
+    }
+
+    public ngOnInit(): void
+    {
+
+    }
+
+    public ShowTestResultHistoryList(): void
+    {
+        this.SiteTestResult = this._testingService.GetSiteTestResult("1");
     }
 }

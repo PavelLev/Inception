@@ -1,12 +1,12 @@
 {
-    "extends": 
+    "extends":
     [
         "tslint-eslint-rules"
     ],
-    "rules": 
+    "rules":
     {
         "arrow-return-shorthand": true,
-        "brace-style": 
+        "brace-style":
         [
             true,
             "allman",
@@ -16,13 +16,13 @@
         ],
         "callable-types": false,
         "class-name": true,
-        "comment-format": 
+        "comment-format":
         [
             true,
             "check-space"
         ],
         "component-class-suffix": true,
-        "component-selector": 
+        "component-selector":
         [
             true,
             "element",
@@ -30,12 +30,12 @@
             "camelCase"
         ],
         "curly": true,
-        "deprecation": 
+        "deprecation":
         {
             "severity": "warn"
         },
         "directive-class-suffix": true,
-        "directive-selector": 
+        "directive-selector":
         [
             true,
             "attribute",
@@ -44,14 +44,14 @@
         ],
         "eofline": true,
         "forin": true,
-        "import-blacklist": 
+        "import-blacklist":
         [
             true,
             "rxjs",
             "rxjs/Rx"
         ],
         "import-spacing": true,
-        "indent": 
+        "indent":
         [
             true,
             "spaces",
@@ -59,17 +59,17 @@
         ],
         "interface-over-type-literal": true,
         "label-position": true,
-        "max-line-length": 
+        "max-line-length":
         [
             true,
             200
         ],
         "member-access": true,
-        "member-ordering": 
+        "member-ordering":
         [
             true,
             {
-                "order": 
+                "order":
                 [
                     "public-static-field",
                     "public-static-method",
@@ -91,7 +91,7 @@
         ],
         "no-arg": true,
         "no-bitwise": true,
-        "no-console": 
+        "no-console":
         [
             true,
             "debug",
@@ -106,10 +106,11 @@
         "no-empty": false,
         "no-empty-interface": true,
         "no-eval": true,
-        "no-inferrable-types": 
+        "no-inferrable-types":
         [
             true,
-            "ignore-params"
+            "ignore-params",
+            "ignore-properties"
         ],
         "no-input-rename": true,
         "no-misused-new": true,
@@ -129,50 +130,61 @@
         "one-line": false,
         "one-variable-per-declaration": true,
         "prefer-const": true,
-        "quotemark": 
+        "quotemark":
         [
             true,
             "double"
         ],
         "radix": true,
-        "semicolon": 
+        "semicolon":
         [
             true,
             "always"
         ],
-        "sort-imports": 
+        "sort-imports":
         [
             false
         ],
-        "ter-indent": 
+        "ter-indent":
         [
             true,
             4,
             {
-                "CallExpression": 
+                "CallExpression":
                 {
                     "arguments": 1
                 },
-                "FunctionDeclaration": 
+                "FunctionDeclaration":
                 {
                     "body": 1,
                     "parameters": 1
                 },
-                "FunctionExpression": 
+                "FunctionExpression":
                 {
                     "body": 1,
                     "parameters": 1
                 },
                 "MemberExpression": 1,
-                "SwitchCase": 1
+                "SwitchCase": 1,
+                "VariableDeclarator": 0
             }
         ],
-        "triple-equals": 
+        "triple-equals":
         [
             true,
             "allow-null-check"
         ],
-        "typedef-whitespace": 
+        "typedef":
+        [
+            true,
+            "call-signature",
+            "parameter",
+            "property-declaration",
+            "member-variable-declaration",
+            "object-destructuring",
+            "array-destructuring"
+        ],
+        "typedef-whitespace":
         [
             true,
             {
@@ -191,7 +203,7 @@
         "use-output-property-decorator": true,
         "use-pipe-transform-interface": true,
         "variable-name": false,
-        "whitespace": 
+        "whitespace":
         [
             true,
             "check-branch",
@@ -201,7 +213,7 @@
             "check-type"
         ]
     },
-    "rulesDirectory": 
+    "rulesDirectory":
     [
         "node_modules/codelyzer"
     ]
