@@ -4,10 +4,15 @@ import { Component } from "@angular/core";
     (
     {
         selector: "App",
-        styleUrls: ["./AppComponent.css"],
+        styleUrls: 
+        [
+            "./AppComponent.css"
+        ],
         templateUrl: "./AppComponent.html"
     }
     )
-export class AppComponent {
+
+export class AppComponent 
+{
     public title: string = "app";
 }

@@ -16,27 +16,44 @@ import { TestResultHistoryComponent } from "./Home/TestResultHistoryComponent";
 import { LinkTestResultComponent } from "./Home/LinkTestResultComponent";
 
 @NgModule
-({
-    bootstrap: [AppComponent],
-    declarations: [
-        AppComponent,
-        NavigationMenuComponent,
-        HomeComponent,
-        TestResultHistoryListComponent,
-        TestResultHistoryComponent,
-        LinkTestResultComponent
-    ],
-    imports: [
-        AlertModule.forRoot(),
-        ButtonsModule.forRoot(),
-        BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
-        HttpClientModule,
-        FormsModule,
-        AppRouting
-    ],
-    providers: [
-        Resolver,
-        TestingService
-    ]
-})
-export class AppModule { }
+    (
+    {
+        bootstrap:
+        [
+            AppComponent
+        ],
+        declarations: 
+        [
+            AppComponent,
+            NavigationMenuComponent,
+            HomeComponent,
+            TestResultHistoryListComponent,
+            TestResultHistoryComponent,
+            LinkTestResultComponent
+        ],
+        imports: 
+        [
+            AlertModule.forRoot(),
+            ButtonsModule.forRoot(),
+            BrowserModule.withServerTransition
+                (
+                {
+                    appId: "ng-cli-universal"
+                }
+                ),
+            HttpClientModule,
+            FormsModule,
+            AppRouting
+        ],
+        providers: 
+        [
+            Resolver,
+            TestingService
+        ]
+    }
+    )
+
+export class AppModule 
+{
+
+}

@@ -7,10 +7,14 @@ import { SiteTestResult } from "./SiteTestResult";
     (
     {
         selector: "TestResultHistory",
-        styleUrls: ["TestResultHistoryComponent.css"],
+        styleUrls: 
+        [
+            "TestResultHistoryComponent.css"
+        ],
         templateUrl: "TestResultHistoryComponent.html"
     }
     )
+
 export class TestResultHistoryComponent implements OnInit
 {
     @Input()

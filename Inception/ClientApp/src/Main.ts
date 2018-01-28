@@ -11,13 +11,7 @@ import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
         return document.getElementsByTagName("base")[0].href;
     }
 
-    let providers: {
-        provide: string,
-        useFactory: () => string,
-        deps: any[]
-    }[];
-
-    providers = [
+    const providers = [
         { provide: "BASE_URL", useFactory: getBaseUrl, deps: [] }
     ];
 

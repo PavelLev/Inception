@@ -5,6 +5,7 @@ import { LinkTestResult } from "./Home/LinkTestResult";
 import { SiteTestResult } from "./Home/SiteTestResult";
 
 @Injectable()
+
 export class TestingService {
 
     public getLinkTestResults(): Observable<LinkTestResult[]>
@@ -12,13 +13,15 @@ export class TestingService {
         let subject: Subject<LinkTestResult[]>;
 
         subject = new Subject<LinkTestResult[]>();
-        setTimeout(
+        setTimeout
+            (
             () =>
             {
                 subject.next(LinkTestResults);
                 subject.complete();
             },
-            100);
+            100
+            );
 
         return subject;
     }
@@ -29,11 +32,13 @@ export class TestingService {
     }
 }
 
-const TestSiteTestResult: SiteTestResult[] = [
+const TestSiteTestResult: SiteTestResult[] =
+[
     {
         DomainName: "www.hys-enterprise.com",
         Id: "1",
-        LinkTestResults: [
+        LinkTestResults: 
+        [
             {
                 Id: "1",
                 ResponseTime: 0.2,
@@ -65,7 +70,8 @@ const TestSiteTestResult: SiteTestResult[] = [
     {
         DomainName: "dou.ua",
         Id: "2",
-        LinkTestResults: [
+        LinkTestResults: 
+        [
             {
                 Id: "1",
                 ResponseTime: 0.2,
@@ -97,30 +103,30 @@ const TestSiteTestResult: SiteTestResult[] = [
 ];
 
 const LinkTestResults: LinkTestResult[] =
-    [
-        {
-            Id: "1",
-            ResponseTime: 0.2,
-            Url: "http://www.hys-enterprise.com/"
-        },
-        {
-            Id: "2",
-            ResponseTime: 0.4,
-            Url: "http://www.hys-enterprise.com/Home/Telecoms",
-        },
-        {
-            Id: "3",
-            ResponseTime: 0.4,
-            Url: "http://www.hys-enterprise.com/Home/LBS"
-        },
-        {
-            Id: "4",
-            ResponseTime: 0.4,
-            Url: "http://www.hys-enterprise.com/Home/Finance"
-        },
-        {
-            Id: "5",
-            ResponseTime: 0.4,
-            Url: "http://www.hys-enterprise.com/Home/Development"
-        },
-    ];
+[
+    {
+        Id: "1",
+        ResponseTime: 0.2,
+        Url: "http://www.hys-enterprise.com/"
+    },
+    {
+        Id: "2",
+        ResponseTime: 0.4,
+        Url: "http://www.hys-enterprise.com/Home/Telecoms",
+    },
+    {
+        Id: "3",
+        ResponseTime: 0.4,
+        Url: "http://www.hys-enterprise.com/Home/LBS"
+    },
+    {
+        Id: "4",
+        ResponseTime: 0.4,
+        Url: "http://www.hys-enterprise.com/Home/Finance"
+    },
+    {
+        Id: "5",
+        ResponseTime: 0.4,
+        Url: "http://www.hys-enterprise.com/Home/Development"
+    },
+];

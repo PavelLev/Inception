@@ -5,10 +5,14 @@ import { LinkTestResult } from "./LinkTestResult";
     (
     {
         selector: "LinkTestResult",
-        styleUrls: ["LinkTestResultComponent.css"],
+        styleUrls: 
+        [
+            "LinkTestResultComponent.css"
+        ],
         templateUrl: "LinkTestResultComponent.html"
     }
     )
+
 export class LinkTestResultComponent implements OnInit
 {
     @Input()

@@ -165,7 +165,8 @@
                     "parameters": 1
                 },
                 "MemberExpression": 1,
-                "SwitchCase": 1
+                "SwitchCase": 1,
+                "VariableDeclarator": 0
             }
         ],
         "triple-equals":
