@@ -26,7 +26,6 @@ import { SiteTestOverviewComponent } from "./Home/SiteTestOverviewComponent";
         declarations:
         [
             AppComponent,
-            NavigationMenuComponent,
             HomeComponent,
             TestResultHistoryListComponent,
             TestResultHistoryComponent,
