@@ -1,6 +1,11 @@
-<h1>Wellcome to first page of Inception</h1>
-<hr/>
+
 <div class="row">
+    <div class="col-md-12 cl-md-offset-5">
+            <h1>Inception</h1>
+    </div>
+</div>
+
+<!-- <div class="row">
     <div class="col-md-11">
         <div class="input-group">
             <input (ngModel)="siteUrl" name="siteUrl" id="siteUrl" type="text" class="form-control" placeholder="Please enter site url..." (ngModelChange)="ShowTestResultHistoryList()"/>
@@ -8,6 +13,48 @@
                 <button type="submit" class="btn btn-warning btn-default" (click)="ShowTestResultHistoryList()">Test</button>
             </span>
         </div>
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-md-12 col-md-offset-5">
+        <form class="full-width">
+            <mat-form-field class="">
+                <input matInput (ngModel)="siteUrl" type="text" aria-label="Number" placeholder="Please enter site url..." [formControl]="SearchControl" [matAutocomplete]="auto"
+                 name="siteUrl" id="MatSiteUrl" >
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let domainName of filteredDomainNames | async" [value]="domainName">
+                      {{ domainName }}
+                    </mat-option>
+                  </mat-autocomplete>
+            </mat-form-field>
+            <button mat-button>Click me!</button>
+                <!-- <button type="submit" class="btn btn-warning btn-default" (click)="ShowTestResultHistoryList()">Test</button> -->
+
+        </form>
+    </div>
+<!-- <div class="row">
+    <div class="col-md-10">
+        <div class="input-group col-md-12">
+            <form>
+                <mat-form-field class="border-radius-left" >
+                    <input class="form-control" matInput type="text" aria-label="Number"  [formControl]="SearchControl" [matAutocomplete]="auto" value=" ">
+                    <mat-placeholder id="searchPlaceholder">Test</mat-placeholder>
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let domainName of filteredDomainNames | async" [value]="option">
+                            {{ domainName }}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-warning btn-default" (click)="ShowTestResultHistoryList()">Test</button>
+                </span>
+            </form>
+        </div>
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-md-12" *ngIf="SiteTestResult !== null && SiteTestResult !== undefined">
+        <a [routerLink]="['/' + SiteTestResult?.DomainName]" class="btn btn-default">Site overview</a>
     </div>
 </div>
 <div class="row">

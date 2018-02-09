@@ -1,9 +1,25 @@
-<div class="col-md-10" *ngIf="SiteTestResult !== null && SiteTestResult !== undefined">
-    <h2>Domain name: {{SiteTestResult.DomainName}}</h2>
-    <h3>Tested on: {{SiteTestResult.TestedOn | date: 'dd/MM/yyyy'}}</h3>
-    <div class="col-md-5>"
-        *ngFor="let linkTestResult of SiteTestResult.LinkTestResults"
-        >
-        <LinkTestResult [LinkTestResult]="linkTestResult"></LinkTestResult>
+
+<!-- <div class="col=md-12" *ngIf="SiteTestResult !== null && SiteTestResult !== undefined">
+    <div class="col-md-2">
+        <button type="button" class="btn btn-default btn-arrow-left">Back</button>
     </div>
+    <div class="col-md-10">
+        <h2>Domain name: {{SiteTestResult.DomainName}}</h2>
+    </div>
+</div> -->
+
+
+<div class="col-md-10">
+    <button type="button" class="btn btn-default btn-arrow-left"
+        [routerLink]="['/']">Back</button>
+    <div class="col-md-12" *ngIf="SiteTestResult !== null && SiteTestResult !== undefined">
+            <h2>Domain name: {{SiteTestResult.DomainName}}</h2>
+            <h3>Tested on: {{SiteTestResult.TestedOn | date: 'dd/MM/yyyy'}}</h3>
+            <div class="col-md-5>"
+                *ngFor="let linkTestResult of SiteTestResult.LinkTestResults"
+                >
+                <LinkTestResult [LinkTestResult]="linkTestResult"></LinkTestResult>
+            </div>
+        </div>
 </div>
+

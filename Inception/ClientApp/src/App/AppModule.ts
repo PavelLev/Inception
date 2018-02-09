@@ -1,10 +1,9 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { AppComponent } from "./AppComponent";
-import { NavigationMenuComponent } from "./NavigationMenu/NavigationMenuComponent";
 import { HomeComponent } from "./Home/HomeComponent";
 
 import { AppRouting } from "./AppRouting";
@@ -15,7 +14,9 @@ import { TestingService } from "./Services";
 import { TestResultHistoryComponent } from "./Home/TestResultHistoryComponent";
 import { LinkTestResultComponent } from "./Home/LinkTestResultComponent";
 import { SiteTestOverviewComponent } from "./Home/SiteTestOverviewComponent";
-
+import { MaterialModule } from "./MaterialModule";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { DomainNameService } from "./Home/DomainNameService";
 @NgModule
     (
     {
@@ -44,12 +45,16 @@ import { SiteTestOverviewComponent } from "./Home/SiteTestOverviewComponent";
                 ),
             HttpClientModule,
             FormsModule,
-            AppRouting
+            AppRouting,
+            MaterialModule,
+            ReactiveFormsModule,
+            BrowserAnimationsModule
         ],
         providers:
         [
             Resolver,
-            TestingService
+            TestingService,
+            DomainNameService
         ]
     }
     )

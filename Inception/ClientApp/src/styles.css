@@ -3,3 +3,10 @@
 {
     cursor: pointer;
 }
+
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+.float-left
+{
+    float: left;
+}
