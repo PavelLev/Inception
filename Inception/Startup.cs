@@ -1,6 +1,8 @@
 using System;
+using AutoMapper;
 using DryIoc;
 using DryIoc.Microsoft.DependencyInjection;
+using Inception.Repository.Utility.Extensions;
 using Inception.Utility.ModelBinding;
 using Inception.Utility.ModelBinding.ActionConstraint;
 using Microsoft.AspNetCore.Builder;
@@ -8,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Serialization;
 
 namespace Inception
 {
@@ -30,8 +33,7 @@ namespace Inception
                     throwIfUnresolved: type => true
                 );
 
-            container.Register<CompositionRoot>();
-            container.Resolve<CompositionRoot>();
+            container.RegisterCompositionRoot<CompositionRoot>();
 
             services.AddMvc(mvcOptions =>
                 {
@@ -39,7 +41,11 @@ namespace Inception
 
                     mvcOptions.ModelBinderProviders.Insert(0, container.Resolve<ICustomModelBinderProvider>());
                 })
-                .AddControllersAsServices();
+                .AddControllersAsServices()
+                .AddJsonOptions
+                (
+                options => options.SerializerSettings.ContractResolver = new DefaultContractResolver()
+                );
 
 
             // In production, the Angular files will be served from this directory
@@ -47,6 +53,9 @@ namespace Inception
                 {
                     configuration.RootPath = "ClientApp/dist";
                 });
+
+
+            services.AddAutoMapper();
 
 
             container.Populate(services);

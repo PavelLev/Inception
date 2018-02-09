@@ -1,4 +1,5 @@
 ﻿using DryIoc;
+using Inception.Repository.Utility.Extensions;
 using Inception.Utility.ModelBinding;
 using Inception.Utility.ModelBinding.ActionConstraint;
 
@@ -6,9 +7,11 @@ namespace Inception
 {
     public class CompositionRoot
     {
-        public CompositionRoot(IRegistrator registrator)
+        public CompositionRoot(IContainer container)
         {
-            RegisterUtility(registrator);
+            RegisterUtility(container);
+
+            RegisterReporitory(container);
         }
 
 
@@ -27,6 +30,13 @@ namespace Inception
             registrator.Register<ICustomModelBinderProvider, CustomModelBinderProvider>(Reuse.Singleton);
 
             registrator.Register<IPostActionModelDeserializer, PostActionModelDeserializer>(Reuse.Singleton);
+        }
+
+
+
+        private void RegisterReporitory(IContainer container)
+        {
+            container.RegisterCompositionRoot<Repository.CompositionRoot>();
         }
     }
 }

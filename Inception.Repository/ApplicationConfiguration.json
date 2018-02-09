@@ -1,0 +1,5 @@
+﻿{
+    "DbContext": {
+        "ConnectionString": "Data Source=DESKTOP-P1IGEKB\\sqlexpress;Initial Catalog=Inception;Integrated Security=True;Pooling=False"
+    } 
+}
