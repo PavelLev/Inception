@@ -1,7 +1,7 @@
 
 <div class="row">
-    <div class="col-md-12 cl-md-offset-5">
-            <h1>Inception</h1>
+    <div class="col-md-12">
+            <div class="text-center project-name">Inception</div>
     </div>
 </div>
 
@@ -16,9 +16,9 @@
     </div>
 </div> -->
 <div class="row">
-    <div class="col-md-12 col-md-offset-5">
-        <form class="full-width">
-            <mat-form-field class="">
+    <div class="col-md-12">
+        <form class="col-md-7 col-md-offset-3">
+            <mat-form-field class="col-md-8">
                 <input matInput (ngModel)="siteUrl" type="text" aria-label="Number" placeholder="Please enter site url..." [formControl]="SearchControl" [matAutocomplete]="auto"
                  name="siteUrl" id="MatSiteUrl" >
                 <mat-autocomplete #auto="matAutocomplete">
@@ -27,7 +27,7 @@
                     </mat-option>
                   </mat-autocomplete>
             </mat-form-field>
-            <button mat-button>Click me!</button>
+            <button mat-button class="test-button">Test me!</button>
                 <!-- <button type="submit" class="btn btn-warning btn-default" (click)="ShowTestResultHistoryList()">Test</button> -->
 
         </form>

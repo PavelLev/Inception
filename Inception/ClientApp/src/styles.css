@@ -1,12 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/purple-green.css';
+
+html,
+body 
+{
+    height: 100%;
+}
+
+body 
+{
+    font-family: Roboto, Arial, sans-serif;
+    margin: 0;
+    background: linear-gradient(to bottom right, #4F6D93, #AD9D86);
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 #test-result-history-list-item
 {
     cursor: pointer;
 }
 
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-
 .float-left
 {
     float: left;
 }
+
+.mat-focused .mat-form-field-label{color:#e5daf7}
+
