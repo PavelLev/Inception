@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Update="ApplicationConfiguration.json">
+        <None Update="InceptionRepositoryConfiguration.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
     </ItemGroup>

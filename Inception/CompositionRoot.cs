@@ -1,7 +1,12 @@
-﻿using DryIoc;
+﻿using System.Net.Http;
+using DryIoc;
+using HtmlAgilityPack;
 using Inception.Repository.Utility.Extensions;
+using Inception.Testing;
+using Inception.Utility;
 using Inception.Utility.ModelBinding;
 using Inception.Utility.ModelBinding.ActionConstraint;
+using Microsoft.Extensions.Configuration;
 
 namespace Inception
 {
@@ -9,6 +14,8 @@ namespace Inception
     {
         public CompositionRoot(IContainer container)
         {
+            RegisterConfiguration(container);
+
             RegisterUtility(container);
 
             RegisterReporitory(container);
@@ -16,20 +23,41 @@ namespace Inception
 
 
 
-        private void RegisterUtility(IRegistrator registrator)
+        private void RegisterConfiguration(IContainer container)
         {
-            registrator.Register<ICustomActionConstraint, CustomActionConstraint>(Reuse.Singleton);
+            var builder = new ConfigurationBuilder()
+                .AddJsonFile("InceptionConfiguration.json");
 
-            registrator.Register<ICustomActionModelConvention, CustomActionModelConvention>(Reuse.Singleton);
+            var configuration = builder.Build();
 
 
-            registrator.Register<IActionTypeService, ActionTypeService>(Reuse.Singleton);
+            container.Configure<TestingConfiguration>(configuration.GetSection("Testing"));
+        }
 
-            registrator.Register<ICustomModelBinder, CustomModelBinder>(Reuse.Singleton);
 
-            registrator.Register<ICustomModelBinderProvider, CustomModelBinderProvider>(Reuse.Singleton);
 
-            registrator.Register<IPostActionModelDeserializer, PostActionModelDeserializer>(Reuse.Singleton);
+        private void RegisterUtility(IContainer container)
+        {
+            container.Register<ICustomActionConstraint, CustomActionConstraint>(Reuse.Singleton);
+
+            container.Register<ICustomActionModelConvention, CustomActionModelConvention>(Reuse.Singleton);
+
+
+            container.Register<IActionTypeService, ActionTypeService>(Reuse.Singleton);
+
+            container.Register<ICustomModelBinder, CustomModelBinder>(Reuse.Singleton);
+
+            container.Register<ICustomModelBinderProvider, CustomModelBinderProvider>(Reuse.Singleton);
+
+            container.Register<IPostActionModelDeserializer, PostActionModelDeserializer>(Reuse.Singleton);
+
+
+            container.Register<HttpClient>(Reuse.Singleton, Made.Of(() => new HttpClient()));
+
+            container.Register<HtmlDocument>();
+
+
+            container.Register<IUriService, UriService>(Reuse.Singleton);
         }
 
 

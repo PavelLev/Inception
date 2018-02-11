@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DryIoc;
-using Inception.Repository.Testing;
-using Inception.Repository.Testing.Overview;
 using Inception.Repository.Utility.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -29,7 +26,7 @@ namespace Inception.Repository
         private void RegisterConfiguration(IContainer container)
         {
             var builder = new ConfigurationBuilder()
-                .AddJsonFile("ApplicationConfiguration.json");
+                .AddJsonFile("InceptionRepositoryConfiguration.json");
 
             var configuration = builder.Build();
 

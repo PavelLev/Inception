@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Inception.Testing
 {
-    public class DomainNameService : Controller
+    public class DomainNameController : Controller
     {
         public List<string> GetTestedSiteDomainNames(string filter)
         {
