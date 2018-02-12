@@ -26,8 +26,17 @@ namespace Inception.Testing
 
 
 
-        public async Task<IActionResult> TestSite(string domainName)
+        public async Task<IActionResult> TestSite
+            (
+            string domainName
+            )
         {
+            if (!domainName.Contains("://"))
+            {
+                domainName = "http://" + domainName;
+            }
+
+
             var linkTestResults = (await _testingService.Process(domainName))
                 .ToList();
 
