@@ -19,6 +19,8 @@ namespace Inception
             RegisterUtility(container);
 
             RegisterReporitory(container);
+
+            RegisterTesting(container);
         }
 
 
@@ -57,6 +59,8 @@ namespace Inception
             container.Register<HtmlDocument>();
 
 
+            container.Register<IHtmlParser, HtmlParser>(Reuse.Singleton);
+
             container.Register<IUriService, UriService>(Reuse.Singleton);
         }
 
@@ -65,6 +69,13 @@ namespace Inception
         private void RegisterReporitory(IContainer container)
         {
             container.RegisterCompositionRoot<Repository.CompositionRoot>();
+        }
+
+
+
+        private void RegisterTesting(IContainer container)
+        {
+            container.Register<ITestingService, TestingService>(Reuse.Singleton);
         }
     }
 }

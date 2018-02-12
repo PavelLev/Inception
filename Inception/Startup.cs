@@ -1,4 +1,6 @@
 using System;
+using System.Net;
+using System.Text;
 using AutoMapper;
 using DryIoc;
 using DryIoc.Microsoft.DependencyInjection;
@@ -19,9 +21,24 @@ namespace Inception
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            ConfigureMiscellaneous();
         }
 
+
+
+        private void ConfigureMiscellaneous()
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            ServicePointManager.DefaultConnectionLimit = 1;
+        }
+
+
+
         public IConfiguration Configuration { get; }
+
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
@@ -62,6 +79,8 @@ namespace Inception
 
             return container.Resolve<IServiceProvider>();
         }
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

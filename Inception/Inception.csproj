@@ -21,6 +21,7 @@
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.0.0-rc1-final" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.1-beta3" />
     <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.0-preview1-25914-04" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +36,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Inception.Repository\Inception.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="InceptionConfiguration.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

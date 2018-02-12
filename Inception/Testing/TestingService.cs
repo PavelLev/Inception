@@ -8,7 +8,7 @@ using Inception.Utility;
 
 namespace Inception.Testing
 {
-    public class TestingService
+    public class TestingService : ITestingService
     {
         private readonly HttpClient _httpClient;
         private readonly TestingConfiguration _testingConfiguration;
@@ -71,14 +71,23 @@ namespace Inception.Testing
 
             var start = DateTime.Now;
 
-            var response = await _httpClient.GetAsync(url);
+            HttpResponseMessage httpResponseMessage;
 
-            if (!response.IsSuccessStatusCode)
+            try
+            {
+                httpResponseMessage = await _httpClient.GetAsync(url);
+            }
+            catch //server may return some junk
             {
                 return;
             }
 
-            var html = await response.Content.ReadAsStringAsync();
+            if (!httpResponseMessage.IsSuccessStatusCode)
+            {
+                return;
+            }
+
+            var html = await httpResponseMessage.Content.ReadAsStringAsync();
 
 
             var end = DateTime.Now;
