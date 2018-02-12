@@ -1,4 +1,4 @@
-﻿namespace Inception.Testing
+﻿namespace Inception.Testing.Results
 {
     public class LinkTestResultDto
     {

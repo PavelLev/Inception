@@ -12,8 +12,6 @@ namespace Inception.Utility.ModelBinding
             new Dictionary<ActionDescriptor, Type>();
 
 
-        private readonly AssemblyBuilder _assemblyBuilder;
-
         private readonly ModuleBuilder _moduleBuilder;
 
 
@@ -22,9 +20,9 @@ namespace Inception.Utility.ModelBinding
         {
             var assemblyName = new AssemblyName(Guid.NewGuid().ToString());
 
-            _assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
+            var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
 
-            _moduleBuilder = _assemblyBuilder.DefineDynamicModule("MainModule");
+            _moduleBuilder = assemblyBuilder.DefineDynamicModule("MainModule");
         }
 
 

@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Inception.Repository;
 using Inception.Repository.Testing;
-using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inception.Testing

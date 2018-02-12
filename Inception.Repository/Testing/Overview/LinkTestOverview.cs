@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Inception.Repository.Testing.Overview
+﻿namespace Inception.Repository.Testing.Overview
 {
     public class LinkTestOverview
     {

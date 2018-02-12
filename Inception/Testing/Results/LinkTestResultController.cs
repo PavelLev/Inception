@@ -4,7 +4,7 @@ using Inception.Repository;
 using Inception.Repository.Testing;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Inception.Testing
+namespace Inception.Testing.Results
 {
     public class LinkTestResultController : Controller
     {
