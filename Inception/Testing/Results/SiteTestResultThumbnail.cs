@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Inception.Testing
+namespace Inception.Testing.Results
 {
     public class SiteTestResultThumbnail
     {

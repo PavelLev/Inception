@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using AutoMapper;
 using Inception.Repository;
 using Inception.Repository.Testing;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
-namespace Inception.Testing
+namespace Inception.Testing.Results
 {
     public class SiteTestResultController: Controller
     {

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Inception.Repository.Testing;
-using Inception.Testing;
+using Inception.Testing.Results;
 
 namespace Inception.Utility.AutoMapper
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Inception.Testing
+namespace Inception.Testing.Results
 {
     public class SiteTestResultDto
     {
