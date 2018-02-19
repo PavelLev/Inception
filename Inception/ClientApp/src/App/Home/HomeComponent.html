@@ -19,15 +19,16 @@
     <div class="col-md-12">
         <form class="col-md-7 col-md-offset-3">
             <mat-form-field class="col-md-8">
-                <input matInput (ngModel)="siteUrl" type="text" aria-label="Number" placeholder="Please enter site url..." [formControl]="SearchControl" [matAutocomplete]="auto"
-                 name="siteUrl" id="MatSiteUrl" >
-                <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let domainName of filteredDomainNames | async" [value]="domainName">
+                <input matInput  type="text" aria-label="Number" placeholder="Please enter site url..." [formControl]="SearchControl" [matAutocomplete]="auto"
+                 name="siteUrl" id="MatSiteUrl"  [(ngModel)]="DomainName" name="selectedDomain" ngDefaultControl> 
+                <mat-autocomplete #auto="matAutocomplete" >
+                    <mat-option *ngFor="let domainName of FilteredDomainNames | async" [value]="domainName" 
+                    (onSelectionChange)="CallSomeFunction(domainName)">
                       {{ domainName }}
                     </mat-option>
                   </mat-autocomplete>
             </mat-form-field>
-            <button mat-button class="test-button">Test me!</button>
+            <button mat-button class="test-button" (click)="ShowTestResultHistoryList()">Test me!</button>
                 <!-- <button type="submit" class="btn btn-warning btn-default" (click)="ShowTestResultHistoryList()">Test</button> -->
 
         </form>
@@ -40,7 +41,7 @@
                     <input class="form-control" matInput type="text" aria-label="Number"  [formControl]="SearchControl" [matAutocomplete]="auto" value=" ">
                     <mat-placeholder id="searchPlaceholder">Test</mat-placeholder>
                     <mat-autocomplete #auto="matAutocomplete">
-                        <mat-option *ngFor="let domainName of filteredDomainNames | async" [value]="option">
+                        <mat-option *ngFor="let domainName of FilteredDomainNames | async" [value]="option">
                             {{ domainName }}
                         </mat-option>
                     </mat-autocomplete>

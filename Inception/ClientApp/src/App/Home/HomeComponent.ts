@@ -21,10 +21,11 @@ import { map } from "rxjs/operator/map";
 
 export class HomeComponent implements OnInit
 {
+    public DomainName: string;
     public SiteTestResult: SiteTestResult;
     public TestedSiteDomainNames: string[];
     public SearchControl: FormControl = new FormControl();
-    public filteredDomainNames: Observable<string[]>;
+    public FilteredDomainNames: Observable<string[]>;
 
     constructor(private _testingService: TestingService, private _domainNameService: DomainNameService)
     {
@@ -35,7 +36,7 @@ export class HomeComponent implements OnInit
     {
         this.TestedSiteDomainNames = this._domainNameService.GetTestedSiteDomainNames("");
 
-        this.filteredDomainNames = this.SearchControl.valueChanges.pipe
+        this.FilteredDomainNames = this.SearchControl.valueChanges.pipe
         (
             startWith(""),
             x => x.map
@@ -56,6 +57,13 @@ export class HomeComponent implements OnInit
 
     public ShowTestResultHistoryList(): void
     {
+        console.log(this.DomainName);
         this.SiteTestResult = this._testingService.GetSiteTestResult("1");
+    }
+
+    public CallSomeFunction(name: string): void
+    {        
+        console.log("2: " + this.DomainName)
+        console.log("1: " + name)
     }
 }
