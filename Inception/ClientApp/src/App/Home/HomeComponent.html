@@ -1,7 +1,7 @@
 
-<div class="row padding-top">
+<div class="row PaddingTop">
     <div class="col-md-12">
-            <div class="text-center project-name">Inception</div>
+            <div class="text-center ProjectName">Inception</div>
     </div>
 </div>
 
@@ -19,16 +19,24 @@
     <div class="col-md-12">
         <form class="col-md-7 col-md-offset-3">
             <mat-form-field class="col-md-8">
-                <input matInput  type="text" aria-label="Number" placeholder="Please enter site url..." [formControl]="SearchControl" [matAutocomplete]="auto"
-                 name="siteUrl" id="MatSiteUrl"  [(ngModel)]="DomainName" name="selectedDomain" ngDefaultControl> 
+                <input 
+                matInput  
+                type="text"
+                placeholder="Please enter site url..."
+                [formControl]="SearchControl"
+                [matAutocomplete]="auto"
+                id="DomainName"  
+                [(ngModel)]="DomainName" 
+                name="SelectedDomain" 
+                > 
                 <mat-autocomplete #auto="matAutocomplete" >
                     <mat-option *ngFor="let domainName of FilteredDomainNames | async" [value]="domainName" 
-                    (onSelectionChange)="CallSomeFunction(domainName)">
+                    >
                       {{ domainName }}
                     </mat-option>
                   </mat-autocomplete>
             </mat-form-field>
-            <button mat-button class="test-button" (click)="ShowTestResultHistoryList()">Test me!</button>
+            <button mat-button class="TestButton" (click)="ShowTestResultHistoryList()">Test me!</button>
                 <!-- <button type="submit" class="btn btn-warning btn-default" (click)="ShowTestResultHistoryList()">Test</button> -->
 
         </form>

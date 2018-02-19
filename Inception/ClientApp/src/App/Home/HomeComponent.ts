@@ -60,10 +60,4 @@ export class HomeComponent implements OnInit
         console.log(this.DomainName);
         this.SiteTestResult = this._testingService.GetSiteTestResult("1");
     }
-
-    public CallSomeFunction(name: string): void
-    {        
-        console.log("2: " + this.DomainName)
-        console.log("1: " + name)
-    }
 }
