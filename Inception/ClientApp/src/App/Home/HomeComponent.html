@@ -18,20 +18,21 @@
 <div class="row">
     <div class="col-md-12">
         <form class="col-md-7 col-md-offset-3">
-            <mat-form-field class="col-md-8">
+            <mat-form-field 
+                (focusin)="changeTheme()"
+                (focusout)="changeTheme()"
+                class="col-md-8">
                 <input 
-                matInput  
-                type="text"
-                placeholder="Please enter site url..."
-                [formControl]="SearchControl"
-                [matAutocomplete]="auto"
-                id="DomainName"  
-                [(ngModel)]="DomainName" 
-                name="SelectedDomain" 
-                > 
-                <mat-autocomplete #auto="matAutocomplete" >
-                    <mat-option *ngFor="let domainName of FilteredDomainNames | async" [value]="domainName" 
-                    >
+                    matInput  
+                    type="text"
+                    placeholder="Please enter site url..."
+                    [formControl]="SearchControl"
+                    [matAutocomplete]="auto"
+                    id="DomainName"  
+                    [(ngModel)]="DomainName" 
+                    name="SelectedDomain"> 
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let domainName of FilteredDomainNames | async" [value]="domainName" >
                       {{ domainName }}
                     </mat-option>
                   </mat-autocomplete>

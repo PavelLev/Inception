@@ -17,6 +17,7 @@ import { SiteTestOverviewComponent } from "./Home/SiteTestOverviewComponent";
 import { MaterialModule } from "./MaterialModule";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DomainNameService } from "./Home/DomainNameService";
+import { GlobalService } from "./GlobalService";
 @NgModule
     (
     {
@@ -54,7 +55,8 @@ import { DomainNameService } from "./Home/DomainNameService";
         [
             Resolver,
             TestingService,
-            DomainNameService
+            DomainNameService,
+            GlobalService
         ]
     }
     )

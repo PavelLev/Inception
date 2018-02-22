@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { GlobalService } from "./GlobalService";
 
 @Component
     (
@@ -12,7 +13,19 @@ import { Component } from "@angular/core";
     }
     )
 
-export class AppComponent 
+export class AppComponent implements OnInit
 {
+    public IsOverlayDark: boolean;
     public title: string = "app";
+
+    constructor(private _globalService: GlobalService)
+    {
+
+    }
+
+    ngOnInit(): void 
+    {
+        this._globalService.currentMessage.subscribe(message => this.IsOverlayDark = message);
+    }
 }
+    
