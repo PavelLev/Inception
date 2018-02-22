@@ -64,30 +64,26 @@ export class HomeComponent implements OnInit
         this.SiteTestResult = this._testingService.GetSiteTestResult("1");
     }
 
-    public changeTheme(): void
+    public SetDarkOverlay(): void
     {
-        //console.log("changeTheme: " + this.IsOverlayDark);
-        if (this.IsOverlayDark) 
+        this._globalService.changeMessage(true);
+    }
+
+    public SetOverlayDependedOnKeyPressed($event): void
+    {
+        if($event.keyCode == 13)
         {
-            this._globalService.changeMessage(false)
-            
-            console.log("after changeTheme: " + this.IsOverlayDark);
-         } 
-        else 
-        {             
-            this._globalService.changeMessage(true)
-            console.log("after changeTheme: " + this.IsOverlayDark);
+            this.SetLightOverlay();
+        } 
+        if($event.inputType == "deleteContentBackward")
+        {
+            this.SetDarkOverlay();
         }
     }
-
-    public onSelect(smth):void
-    {
-        console.log("click")
-    }
-
-    public onSelect2(smth):void
-    {
-        console.log("outfocus")
+    
+    public SetLightOverlay(): void
+    {        
+        this._globalService.changeMessage(false);
     }
 
 }

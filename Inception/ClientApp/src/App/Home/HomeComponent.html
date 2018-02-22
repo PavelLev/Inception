@@ -19,8 +19,8 @@
     <div class="col-md-12">
         <form class="col-md-7 col-md-offset-3">
             <mat-form-field 
-                (focusin)="changeTheme()"
-                (focusout)="changeTheme()"
+                (focusin)="SetDarkOverlay()"
+                (focusout)="SetLightOverlay()"                
                 class="col-md-8">
                 <input 
                     matInput  
@@ -30,12 +30,17 @@
                     [matAutocomplete]="auto"
                     id="DomainName"  
                     [(ngModel)]="DomainName" 
-                    name="SelectedDomain"> 
-                <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let domainName of FilteredDomainNames | async" [value]="domainName" >
-                      {{ domainName }}
-                    </mat-option>
-                  </mat-autocomplete>
+                    name="SelectedDomain" 
+                    (keyup)="SetOverlayDependedOnKeyPressed($event)"
+                    (input)="SetOverlayDependedOnKeyPressed($event)"
+                    > 
+                    <mat-autocomplete                        
+                        (optionSelected)="SetLightOverlay()"
+                        #auto="matAutocomplete" >
+                        <mat-option  *ngFor="let domainName of FilteredDomainNames | async" [value]="domainName" >
+                        {{ domainName }}
+                        </mat-option>
+                    </mat-autocomplete>
             </mat-form-field>
             <button mat-button class="TestButton" (click)="ShowTestResultHistoryList()">Test me!</button>
                 <!-- <button type="submit" class="btn btn-warning btn-default" (click)="ShowTestResultHistoryList()">Test</button> -->
