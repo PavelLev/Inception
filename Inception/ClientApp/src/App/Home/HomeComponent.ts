@@ -86,10 +86,4 @@ export class HomeComponent implements OnInit
         this._globalService.changeMessage(false);
     }
 
-    public SetFocus(event): void
-    {
-        event.target.focus();
-        this.SetDarkOverlay();
-    }
-
 }

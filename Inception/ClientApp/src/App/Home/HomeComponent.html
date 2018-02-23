@@ -20,8 +20,7 @@
                     [(ngModel)]="DomainName" 
                     name="SelectedDomain" 
                     (keyup)="SetOverlayDependedOnKeyPressed($event)"
-                    (input)="SetOverlayDependedOnKeyPressed($event)"
-                    (blur)="SetFocus($event)"> 
+                    (input)="SetOverlayDependedOnKeyPressed($event)"> 
                     <mat-autocomplete                        
                         (optionSelected)="SetLightOverlay()"
                         #auto="matAutocomplete" >
@@ -31,7 +30,7 @@
                     </mat-autocomplete>
             </mat-form-field>
             <button mat-button class="TestButton" (click)="ShowTestResultHistoryList()">Test me!</button>
-            <button mat-button *ngIf="SiteTestResult !== null && SiteTestResult !== undefined" [routerLink]="['/' + SiteTestResult?.DomainName]" class="TestButton">Site overview</button>
+            <button mat-button *ngIf="SiteTestResult !== undefined" [routerLink]="['/' + SiteTestResult?.DomainName]" class="TestButton">Site overview</button>
         </form>
     </div>
 </div>
