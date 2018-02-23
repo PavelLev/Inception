@@ -16,7 +16,6 @@ namespace Inception.Utility.ModelBinding.ActionConstraint
 
         public void Apply(ActionModel action)
         {
-
             foreach (var actionSelectorModel in action.Selectors)
             {
                 actionSelectorModel.ActionConstraints.Add(_serviceProvider.GetService<ICustomActionConstraint>());
