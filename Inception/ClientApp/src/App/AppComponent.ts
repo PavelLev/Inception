@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { GlobalService } from "./GlobalService";
+import { OverlaySettingsService } from "./OverlaySettingsService";
 
 @Component
     (
@@ -18,14 +18,14 @@ export class AppComponent implements OnInit
     public IsOverlayDark: boolean;
     public title: string = "app";
 
-    constructor(private _globalService: GlobalService)
+    constructor(private _overlaySettingsService: OverlaySettingsService)
     {
 
     }
 
     ngOnInit(): void 
     {
-        this._globalService.currentMessage.subscribe(message => this.IsOverlayDark = message);
+        this._overlaySettingsService.currentMessage.subscribe(message => this.IsOverlayDark = message);
     }
 }
     

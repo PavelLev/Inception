@@ -6,7 +6,7 @@ import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs/Observable";
 import {startWith} from "rxjs/operators/startWith";
 import { map } from "rxjs/operator/map";
-import { GlobalService } from "../GlobalService";
+import { OverlaySettingsService } from "../OverlaySettingsService";
 
 @Component
     (
@@ -29,14 +29,14 @@ export class HomeComponent implements OnInit
     public SearchControl: FormControl = new FormControl();
     public FilteredDomainNames: Observable<string[]>;
 
-    constructor(private _testingService: TestingService, private _domainNameService: DomainNameService, private _globalService: GlobalService)
+    constructor(private _testingService: TestingService, private _domainNameService: DomainNameService, private _overlaySettingsService: OverlaySettingsService)
     {
 
     }
 
     public ngOnInit(): void
     {
-        this._globalService.currentMessage.subscribe(message => this.IsOverlayDark = message);
+        this._overlaySettingsService.currentMessage.subscribe(message => this.IsOverlayDark = message);
 
         this.TestedSiteDomainNames = this._domainNameService.GetTestedSiteDomainNames("");
 
@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit
 
     public HideOverlay(): void
     {
-        this._globalService.changeMessage(true);
+        this._overlaySettingsService.changeMessage(true);
     }
 
     public SetOverlayOnKeyPressed(event): void
@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit
     
     public ShowOverlay(): void
     {        
-        this._globalService.changeMessage(false);
+        this._overlaySettingsService.changeMessage(false);
     }
 
 }

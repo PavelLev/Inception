@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
 @Injectable()
-export class GlobalService 
+export class OverlaySettingsService 
 {
     private messageSource = new BehaviorSubject<boolean>(false);
     currentMessage = this.messageSource.asObservable();
