@@ -1,5 +1,5 @@
 <div class="col-md-11 SiteTestResultItem" 
-    *ngIf="SiteTestResult !== null && SiteTestResult !== undefined"
+    *ngIf="SiteTestResult !== null"
     [routerLink]="['/', SiteTestResult.Id]">
     <h5>{{SiteTestResult.DomainName}}</h5><span>{{SiteTestResult.TestedOn | date: 'dd/MM/yyyy'}}</span>
 </div>
