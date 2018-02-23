@@ -64,24 +64,24 @@ export class HomeComponent implements OnInit
         this.SiteTestResult = this._testingService.GetSiteTestResult("1");
     }
 
-    public SetDarkOverlay(): void
+    public HideOverlay(): void
     {
         this._globalService.changeMessage(true);
     }
 
-    public SetOverlayDependedOnKeyPressed(event): void
+    public SetOverlayOnKeyPressed(event): void
     {
         if(event.keyCode == 13)
         {
-            this.SetLightOverlay();
+            this.ShowOverlay();
         } 
         if(event.inputType == "deleteContentBackward")
         {
-            this.SetDarkOverlay();
+            this.HideOverlay();
         }
     }
     
-    public SetLightOverlay(): void
+    public ShowOverlay(): void
     {        
         this._globalService.changeMessage(false);
     }
