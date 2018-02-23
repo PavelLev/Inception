@@ -44,6 +44,7 @@
                     </mat-autocomplete>
             </mat-form-field>
             <button mat-button class="TestButton" (click)="ShowTestResultHistoryList()">Test me!</button>
+            <button mat-button *ngIf="SiteTestResult !== null && SiteTestResult !== undefined" [routerLink]="['/' + SiteTestResult?.DomainName]" class="TestButton">Site overview</button>
                 <!-- <button type="submit" class="btn btn-warning btn-default" (click)="ShowTestResultHistoryList()">Test</button> -->
 
         </form>
@@ -68,13 +69,17 @@
         </div>
     </div>
 </div> -->
-<div class="row">
+<!-- <div class="row">
     <div class="col-md-12" *ngIf="SiteTestResult !== null && SiteTestResult !== undefined">
-        <a [routerLink]="['/' + SiteTestResult?.DomainName]" class="btn btn-default">Site overview</a>
+        <div class="col-md-7 col-md-offset-3">
+            <button mat-button [routerLink]="['/' + SiteTestResult?.DomainName]" class="TestButton">Site overview</button>
+        </div>        
     </div>
-</div>
+</div> -->
 <div class="row">
-    <TestResultHistoryList [SiteTestResult]="SiteTestResult" id="test-result-history-list-item"></TestResultHistoryList>
+    <div class="col-md-7 col-md-offset-3">
+        <TestResultHistoryList [SiteTestResult]="SiteTestResult" id="test-result-history-list-item"></TestResultHistoryList>
+    </div>    
 </div>
 
 
