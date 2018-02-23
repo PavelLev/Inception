@@ -18,11 +18,6 @@ body
   -o-background-size: cover;    
 }
 
-#test-result-history-list-item
-{
-  cursor: pointer;
-}
-
 .float-left
 {
   float: left;
