@@ -33,6 +33,7 @@
                     name="SelectedDomain" 
                     (keyup)="SetOverlayDependedOnKeyPressed($event)"
                     (input)="SetOverlayDependedOnKeyPressed($event)"
+                    (blur)="SetFocus($event)"
                     > 
                     <mat-autocomplete                        
                         (optionSelected)="SetLightOverlay()"

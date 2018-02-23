@@ -67,15 +67,16 @@ export class HomeComponent implements OnInit
     public SetDarkOverlay(): void
     {
         this._globalService.changeMessage(true);
+        console.log("i am setted")
     }
 
-    public SetOverlayDependedOnKeyPressed($event): void
+    public SetOverlayDependedOnKeyPressed(event): void
     {
-        if($event.keyCode == 13)
+        if(event.keyCode == 13)
         {
             this.SetLightOverlay();
         } 
-        if($event.inputType == "deleteContentBackward")
+        if(event.inputType == "deleteContentBackward")
         {
             this.SetDarkOverlay();
         }
@@ -84,6 +85,12 @@ export class HomeComponent implements OnInit
     public SetLightOverlay(): void
     {        
         this._globalService.changeMessage(false);
+    }
+
+    public SetFocus(event): void
+    {
+        event.target.focus();
+        this.SetDarkOverlay();
     }
 
 }
