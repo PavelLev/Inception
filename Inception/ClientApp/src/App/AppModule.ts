@@ -38,12 +38,12 @@ import { GlobalService } from "./GlobalService";
         [
             AlertModule.forRoot(),
             ButtonsModule.forRoot(),
-            // BrowserModule.withServerTransition
-            //     (
-            //     {
-            //         appId: "ng-cli-universal"
-            //     }
-            //     ),
+            BrowserModule.withServerTransition
+                (
+                {
+                    appId: "ng-cli-universal"
+                }
+                ),
             HttpClientModule,
             FormsModule,
             AppRouting,
