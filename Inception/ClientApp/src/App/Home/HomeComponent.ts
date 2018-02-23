@@ -67,7 +67,6 @@ export class HomeComponent implements OnInit
     public SetDarkOverlay(): void
     {
         this._globalService.changeMessage(true);
-        console.log("i am setted")
     }
 
     public SetOverlayDependedOnKeyPressed(event): void
