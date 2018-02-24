@@ -4,8 +4,7 @@ import { SiteTestResult } from "./SiteTestResult";
 import { DomainNameService } from "./DomainNameService";
 import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs/Observable";
-import {startWith} from "rxjs/operators/startWith";
-import { map } from "rxjs/operator/map";
+import {startWith, map} from "rxjs/operators";
 import { OverlaySettingsService } from "../OverlaySettingsService";
 
 @Component
@@ -39,14 +38,16 @@ export class HomeComponent implements OnInit
         this._overlaySettingsService.currentMessage.subscribe(message => this.IsOverlayDark = message);
 
         this._domainNameService.GetTestedSiteDomainNames("")
-        .subscribe(x=> 
+        .subscribe
+            (
+            x => 
             {
                 this.TestedSiteDomainNames = x;
                 
                 this.FilteredDomainNames = this.SearchControl.valueChanges.pipe
                 (
                     startWith(""),
-                    x => x.map
+                    map
                     (
                         val => this.filter(val)
                     )
@@ -58,10 +59,10 @@ export class HomeComponent implements OnInit
     public filter(val: string): string[]
     {
         return this.TestedSiteDomainNames.filter
-        (
+            (
             name =>
-            name.toLowerCase().indexOf(val.toLowerCase()) === 0
-        );
+                name.toLowerCase().startsWith(val.toLowerCase())
+            );
     }
 
     public ShowTestResultHistoryList(): void
