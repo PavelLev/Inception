@@ -1,17 +1,23 @@
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs/Observable";
+import { Subject } from "rxjs/Subject";
 
 @Injectable()
 export class DomainNameService
 {
 
-    public GetTestedSiteDomainNames(filter: string): string[]
+    public GetTestedSiteDomainNames(filter: string): Observable<string[]>
     {
-        return TestedDomainNames;
+        let subject: Subject<string[]>;
+        subject = new Subject<string[]>();
+        setTimeout(() => subject.next(TestedDomainNames), 200);
+        
+        return subject;
     }
 
 }
 
-const TestedDomainNames =
+const TestedDomainNames  =
 [
     "www.hys-enterprise.com",
     "yarnpkg.com",

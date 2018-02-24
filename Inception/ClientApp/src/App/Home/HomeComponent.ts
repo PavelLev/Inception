@@ -38,16 +38,21 @@ export class HomeComponent implements OnInit
     {
         this._overlaySettingsService.currentMessage.subscribe(message => this.IsOverlayDark = message);
 
-        this.TestedSiteDomainNames = this._domainNameService.GetTestedSiteDomainNames("");
-
-        this.FilteredDomainNames = this.SearchControl.valueChanges.pipe
-        (
-            startWith(""),
-            x => x.map
-            (
-                val => this.filter(val)
-            )
-        );
+        this._domainNameService.GetTestedSiteDomainNames("")
+        .subscribe(x=> 
+            {
+                this.TestedSiteDomainNames = x;
+                
+                this.FilteredDomainNames = this.SearchControl.valueChanges.pipe
+                (
+                    startWith(""),
+                    x => x.map
+                    (
+                        val => this.filter(val)
+                    )
+                );
+            }            
+            );
     }
 
     public filter(val: string): string[]
