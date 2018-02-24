@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit
 
     public ngOnInit(): void
     {
-        this._overlaySettingsService.isOverlayShown.subscribe(isOverlayShown => this.IsOverlayShown = isOverlayShown);
+        this._overlaySettingsService.IsOverlayShown.subscribe(IsOverlayShown => this.IsOverlayShown = IsOverlayShown);
 
         this._domainNameService.GetTestedSiteDomainNames("")
         .subscribe

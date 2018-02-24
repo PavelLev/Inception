@@ -4,8 +4,8 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
 @Injectable()
 export class OverlaySettingsService 
 {
-    public _isOverlayShown = new BehaviorSubject<boolean>(false);
-    isOverlayShown = this._isOverlayShown.asObservable();
+    private _isOverlayShown = new BehaviorSubject<boolean>(false);
+    public IsOverlayShown = this._isOverlayShown.asObservable();
     
     constructor()
     {

@@ -25,7 +25,7 @@ export class AppComponent implements OnInit
 
     ngOnInit(): void 
     {
-        this._overlaySettingsService.isOverlayShown.subscribe(isOverlayShown => this.IsOverlayShown = isOverlayShown);
+        this._overlaySettingsService.IsOverlayShown.subscribe(IsOverlayShown => this.IsOverlayShown = IsOverlayShown);
     }
 }
     
