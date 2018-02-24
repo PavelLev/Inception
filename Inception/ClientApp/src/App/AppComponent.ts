@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { OverlaySettingsService } from "./OverlaySettingsService";
 
 @Component
     (
@@ -12,7 +13,19 @@ import { Component } from "@angular/core";
     }
     )
 
-export class AppComponent 
+export class AppComponent implements OnInit
 {
+    public IsOverlayShown: boolean;
     public title: string = "app";
+
+    constructor(private _overlaySettingsService: OverlaySettingsService)
+    {
+
+    }
+
+    ngOnInit(): void 
+    {
+        this._overlaySettingsService.IsOverlayShown.subscribe(IsOverlayShown => this.IsOverlayShown = IsOverlayShown);
+    }
 }
+    

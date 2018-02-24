@@ -1,10 +1,9 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { AppComponent } from "./AppComponent";
-import { NavigationMenuComponent } from "./NavigationMenu/NavigationMenuComponent";
 import { HomeComponent } from "./Home/HomeComponent";
 
 import { AppRouting } from "./AppRouting";
@@ -14,7 +13,11 @@ import { Resolver } from "./Resolver";
 import { TestingService } from "./Services";
 import { TestResultHistoryComponent } from "./Home/TestResultHistoryComponent";
 import { LinkTestResultComponent } from "./Home/LinkTestResultComponent";
-
+import { SiteTestOverviewComponent } from "./Home/SiteTestOverviewComponent";
+import { MaterialModule } from "./MaterialModule";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { DomainNameService } from "./Home/DomainNameService";
+import { OverlaySettingsService } from "./OverlaySettingsService";
 @NgModule
     (
     {
@@ -22,16 +25,16 @@ import { LinkTestResultComponent } from "./Home/LinkTestResultComponent";
         [
             AppComponent
         ],
-        declarations: 
+        declarations:
         [
             AppComponent,
-            NavigationMenuComponent,
             HomeComponent,
             TestResultHistoryListComponent,
             TestResultHistoryComponent,
-            LinkTestResultComponent
+            LinkTestResultComponent,
+            SiteTestOverviewComponent
         ],
-        imports: 
+        imports:
         [
             AlertModule.forRoot(),
             ButtonsModule.forRoot(),
@@ -43,17 +46,22 @@ import { LinkTestResultComponent } from "./Home/LinkTestResultComponent";
                 ),
             HttpClientModule,
             FormsModule,
-            AppRouting
+            AppRouting,
+            MaterialModule,
+            ReactiveFormsModule,
+            BrowserAnimationsModule
         ],
-        providers: 
+        providers:
         [
             Resolver,
-            TestingService
+            TestingService,
+            DomainNameService,
+            OverlaySettingsService
         ]
     }
     )
 
-export class AppModule 
+export class AppModule
 {
 
 }

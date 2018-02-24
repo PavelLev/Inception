@@ -1,17 +1,45 @@
-<h1>Wellcome to first page of Inception</h1>
-<hr/>
-<div class="row">
-    <div class="col-md-10">
-        <div class="input-group">
-            <input (ngModel)="siteUrl" name="siteUrl" id="siteUrl" type="text" class="form-control" placeholder="Please enter site url..." (ngModelChange)="ShowTestResultHistoryList()"/>
-            <span class="input-group-btn">
-                <button type="submit" class="btn btn-warning btn-default" (click)="ShowTestResultHistoryList()">Test</button>
-            </span>
-        </div>
+<div class="row PaddingTop">
+    <div class="col-md-12">
+            <div class="text-center ProjectName">Inception</div>
     </div>
 </div>
 <div class="row">
-    <TestResultHistoryList [SiteTestResult]="SiteTestResult" id="test-result-history-list-item"></TestResultHistoryList>
+    <div class="col-md-12">
+        <form class="col-md-7 col-md-offset-3">
+            <mat-form-field 
+                (focusin)="HideOverlay()"
+                (focusout)="ShowOverlay()"                
+                class="col-md-8">
+                <input 
+                    matInput  
+                    type="text"
+                    placeholder="Please enter site url..."
+                    [formControl]="SearchControl"
+                    [matAutocomplete]="auto"
+                    id="DomainName"  
+                    [(ngModel)]="DomainName" 
+                    name="SelectedDomain" 
+                    (keyup)="SetOverlayOnKeyPressed($event)"
+                    (input)="SetOverlayOnKeyPressed($event)"> 
+                    <mat-autocomplete                        
+                        (optionSelected)="ShowOverlay()"
+                        #auto="matAutocomplete" >
+                        <mat-option  *ngFor="let domainName of FilteredDomainNames | async" [value]="domainName" >
+                        {{ domainName }}
+                        </mat-option>
+                    </mat-autocomplete>
+            </mat-form-field>
+            <button mat-button class="TestButton" (click)="ShowTestResultHistoryList()">Test me!</button>
+            <button mat-button *ngIf="SiteTestResult != null" [routerLink]="['/' + SiteTestResult?.DomainName]" class="TestButton">Site overview</button>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-7 col-md-offset-3">
+                <TestResultHistoryList [SiteTestResult]="SiteTestResult"></TestResultHistoryList>
+        </div>  
+    </div>  
 </div>
 
 

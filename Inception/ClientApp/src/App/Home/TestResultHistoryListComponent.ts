@@ -7,6 +7,10 @@ import { SiteTestResult } from "./SiteTestResult";
     (
     {
         selector: "TestResultHistoryList",
+        styleUrls:
+        [
+            "TestResultHistoryListComponent.css"
+        ],
         templateUrl: "TestResultHistoryListComponent.html"
     }
     )
