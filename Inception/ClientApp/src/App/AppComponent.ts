@@ -15,7 +15,7 @@ import { OverlaySettingsService } from "./OverlaySettingsService";
 
 export class AppComponent implements OnInit
 {
-    public IsOverlayDark: boolean;
+    public IsOverlayShown: boolean;
     public title: string = "app";
 
     constructor(private _overlaySettingsService: OverlaySettingsService)
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit
 
     ngOnInit(): void 
     {
-        this._overlaySettingsService.currentMessage.subscribe(message => this.IsOverlayDark = message);
+        this._overlaySettingsService.isOverlayShown.subscribe(isOverlayShown => this.IsOverlayShown = isOverlayShown);
     }
 }
     

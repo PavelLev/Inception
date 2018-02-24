@@ -8,8 +8,7 @@ export class DomainNameService
 
     public GetTestedSiteDomainNames(filter: string): Observable<string[]>
     {
-        let subject: Subject<string[]>;
-        subject = new Subject<string[]>();
+        let subject: Subject<string[]> = new Subject<string[]>();
         setTimeout(() => subject.next(TestedDomainNames), 200);
         
         return subject;

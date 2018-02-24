@@ -21,7 +21,7 @@ import { OverlaySettingsService } from "../OverlaySettingsService";
 
 export class HomeComponent implements OnInit
 {
-    public IsOverlayDark: boolean = false;
+    public IsOverlayShown: boolean = false;
     public DomainName: string;
     public SiteTestResult: SiteTestResult;
     public TestedSiteDomainNames: string[];
@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit
 
     public ngOnInit(): void
     {
-        this._overlaySettingsService.currentMessage.subscribe(message => this.IsOverlayDark = message);
+        this._overlaySettingsService.isOverlayShown.subscribe(isOverlayShown => this.IsOverlayShown = isOverlayShown);
 
         this._domainNameService.GetTestedSiteDomainNames("")
         .subscribe
@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit
 
     public HideOverlay(): void
     {
-        this._overlaySettingsService.changeMessage(true);
+        this._overlaySettingsService.changeOverlaySetting(true);
     }
 
     public SetOverlayOnKeyPressed(event): void
@@ -89,7 +89,7 @@ export class HomeComponent implements OnInit
     
     public ShowOverlay(): void
     {        
-        this._overlaySettingsService.changeMessage(false);
+        this._overlaySettingsService.changeOverlaySetting(false);
     }
 
 }

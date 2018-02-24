@@ -12,7 +12,7 @@
 <div class="col-md-10">
     <button type="button" class="btn btn-default btn-arrow-left"
         [routerLink]="['/']">Back</button>
-    <div class="col-md-12" *ngIf="SiteTestResult !== null && SiteTestResult !== undefined">
+    <div class="col-md-12" *ngIf="SiteTestResult != null">
             <h2>Domain name: {{SiteTestResult.DomainName}}</h2>
             <h3>Tested on: {{SiteTestResult.TestedOn | date: 'dd/MM/yyyy'}}</h3>
             <div class="col-md-5>"
