@@ -10,7 +10,7 @@ export class TestingService {
 
     public getLinkTestResults(): Observable<LinkTestResult[]>
     {
-        let subject: Subject<LinkTestResult[]> = new Subject<LinkTestResult[]>();
+        let subject = new Subject<LinkTestResult[]>();
         setTimeout
             (
             () =>
