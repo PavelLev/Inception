@@ -34,6 +34,8 @@ namespace Inception
 
 
             container.Configure<TestingConfiguration>(configuration.GetSection("Testing"));
+
+            container.Configure<MiscellaneousConfiguration>(configuration.GetSection("Miscellaneous"));
         }
 
 
