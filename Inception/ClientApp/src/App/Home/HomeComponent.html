@@ -22,7 +22,7 @@
                     (keyup)="SetOverlayOnKeyPressed($event)"
                     (input)="SetOverlayOnKeyPressed($event)"> 
                     <mat-autocomplete                        
-                        (optionSelected)="ShowOverlay()"
+                        (optionSelected)="ShowOverlay();ShowTestResultHistoryList()"
                         #auto="matAutocomplete" >
                         <mat-option  *ngFor="let domainName of FilteredDomainNames | async" [value]="domainName" >
                         {{ domainName }}
