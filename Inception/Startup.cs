@@ -9,6 +9,7 @@ using Inception.Utility.ModelBinding;
 using Inception.Utility.ModelBinding.ActionConstraint;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -55,6 +56,8 @@ namespace Inception
             services.AddMvc(mvcOptions =>
                 {
                     mvcOptions.Conventions.Add(container.Resolve<ICustomActionModelConvention>());
+
+                    mvcOptions.Filters.Add(container.Resolve<IExceptionFilter>());
 
                     mvcOptions.ModelBinderProviders.Insert(0, container.Resolve<ICustomModelBinderProvider>());
                 })

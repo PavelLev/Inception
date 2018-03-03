@@ -1,6 +1,10 @@
 ﻿{
     "Testing":
     {
-        "LinkTestResultLimit":  30 
-    } 
+        "LinkTestResultLimit": 30
+    },
+    "Miscellaneous":
+    {
+        "BusinessExceptionMessageFormat": "Business error occured with code {0} and description \"{1}\""
+    }
 }
