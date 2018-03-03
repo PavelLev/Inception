@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Inception.Repository
 {
@@ -12,7 +14,6 @@ namespace Inception.Repository
         private readonly DbContext _dbContext;
 
         private readonly DbSet<TEntity> _dbSet;
-        private readonly List<INavigation> _navigations;
 
 
 
@@ -21,32 +22,33 @@ namespace Inception.Repository
             _dbContext = dbContext;
 
             _dbSet = dbContext.Set<TEntity>();
-
-            _navigations = _dbContext.Model.FindEntityType(typeof(TEntity))
-                .GetNavigations()
-                .ToList();
         }
 
 
 
         public IQueryable<TEntity> GetAll()
         {
-            return _navigations.Aggregate
-                (
-                _dbSet.AsNoTracking(),
-                (queryable, navigation) => queryable.Include(navigation.Name)
-                );
+            var entities = _dbSet.AsNoTracking();
+
+            return entities;
         }
 
 
 
-        public async Task<TEntity> GetById(int id)
+        public async Task<TEntity> GetById(int id, IEnumerable<Expression<Func<TEntity, object>>> propertyExpressions = null)
         {
             var entity = await _dbSet.FindAsync(id);
 
-            foreach (var navigation in _dbContext.Entry(entity).Navigations)
+            if (entity != null &&
+                propertyExpressions != null)
             {
-                navigation.Load();
+                foreach (var propertyExpression in propertyExpressions)
+                {
+                    _dbContext.Entry(entity)
+                        .Navigations
+                        .First(navigationProperty => navigationProperty.Metadata.Name == propertyExpression.GetPropertyAccess().Name)
+                        .Load();
+                }
             }
 
             return entity;

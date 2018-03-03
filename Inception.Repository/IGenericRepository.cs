@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Inception.Repository
@@ -8,7 +11,7 @@ namespace Inception.Repository
     {
         IQueryable<TEntity> GetAll();
 
-        Task<TEntity> GetById(int id);
+        Task<TEntity> GetById(int id, IEnumerable<Expression<Func<TEntity, object>>> propertyExpressions = null);
 
         Task Create(TEntity entity);
 
