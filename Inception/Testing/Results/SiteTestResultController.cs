@@ -1,8 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 using AutoMapper;
 using Inception.Repository;
 using Inception.Repository.Testing;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Inception.Testing.Results
 {
@@ -27,7 +30,8 @@ namespace Inception.Testing.Results
 
         public IActionResult GetAll(string filter)
         {
-            var siteTestResults = _siteTestResultRepository.GetAll();
+            var siteTestResults = _siteTestResultRepository.GetAll()
+                .Include(siteTestResult => siteTestResult.LinkTestResults);
 
             var siteTestResultDtos = siteTestResults.Select(x => ToDto(x));
 
@@ -38,9 +42,15 @@ namespace Inception.Testing.Results
 
         public IActionResult GetById(int id)
         {
-            var siteTestResult = _siteTestResultRepository.GetById(id).Result;
+            var specifiedSiteTestResult = _siteTestResultRepository.GetById
+                (
+                id, 
+                new Expression<Func<SiteTestResult, object>>[]
+                {
+                    siteTestResult => siteTestResult.LinkTestResults
+                }).Result;
 
-            var siteTestResultDto = ToDto(siteTestResult);
+            var siteTestResultDto = ToDto(specifiedSiteTestResult);
 
             return Ok(siteTestResultDto);
         }
