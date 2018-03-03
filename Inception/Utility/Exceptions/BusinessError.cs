@@ -1,4 +1,4 @@
-﻿namespace Inception.Exceptions
+﻿namespace Inception.Utility.Exceptions
 {
     public enum BusinessError
     {
