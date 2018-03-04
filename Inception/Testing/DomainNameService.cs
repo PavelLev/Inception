@@ -13,10 +13,12 @@ namespace Inception.Testing
         private readonly DomainNameConfiguration _domainNameConfiguration;
 
         public DomainNameService(
-            IGenericRepository<SiteTestResult> siteTestResultRepository
+            IGenericRepository<SiteTestResult> siteTestResultRepository,
+            DomainNameConfiguration domainNameConfiguration
             )
         {
             _siteTestResultRepository = siteTestResultRepository;
+            _domainNameConfiguration = domainNameConfiguration;
         }
 
 
@@ -28,6 +30,8 @@ namespace Inception.Testing
                 .Select(siteTestResult => siteTestResult.DomainName)
                 .Where(domainName => domainName.Contains(filter))
                 .Take(_domainNameConfiguration.DomainNamesNumber)
+                .Select(domainName => domainName.Contains("//") ? domainName.Split("//", StringSplitOptions.None)[1] : domainName)
+                .Distinct()
                 .OrderByDescending(domainName => domainName)
                 .ToList();
         }
