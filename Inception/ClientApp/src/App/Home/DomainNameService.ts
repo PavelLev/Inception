@@ -28,14 +28,6 @@ export class DomainNameService
         let Url = "api/DomainName/GetTestedSiteDomainNames";
         let subject = new Subject<string[]>();
 
-        this.httpClient.post<string[]>(Url, Params, this._httpClientOptions).subscribe
-        (            
-            value =>
-            {
-                subject.next(value)
-            }
-        );
-
-        return subject;
+        return this.httpClient.post<string[]>(Url, Params, this._httpClientOptions);
     }
 }
