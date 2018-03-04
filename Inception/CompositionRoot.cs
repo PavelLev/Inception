@@ -23,6 +23,8 @@ namespace Inception
             RegisterReporitory(container);
 
             RegisterTesting(container);
+
+            RegisterDomainName(container);
         }
 
 
@@ -37,7 +39,12 @@ namespace Inception
 
             container.Configure<TestingConfiguration>(configuration.GetSection("Testing"));
 
+
+            container.Configure<DomainNameConfiguration>(configuration.GetSection("DomainName"));
+
+
             container.Configure<MiscellaneousConfiguration>(configuration.GetSection("Miscellaneous"));
+
         }
 
 
@@ -87,6 +94,13 @@ namespace Inception
         private void RegisterTesting(IContainer container)
         {
             container.Register<ITestingService, TestingService>(Reuse.Singleton);
+        }
+
+
+
+        private void RegisterDomainName(IContainer container)
+        {
+            container.Register<IDomainNameService, DomainNameService>(Reuse.InWebRequest);
         }
     }
 }
