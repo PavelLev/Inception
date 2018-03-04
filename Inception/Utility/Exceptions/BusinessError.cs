@@ -2,6 +2,8 @@
 {
     public enum BusinessError
     {
-        UnknownError
+        UnknownError,
+        UnableToTestSite,
+        IncorrectId
     }
 }

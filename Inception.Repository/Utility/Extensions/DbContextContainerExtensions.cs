@@ -11,9 +11,9 @@ namespace Inception.Repository.Utility.Extensions
         public static void RegisterDbContext<TDbContext>(this IContainer container, Action<IResolver, DbContextOptionsBuilder<TDbContext>> optionsAction)
             where TDbContext : DbContext
         {
-            container.RegisterDelegate(resolverContext => DbContextOptionsFactory(resolverContext, optionsAction), Reuse.InWebRequest);
+            container.RegisterDelegate(resolverContext => DbContextOptionsFactory(resolverContext, optionsAction), setup: Setup.With(useParentReuse: true));
             
-            container.Register<TDbContext>(Reuse.InWebRequest);
+            container.Register<TDbContext>(setup: Setup.With(useParentReuse: true));
         }
 
 

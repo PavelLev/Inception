@@ -2,6 +2,6 @@
 {
     public interface IBusinessExceptionProvider
     {
-        BusinessException Create(BusinessError businessError, string errorDescription);
+        BusinessException Create(BusinessError error, string description);
     }
 }

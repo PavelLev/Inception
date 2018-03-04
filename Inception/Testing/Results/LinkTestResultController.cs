@@ -2,6 +2,7 @@
 using AutoMapper;
 using Inception.Repository;
 using Inception.Repository.Testing;
+using Inception.Utility.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Inception.Testing.Results
@@ -10,17 +11,20 @@ namespace Inception.Testing.Results
     {
         private readonly IGenericRepository<LinkTestResult> _linkTestResultRepository;
         private readonly IMapper _mapper;
+        private readonly IBusinessExceptionProvider _businessExceptionProvider;
 
 
 
         public LinkTestResultController
             (
             IGenericRepository<LinkTestResult> linkTestResultRepository,
-            IMapper mapper
+            IMapper mapper,
+            IBusinessExceptionProvider businessExceptionProvider
             )
         {
             _linkTestResultRepository = linkTestResultRepository;
             _mapper = mapper;
+            _businessExceptionProvider = businessExceptionProvider;
         }
 
 
@@ -28,6 +32,12 @@ namespace Inception.Testing.Results
         public async Task<IActionResult> GetById(int id)
         {
             var linkTestResult = await _linkTestResultRepository.GetById(id);
+
+            if (linkTestResult == null)
+            {
+                throw _businessExceptionProvider.Create(BusinessError.IncorrectId, "There is no LinkTestResult with specified id");
+            }
+
 
             var linkTestResultDto = ToDto(linkTestResult);
 

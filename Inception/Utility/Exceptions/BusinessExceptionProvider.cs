@@ -15,7 +15,7 @@ namespace Inception.Utility.Exceptions
 
 
 
-        public BusinessException Create(BusinessError businessError, string errorDescription) =>
-            _createBusinessExceptionFunc(businessError, errorDescription);
+        public BusinessException Create(BusinessError error, string description) =>
+            _createBusinessExceptionFunc(error, description);
     }
 }
