@@ -26,7 +26,6 @@ export class DomainNameService
         };
 
         let Url = "api/DomainName/GetTestedSiteDomainNames";
-        let subject = new Subject<string[]>();
 
         return this.httpClient.post<string[]>(Url, Params, this._httpClientOptions);
     }
