@@ -1,6 +1,10 @@
 ﻿{
-    "Testing":
-    {
-        "LinkTestResultLimit":  30 
-    } 
+  "Testing": 
+  {
+    "LinkTestResultLimit": 30
+  },
+  "DomainName": 
+  {
+    "DomainNamesNumber": 10
+  }
 }

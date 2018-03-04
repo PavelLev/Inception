@@ -20,7 +20,8 @@
                     [(ngModel)]="DomainName" 
                     name="SelectedDomain" 
                     (keyup)="SetOverlayOnKeyPressed($event)"
-                    (input)="SetOverlayOnKeyPressed($event)"> 
+                    (click)="SetOverlayOnKeyPressed($event)"
+                    (input)="SetOverlayOnKeyPressed($event);GetTestedSiteDomainNames()"> 
                     <mat-autocomplete                        
                         (optionSelected)="ShowOverlay();ShowTestResultHistoryList()"
                         #auto="matAutocomplete" >

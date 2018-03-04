@@ -22,7 +22,7 @@ import { OverlaySettingsService } from "../OverlaySettingsService";
 export class HomeComponent implements OnInit
 {
     public IsOverlayShown: boolean = false;
-    public DomainName: string;
+    public DomainName: string = "";
     public SiteTestResult: SiteTestResult;
     public TestedSiteDomainNames: string[];
     public SearchControl: FormControl = new FormControl();
@@ -36,24 +36,7 @@ export class HomeComponent implements OnInit
     public ngOnInit(): void
     {
         this._overlaySettingsService.IsOverlayShown.subscribe(IsOverlayShown => this.IsOverlayShown = IsOverlayShown);
-
-        this._domainNameService.GetTestedSiteDomainNames("")
-        .subscribe
-            (
-            x => 
-            {
-                this.TestedSiteDomainNames = x;
-                
-                this.FilteredDomainNames = this.SearchControl.valueChanges.pipe
-                (
-                    startWith(""),
-                    map
-                    (
-                        val => this.filter(val)
-                    )
-                );
-            }            
-            );
+        this.GetTestedSiteDomainNames();
     }
 
     public filter(val: string): string[]
@@ -90,6 +73,27 @@ export class HomeComponent implements OnInit
     public ShowOverlay(): void
     {        
         this._overlaySettingsService.changeOverlaySetting(false);
+    }
+
+    public GetTestedSiteDomainNames(): void
+    {        
+        this._domainNameService.GetTestedSiteDomainNames(this.DomainName)
+        .subscribe
+            (
+            x => 
+            {
+                this.TestedSiteDomainNames = x;
+                
+                this.FilteredDomainNames = this.SearchControl.valueChanges.pipe
+                (
+                    startWith(""),
+                    map
+                    (
+                        val => this.filter(val)
+                    )
+                );
+            }            
+            );
     }
 
 }
