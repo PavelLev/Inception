@@ -6,5 +6,9 @@
   "DomainName": 
   {
     "DomainNamesNumber": 10
+  },
+    "Miscellaneous":
+  {
+    "BusinessExceptionMessageFormat": "Business error occured with code {0} and description \"{1}\""
   }
 }

@@ -4,8 +4,10 @@ using HtmlAgilityPack;
 using Inception.Repository.Utility.Extensions;
 using Inception.Testing;
 using Inception.Utility;
+using Inception.Utility.Exceptions;
 using Inception.Utility.ModelBinding;
 using Inception.Utility.ModelBinding.ActionConstraint;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Configuration;
 
 namespace Inception
@@ -37,7 +39,11 @@ namespace Inception
 
             container.Configure<TestingConfiguration>(configuration.GetSection("Testing"));
 
+
             container.Configure<DomainNameConfiguration>(configuration.GetSection("DomainName"));
+
+
+            container.Configure<MiscellaneousConfiguration>(configuration.GetSection("Miscellaneous"));
 
         }
 
@@ -48,6 +54,13 @@ namespace Inception
             container.Register<ICustomActionConstraint, CustomActionConstraint>(Reuse.Singleton);
 
             container.Register<ICustomActionModelConvention, CustomActionModelConvention>(Reuse.Singleton);
+
+
+            container.Register<BusinessException>();
+
+            container.Register<IBusinessExceptionProvider, BusinessExceptionProvider>(Reuse.Singleton);
+
+            container.Register<IExceptionFilter, ExceptionFilter>(Reuse.Singleton);
 
 
             container.Register<IActionTypeService, ActionTypeService>(Reuse.Singleton);
