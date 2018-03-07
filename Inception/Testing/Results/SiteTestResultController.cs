@@ -13,25 +13,27 @@ namespace Inception.Testing.Results
     {
         private readonly IGenericRepository<SiteTestResult> _siteTestResultRepository;
         private readonly IMapper _mapper;
+        private readonly ISiteTestResultService _siteTestResultService;
 
 
 
         public SiteTestResultController
             (
             IGenericRepository<SiteTestResult> siteTestResultRepository,
-            IMapper mapper
+            IMapper mapper,
+            ISiteTestResultService siteTestResultService
             )
         {
             _siteTestResultRepository = siteTestResultRepository;
             _mapper = mapper;
+            _siteTestResultService = siteTestResultService;
         }
 
 
 
         public IActionResult GetAll(string filter)
         {
-            var siteTestResults = _siteTestResultRepository.GetAll()
-                .Include(siteTestResult => siteTestResult.LinkTestResults);
+            var siteTestResults = _siteTestResultService.GetAll();
 
             var siteTestResultDtos = siteTestResults.Select(x => ToDto(x));
 
@@ -42,19 +44,23 @@ namespace Inception.Testing.Results
 
         public IActionResult GetById(int id)
         {
-            var specifiedSiteTestResult = _siteTestResultRepository.GetById
-                (
-                id, 
-                new Expression<Func<SiteTestResult, object>>[]
-                {
-                    siteTestResult => siteTestResult.LinkTestResults
-                }).Result;
+            var specifiedSiteTestResult = _siteTestResultService.GetById(id);
 
             var siteTestResultDto = ToDto(specifiedSiteTestResult);
 
             return Ok(siteTestResultDto);
         }
 
+
+
+        public IActionResult GetSiteResults(string domainName)
+        {
+            var SiteTestResults = _siteTestResultService.GetAll().Where(siteTestResult => siteTestResult.DomainName.Equals(domainName));
+
+            var SiteTestResultThumbnails = SiteTestResults.Select(siteTestResult => ToSiteTestResultThumbnail(siteTestResult));
+
+            return Ok(SiteTestResultThumbnails);
+        }
 
 
         private SiteTestResultDto ToDto(SiteTestResult siteTestResult)
@@ -65,6 +71,13 @@ namespace Inception.Testing.Results
                 .ToList();
 
             return siteTestResultDto;
+        }
+
+        private SiteTestResultThumbnail ToSiteTestResultThumbnail(SiteTestResult siteTestResult)
+        {
+            var siteTestResultThumbnails = _mapper.Map<SiteTestResultThumbnail>(siteTestResult);
+
+            return siteTestResultThumbnails;
         }
     }
 }

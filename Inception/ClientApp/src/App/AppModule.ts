@@ -18,6 +18,7 @@ import { MaterialModule } from "./MaterialModule";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DomainNameService } from "./Home/DomainNameService";
 import { OverlaySettingsService } from "./OverlaySettingsService";
+import { SiteTestResultService } from "./Home/SiteTestResultService";
 @NgModule
     (
     {
@@ -56,7 +57,8 @@ import { OverlaySettingsService } from "./OverlaySettingsService";
             Resolver,
             TestingService,
             DomainNameService,
-            OverlaySettingsService
+            OverlaySettingsService,
+            SiteTestResultService
         ]
     }
     )
