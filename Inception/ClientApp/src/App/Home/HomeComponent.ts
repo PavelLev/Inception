@@ -32,10 +32,10 @@ export class HomeComponent implements OnInit
 
     constructor
         (
-            private _testingService: TestingService, 
-            private _domainNameService: DomainNameService, 
-            private _overlaySettingsService: OverlaySettingsService,
-            private _siteTestResultService: SiteTestResultService
+        private _testingService: TestingService, 
+        private _domainNameService: DomainNameService, 
+        private _overlaySettingsService: OverlaySettingsService,
+        private _siteTestResultService: SiteTestResultService
         )
     {
 
