@@ -17,7 +17,6 @@ namespace Inception.Testing
         private readonly TestingConfiguration _testingConfiguration;
         private readonly IUriService _uriService;
         private readonly IHtmlParser _htmlParser;
-        private readonly IGenericRepository<LinkTestResult> _linkTestResultRepository;
         private readonly IGenericRepository<SiteTestResult> _siteTestResultRepository;
         private readonly List<SiteTestResult> _processingSiteTestResults;
         private readonly AutoResetEvent _processAutoResetEvent = new AutoResetEvent(true);
@@ -31,7 +30,6 @@ namespace Inception.Testing
             TestingConfiguration testingConfiguration,
             IUriService uriService,
             IHtmlParser htmlParser,
-            IGenericRepository<LinkTestResult> linkTestResultRepository,
             IGenericRepository<SiteTestResult> siteTestResultRepository
             )
         {
@@ -39,7 +37,6 @@ namespace Inception.Testing
             _testingConfiguration = testingConfiguration;
             _uriService = uriService;
             _htmlParser = htmlParser;
-            _linkTestResultRepository = linkTestResultRepository;
             _siteTestResultRepository = siteTestResultRepository;
             _processingSiteTestResults = new List<SiteTestResult>();
         }
@@ -128,9 +125,12 @@ namespace Inception.Testing
 
             var loaded = (end - start).TotalMilliseconds;
 
-            if (siteTestResult.LinkTestResults.Count < _testingConfiguration.LinkTestResultLimit 
-                &&
-                visitedLinks.Add(normalizedUrl))
+            if (siteTestResult.LinkTestResults.Count >= _testingConfiguration.LinkTestResultLimit)
+            {
+                return;
+            }
+
+            if (visitedLinks.Add(normalizedUrl))
             {
                 var linkTestResult = new LinkTestResult
                 {
@@ -142,8 +142,6 @@ namespace Inception.Testing
 
 
                 _dbAutoResetEvent.WaitOne();
-
-                // await _linkTestResultRepository.Create(linkTestResult);
 
                 await _siteTestResultRepository.Update(siteTestResult);
 
@@ -163,18 +161,19 @@ namespace Inception.Testing
             if (siteTestResult.LinkTestResults.Count == 1)
             {
                 Task.Run(async () =>
-                {
-                    try
                     {
-                        await Task.WhenAll(tasks);
-                    }
-                    finally
-                    {
-                        _processingSiteTestResults.Remove(siteTestResult);
+                        try
+                        {
+                            await Task.WhenAll(tasks);
+                        }
+                        finally
+                        {
+                            _processingSiteTestResults.Remove(siteTestResult);
 
-                        _processAutoResetEvent.Set();
-                    }
-                }).NoWarning();
+                            _processAutoResetEvent.Set();
+                        }
+                    })
+                    .NoWarning();
             }
             else
             {
