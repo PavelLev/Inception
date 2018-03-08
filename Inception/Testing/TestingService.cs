@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
+using Inception.Repository;
 using Inception.Repository.Testing;
 using Inception.Utility;
+using Inception.Utility.Extensions;
 
 namespace Inception.Testing
 {
@@ -14,6 +17,10 @@ namespace Inception.Testing
         private readonly TestingConfiguration _testingConfiguration;
         private readonly IUriService _uriService;
         private readonly IHtmlParser _htmlParser;
+        private readonly IGenericRepository<SiteTestResult> _siteTestResultRepository;
+        private readonly List<SiteTestResult> _processingSiteTestResults;
+        private readonly AutoResetEvent _processAutoResetEvent = new AutoResetEvent(true);
+        private readonly AutoResetEvent _dbAutoResetEvent = new AutoResetEvent(true);
 
 
 
@@ -22,32 +29,56 @@ namespace Inception.Testing
             HttpClient httpClient,
             TestingConfiguration testingConfiguration,
             IUriService uriService,
-            IHtmlParser htmlParser
+            IHtmlParser htmlParser,
+            IGenericRepository<SiteTestResult> siteTestResultRepository
             )
         {
             _httpClient = httpClient;
             _testingConfiguration = testingConfiguration;
             _uriService = uriService;
             _htmlParser = htmlParser;
+            _siteTestResultRepository = siteTestResultRepository;
+            _processingSiteTestResults = new List<SiteTestResult>();
         }
 
 
 
-        public async Task<IEnumerable<LinkTestResult>> Process
+        public bool IsProcessing(SiteTestResult siteTestResult)
+        {
+            var isProcessing = _processingSiteTestResults.Any
+                (
+                someSiteTestResult => someSiteTestResult.Id == siteTestResult.Id
+                );
+
+            return isProcessing;
+        }
+
+
+
+        public async Task<SiteTestResult> Process
             (
-            string url
+            SiteTestResult siteTestResult
             )
         {
-            var linkTestResults = new List<LinkTestResult>();
+            _processingSiteTestResults.Add(siteTestResult);
+
+
+            _processAutoResetEvent.WaitOne();
 
             await Process
                 (
-                url,
-                linkTestResults,
+                siteTestResult.DomainName,
+                siteTestResult,
                 new HashSet<string>()
                 );
 
-            return linkTestResults;
+
+            if (!siteTestResult.LinkTestResults.Any())
+            {
+                _processingSiteTestResults.Remove(siteTestResult);
+            }
+
+            return siteTestResult;
         }
 
 
@@ -55,13 +86,13 @@ namespace Inception.Testing
         private async Task Process
             (
             string url,
-            IList<LinkTestResult> linkTestResults,
+            SiteTestResult siteTestResult,
             ISet<string> visitedLinks
             )
         {
             var normalizedUrl = _uriService.Normalize(url);
 
-            if (linkTestResults.Count >= _testingConfiguration.LinkTestResultLimit 
+            if (siteTestResult.LinkTestResults.Count >= _testingConfiguration.LinkTestResultLimit 
                 ||
                 visitedLinks.Contains(normalizedUrl))
             {
@@ -94,30 +125,60 @@ namespace Inception.Testing
 
             var loaded = (end - start).TotalMilliseconds;
 
-
-            var linkTestResult = new LinkTestResult
+            if (siteTestResult.LinkTestResults.Count >= _testingConfiguration.LinkTestResultLimit)
             {
-                ResponseTime = Convert.ToInt32(loaded),
-                Url = normalizedUrl
-            };
+                return;
+            }
 
-            if (linkTestResults.Count < _testingConfiguration.LinkTestResultLimit 
-                &&
-                visitedLinks.Add(normalizedUrl))
+            if (visitedLinks.Add(normalizedUrl))
             {
-                linkTestResults.Add(linkTestResult);
+                var linkTestResult = new LinkTestResult
+                {
+                    ResponseTime = Convert.ToInt32(loaded),
+                    Url = normalizedUrl
+                };
+
+                siteTestResult.LinkTestResults.Add(linkTestResult);
+
+
+                _dbAutoResetEvent.WaitOne();
+
+                await _siteTestResultRepository.Update(siteTestResult);
+
+                _dbAutoResetEvent.Set();
             }
 
 
             var tasks = ProcessChildLinks
                 (
                 url,
-                linkTestResults,
+                siteTestResult,
                 visitedLinks,
                 html
                 );
 
-            await Task.WhenAll(tasks);
+
+            if (siteTestResult.LinkTestResults.Count == 1)
+            {
+                Task.Run(async () =>
+                    {
+                        try
+                        {
+                            await Task.WhenAll(tasks);
+                        }
+                        finally
+                        {
+                            _processingSiteTestResults.Remove(siteTestResult);
+
+                            _processAutoResetEvent.Set();
+                        }
+                    })
+                    .NoWarning();
+            }
+            else
+            {
+                await Task.WhenAll(tasks);
+            }
         }
 
 
@@ -125,7 +186,7 @@ namespace Inception.Testing
         private IEnumerable<Task> ProcessChildLinks
             (
             string url,
-            IList<LinkTestResult> linkTestResults,
+            SiteTestResult siteTestResult,
             ISet<string> visitedLinks,
             string html
             )
@@ -154,7 +215,7 @@ namespace Inception.Testing
                     var task = Process
                         (
                         link,
-                        linkTestResults,
+                        siteTestResult,
                         visitedLinks
                         );
 

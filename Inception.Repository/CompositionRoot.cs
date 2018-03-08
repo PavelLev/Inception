@@ -65,7 +65,7 @@ namespace Inception.Repository
 
         private void RegisterRepositories(IContainer container)
         {
-            container.Register(typeof(IGenericRepository<>), typeof(GenericRepository<>), Reuse.InWebRequest);
+            container.Register(typeof(IGenericRepository<>), typeof(GenericRepository<>), setup: Setup.With(useParentReuse: true));
         }
     }
 }

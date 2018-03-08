@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
+using System.Threading.Tasks;
 using AutoMapper;
 using Inception.Repository;
 using Inception.Repository.Testing;
+using Inception.Utility.Exceptions;
+using Inception.Utility.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,17 +17,20 @@ namespace Inception.Testing.Results
     {
         private readonly IGenericRepository<SiteTestResult> _siteTestResultRepository;
         private readonly IMapper _mapper;
+        private readonly IBusinessExceptionProvider _businessExceptionProvider;
 
 
 
         public SiteTestResultController
             (
             IGenericRepository<SiteTestResult> siteTestResultRepository,
-            IMapper mapper
+            IMapper mapper,
+            IBusinessExceptionProvider businessExceptionProvider
             )
         {
             _siteTestResultRepository = siteTestResultRepository;
             _mapper = mapper;
+            _businessExceptionProvider = businessExceptionProvider;
         }
 
 
@@ -47,8 +54,14 @@ namespace Inception.Testing.Results
                 id,
                 new Expression<Func<SiteTestResult, object>>[]
                 {
-                    siteTestResult => siteTestResult.LinkTestResults
+                    someSiteTestResult => someSiteTestResult.LinkTestResults
                 }).Result;
+
+            if (specifiedSiteTestResult == null)
+            {
+                throw _businessExceptionProvider.Create(BusinessError.IncorrectId, "There is no SiteTestResult with specified id");
+            }
+
 
             var siteTestResultDto = ToDto(specifiedSiteTestResult);
 

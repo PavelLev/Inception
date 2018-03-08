@@ -6,9 +6,14 @@ namespace Inception.Testing
 {
     public interface ITestingService
     {
-        Task<IEnumerable<LinkTestResult>> Process
+        bool IsProcessing
             (
-            string url
+            SiteTestResult siteTestResult
+            );
+
+        Task<SiteTestResult> Process
+            (
+            SiteTestResult siteTestResult
             );
     }
 }
