@@ -11,6 +11,8 @@ namespace Inception.Utility.AutoMapper
             CreateMap<SiteTestResult, SiteTestResultDto>();
 
             CreateMap<LinkTestResult, LinkTestResultDto>();
+
+            CreateMap<SiteTestResult, SiteTestResultThumbnail>();
         }
     }
 }

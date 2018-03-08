@@ -20,24 +20,29 @@
                     [(ngModel)]="DomainName" 
                     name="SelectedDomain" 
                     (keyup)="SetOverlayOnKeyPressed($event)"
-                    (input)="SetOverlayOnKeyPressed($event)"> 
+                    (click)="SetOverlayOnKeyPressed($event)"
+                    (input)="SetOverlayOnKeyPressed($event);GetTestedSiteDomainNames()"> 
                     <mat-autocomplete                        
                         (optionSelected)="ShowOverlay();ShowTestResultHistoryList()"
                         #auto="matAutocomplete" >
-                        <mat-option  *ngFor="let domainName of FilteredDomainNames | async" [value]="domainName" >
-                        {{ domainName }}
+                        <mat-option  *ngFor="let domainName of FilteredDomainNames | async " [value]="domainName | RemoveScheme" >
+                        {{ domainName | RemoveScheme}}
                         </mat-option>
                     </mat-autocomplete>
             </mat-form-field>
             <button mat-button class="TestButton" (click)="ShowTestResultHistoryList()">Test me!</button>
-            <button mat-button *ngIf="SiteTestResult != null" [routerLink]="['/' + SiteTestResult?.DomainName]" class="TestButton">Site overview</button>
+            <button mat-button *ngIf="SiteTestResultThumbnails != null" [routerLink]="['/' + DomainName]" class="TestButton">Site overview</button>
         </form>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12">
         <div class="col-md-7 col-md-offset-3">
-                <TestResultHistoryList [SiteTestResult]="SiteTestResult"></TestResultHistoryList>
+            <TestResultHistoryList 
+                *ngFor="let siteTestResultThumbnail of SiteTestResultThumbnails" 
+                [SiteTestResultThumbnail]="siteTestResultThumbnail"
+            >
+            </TestResultHistoryList>
         </div>  
     </div>  
 </div>

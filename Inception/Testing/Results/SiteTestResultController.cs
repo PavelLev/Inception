@@ -48,26 +48,36 @@ namespace Inception.Testing.Results
 
 
         public IActionResult GetById(int id)
-        {
-            var siteTestResult = _siteTestResultRepository.GetById
+        {            
+            var specifiedSiteTestResult = _siteTestResultRepository.GetById
                 (
-                id, 
+                id,
                 new Expression<Func<SiteTestResult, object>>[]
                 {
                     someSiteTestResult => someSiteTestResult.LinkTestResults
                 }).Result;
 
-            if (siteTestResult == null)
+            if (specifiedSiteTestResult == null)
             {
                 throw _businessExceptionProvider.Create(BusinessError.IncorrectId, "There is no SiteTestResult with specified id");
             }
 
 
-            var siteTestResultDto = ToDto(siteTestResult);
+            var siteTestResultDto = ToDto(specifiedSiteTestResult);
 
             return Ok(siteTestResultDto);
         }
 
+
+
+        public IActionResult GetSiteTestResultThumbnails(string domainName)
+        {
+            var SiteTestResults = _siteTestResultRepository.GetAll().Where(siteTestResult => siteTestResult.DomainName.Contains(domainName));
+
+            var SiteTestResultThumbnails = SiteTestResults.Select(siteTestResult => ToSiteTestResultThumbnail(siteTestResult));
+
+            return Ok(SiteTestResultThumbnails);
+        }
 
 
         private SiteTestResultDto ToDto(SiteTestResult siteTestResult)
@@ -78,6 +88,13 @@ namespace Inception.Testing.Results
                 .ToList();
 
             return siteTestResultDto;
+        }
+
+        private SiteTestResultThumbnail ToSiteTestResultThumbnail(SiteTestResult siteTestResult)
+        {
+            var siteTestResultThumbnails = _mapper.Map<SiteTestResultThumbnail>(siteTestResult);
+
+            return siteTestResultThumbnails;
         }
     }
 }

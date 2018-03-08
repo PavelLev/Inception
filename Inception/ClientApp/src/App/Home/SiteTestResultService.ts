@@ -2,9 +2,10 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { Subject } from "rxjs/Subject";
 import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
+import { SiteTestResultThumbnail } from "./SiteTestResultThumbnail";
 
 @Injectable()
-export class DomainNameService
+export class SiteTestResultService
 {
     private _httpClientOptions = 
     {
@@ -18,15 +19,15 @@ export class DomainNameService
 
     constructor(private httpClient: HttpClient) { }
 
-    public GetTestedSiteDomainNames(filter: string): Observable<string[]>
+    public GetSiteTestResultThumbnails(domainName: string): Observable<SiteTestResultThumbnail[]>
     {
         let Params = 
         {
-            "filter" : filter
+            "domainName" : domainName
         };
 
-        let Url = "api/DomainName/GetTestedSiteDomainNames";
+        let Url = "api/SiteTestResult/GetSiteTestResultThumbnails";
 
-        return this.httpClient.post<string[]>(Url, Params, this._httpClientOptions);
+        return this.httpClient.post<SiteTestResultThumbnail[]>(Url, Params, this._httpClientOptions);
     }
 }

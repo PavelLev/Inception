@@ -1,7 +1,11 @@
 ﻿{
-    "Testing":
+    "Testing": 
     {
         "LinkTestResultLimit": 30
+    },
+    "DomainName": 
+    {
+        "DomainNamesNumber": 10
     },
     "Miscellaneous":
     {

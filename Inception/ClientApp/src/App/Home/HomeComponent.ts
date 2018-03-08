@@ -6,6 +6,8 @@ import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs/Observable";
 import {startWith, map} from "rxjs/operators";
 import { OverlaySettingsService } from "../OverlaySettingsService";
+import { SiteTestResultService } from "./SiteTestResultService";
+import { SiteTestResultThumbnail } from "./SiteTestResultThumbnail";
 
 @Component
     (
@@ -22,13 +24,19 @@ import { OverlaySettingsService } from "../OverlaySettingsService";
 export class HomeComponent implements OnInit
 {
     public IsOverlayShown: boolean = false;
-    public DomainName: string;
-    public SiteTestResult: SiteTestResult;
+    public DomainName: string = "";
+    public SiteTestResultThumbnails: SiteTestResultThumbnail[];
     public TestedSiteDomainNames: string[];
     public SearchControl: FormControl = new FormControl();
     public FilteredDomainNames: Observable<string[]>;
 
-    constructor(private _testingService: TestingService, private _domainNameService: DomainNameService, private _overlaySettingsService: OverlaySettingsService)
+    constructor
+        (
+        private _testingService: TestingService, 
+        private _domainNameService: DomainNameService, 
+        private _overlaySettingsService: OverlaySettingsService,
+        private _siteTestResultService: SiteTestResultService
+        )
     {
 
     }
@@ -36,24 +44,7 @@ export class HomeComponent implements OnInit
     public ngOnInit(): void
     {
         this._overlaySettingsService.IsOverlayShown.subscribe(IsOverlayShown => this.IsOverlayShown = IsOverlayShown);
-
-        this._domainNameService.GetTestedSiteDomainNames("")
-        .subscribe
-            (
-            x => 
-            {
-                this.TestedSiteDomainNames = x;
-                
-                this.FilteredDomainNames = this.SearchControl.valueChanges.pipe
-                (
-                    startWith(""),
-                    map
-                    (
-                        val => this.filter(val)
-                    )
-                );
-            }            
-            );
+        this.GetTestedSiteDomainNames();
     }
 
     public filter(val: string): string[]
@@ -67,7 +58,11 @@ export class HomeComponent implements OnInit
 
     public ShowTestResultHistoryList(): void
     {
-        this.SiteTestResult = this._testingService.GetSiteTestResult("1");
+        this._siteTestResultService.GetSiteTestResultThumbnails(this.DomainName).subscribe(
+            SiteTestResultThumbnails => 
+            {
+                this.SiteTestResultThumbnails = SiteTestResultThumbnails
+            }); 
     }
 
     public HideOverlay(): void
@@ -92,4 +87,24 @@ export class HomeComponent implements OnInit
         this._overlaySettingsService.changeOverlaySetting(false);
     }
 
+    public GetTestedSiteDomainNames(): void
+    {        
+        this._domainNameService.GetTestedSiteDomainNames(this.DomainName)
+        .subscribe
+            (
+            x => 
+            {
+                this.TestedSiteDomainNames = x;
+                
+                this.FilteredDomainNames = this.SearchControl.valueChanges.pipe
+                (
+                    startWith(""),
+                    map
+                    (
+                        val => this.filter(val)
+                    )
+                );
+            }            
+            );
+    }
 }

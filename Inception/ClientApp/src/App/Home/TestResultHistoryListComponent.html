@@ -1,5 +1,5 @@
 <div class="col-md-11 SiteTestResultItem" 
-    *ngIf="SiteTestResult != null"
-    [routerLink]="['/', SiteTestResult.Id]">
-    <h5>{{SiteTestResult.DomainName}}</h5><span>{{SiteTestResult.TestedOn | date: 'dd/MM/yyyy'}}</span>
+    *ngIf="SiteTestResultThumbnail != null"
+    [routerLink]="['/', SiteTestResultThumbnail.Id]">
+    <h5>{{SiteTestResultThumbnail.DomainName | RemoveScheme}}</h5><span>{{SiteTestResultThumbnail.TestedOn | date: 'dd/MM/yyyy'}}</span>
 </div>

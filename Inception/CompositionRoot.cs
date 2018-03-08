@@ -3,6 +3,7 @@ using DryIoc;
 using HtmlAgilityPack;
 using Inception.Repository.Utility.Extensions;
 using Inception.Testing;
+using Inception.Testing.Results;
 using Inception.Utility;
 using Inception.Utility.Exceptions;
 using Inception.Utility.ModelBinding;
@@ -23,6 +24,8 @@ namespace Inception
             RegisterReporitory(container);
 
             RegisterTesting(container);
+
+            RegisterDomainName(container);
         }
 
 
@@ -37,7 +40,12 @@ namespace Inception
 
             container.Configure<TestingConfiguration>(configuration.GetSection("Testing"));
 
+
+            container.Configure<DomainNameConfiguration>(configuration.GetSection("DomainName"));
+
+
             container.Configure<MiscellaneousConfiguration>(configuration.GetSection("Miscellaneous"));
+
         }
 
 
@@ -88,5 +96,13 @@ namespace Inception
         {
             container.Register<ITestingService, TestingService>(Reuse.Singleton);
         }
+
+
+
+        private void RegisterDomainName(IContainer container)
+        {
+            container.Register<IDomainNameService, DomainNameService>(Reuse.InWebRequest);
+        }
+
     }
 }
