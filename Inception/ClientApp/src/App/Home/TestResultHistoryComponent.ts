@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { TestingService } from "../Services";
+import { TestingService } from "../TestingService";
 import { ActivatedRoute } from "@angular/router";
 import { SiteTestResult } from "./SiteTestResult";
 
@@ -27,7 +27,7 @@ export class TestResultHistoryComponent implements OnInit
 
     public ngOnInit(): void
     {
-        this.SiteTestResult = this._testingService.GetSiteTestResult(this._activatedRoute.snapshot.params["id"]);
-        console.log(this.SiteTestResult);
+        this._testingService.GetSiteTestResult(this._activatedRoute.snapshot.params["id"]).subscribe(SiteTestResult => {this.SiteTestResult = SiteTestResult;console.log(this.SiteTestResult)});
+        
     }
 }

@@ -3,11 +3,24 @@ import { Subject } from "rxjs/Subject";
 import { Injectable } from "@angular/core";
 import { LinkTestResult } from "./Home/LinkTestResult";
 import { SiteTestResult } from "./Home/SiteTestResult";
+import { HttpHeaders, HttpClient } from "@angular/common/http";
 
 @Injectable()
 
 export class TestingService {
 
+    private _httpClientOptions = 
+    {
+        headers: new HttpHeaders
+        (
+        {
+          "Content-Type" : "application/json"
+        }
+        )
+    };
+
+    constructor(private httpClient: HttpClient) { }
+    
     public getLinkTestResults(): Observable<LinkTestResult[]>
     {
         let subject = new Subject<LinkTestResult[]>();
@@ -24,9 +37,17 @@ export class TestingService {
         return subject;
     }
 
-    public GetSiteTestResult(id: string): SiteTestResult
+    public GetSiteTestResult(id: string): Observable<SiteTestResult>
     {
-        return TestSiteTestResult.find(x => x.Id === id);
+        //return TestSiteTestResult.find(x => x.Id === id);
+        let Params = 
+        {
+            "id" : id
+        };
+
+        let Url = "api/SiteTestResult/GetById";
+
+        return this.httpClient.post<SiteTestResult>(Url, Params, this._httpClientOptions);
     }
 }
 

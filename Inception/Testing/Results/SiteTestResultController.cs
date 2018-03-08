@@ -71,9 +71,6 @@ namespace Inception.Testing.Results
         {
             var siteTestResultDto = _mapper.Map<SiteTestResultDto>(siteTestResult);
 
-            siteTestResultDto.LinkTestResultIds = siteTestResult.LinkTestResults.Select(x => x.Id)
-                .ToList();
-
             return siteTestResultDto;
         }
 

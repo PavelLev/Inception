@@ -10,7 +10,7 @@ import { AppRouting } from "./AppRouting";
 import { AlertModule, ButtonsModule } from "ngx-bootstrap";
 import { TestResultHistoryListComponent } from "./Home/TestResultHistoryListComponent";
 import { Resolver } from "./Resolver";
-import { TestingService } from "./Services";
+import { TestingService } from "./TestingService";
 import { TestResultHistoryComponent } from "./Home/TestResultHistoryComponent";
 import { LinkTestResultComponent } from "./Home/LinkTestResultComponent";
 import { SiteTestOverviewComponent } from "./Home/SiteTestOverviewComponent";

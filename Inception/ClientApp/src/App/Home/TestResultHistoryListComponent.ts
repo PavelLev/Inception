@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { TestingService } from "../Services";
+import { TestingService } from "../TestingService";
 import { ActivatedRoute } from "@angular/router";
 import { SiteTestResultThumbnail } from "./SiteTestResultThumbnail";
 
