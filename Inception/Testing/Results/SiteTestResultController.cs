@@ -41,10 +41,10 @@ namespace Inception.Testing.Results
 
 
         public IActionResult GetById(int id)
-        {
+        {            
             var specifiedSiteTestResult = _siteTestResultRepository.GetById
                 (
-                id, 
+                id,
                 new Expression<Func<SiteTestResult, object>>[]
                 {
                     siteTestResult => siteTestResult.LinkTestResults
@@ -57,6 +57,16 @@ namespace Inception.Testing.Results
 
 
 
+        public IActionResult GetSiteTestResultThumbnails(string domainName)
+        {
+            var SiteTestResults = _siteTestResultRepository.GetAll().Where(siteTestResult => siteTestResult.DomainName.Equals(domainName));
+
+            var SiteTestResultThumbnails = SiteTestResults.Select(siteTestResult => ToSiteTestResultThumbnail(siteTestResult));
+
+            return Ok(SiteTestResultThumbnails);
+        }
+
+
         private SiteTestResultDto ToDto(SiteTestResult siteTestResult)
         {
             var siteTestResultDto = _mapper.Map<SiteTestResultDto>(siteTestResult);
@@ -65,6 +75,13 @@ namespace Inception.Testing.Results
                 .ToList();
 
             return siteTestResultDto;
+        }
+
+        private SiteTestResultThumbnail ToSiteTestResultThumbnail(SiteTestResult siteTestResult)
+        {
+            var siteTestResultThumbnails = _mapper.Map<SiteTestResultThumbnail>(siteTestResult);
+
+            return siteTestResultThumbnails;
         }
     }
 }

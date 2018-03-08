@@ -6,6 +6,8 @@ import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs/Observable";
 import {startWith, map} from "rxjs/operators";
 import { OverlaySettingsService } from "../OverlaySettingsService";
+import { SiteTestResultService } from "./SiteTestResultService";
+import { SiteTestResultThumbnail } from "./SiteTestResultThumbnail";
 
 @Component
     (
@@ -23,12 +25,18 @@ export class HomeComponent implements OnInit
 {
     public IsOverlayShown: boolean = false;
     public DomainName: string = "";
-    public SiteTestResult: SiteTestResult;
+    public SiteTestResultThumbnails: SiteTestResultThumbnail[];
     public TestedSiteDomainNames: string[];
     public SearchControl: FormControl = new FormControl();
     public FilteredDomainNames: Observable<string[]>;
 
-    constructor(private _testingService: TestingService, private _domainNameService: DomainNameService, private _overlaySettingsService: OverlaySettingsService)
+    constructor
+        (
+        private _testingService: TestingService, 
+        private _domainNameService: DomainNameService, 
+        private _overlaySettingsService: OverlaySettingsService,
+        private _siteTestResultService: SiteTestResultService
+        )
     {
 
     }
@@ -50,7 +58,11 @@ export class HomeComponent implements OnInit
 
     public ShowTestResultHistoryList(): void
     {
-        this.SiteTestResult = this._testingService.GetSiteTestResult("1");
+        this._siteTestResultService.GetSiteTestResultThumbnails(this.DomainName).subscribe(
+            SiteTestResultThumbnails => 
+            {
+                this.SiteTestResultThumbnails = SiteTestResultThumbnails
+            }); 
     }
 
     public HideOverlay(): void

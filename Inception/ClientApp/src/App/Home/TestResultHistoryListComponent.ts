@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { TestingService } from "../Services";
 import { ActivatedRoute } from "@angular/router";
-import { SiteTestResult } from "./SiteTestResult";
+import { SiteTestResultThumbnail } from "./SiteTestResultThumbnail";
 
 @Component
     (
@@ -18,7 +18,7 @@ import { SiteTestResult } from "./SiteTestResult";
 export class TestResultHistoryListComponent implements OnInit
 {
     @Input()
-    public SiteTestResult: SiteTestResult;
+    public SiteTestResultThumbnail: SiteTestResultThumbnail;
 
     constructor(private _testingService: TestingService, private _activatedRoute: ActivatedRoute)
     {

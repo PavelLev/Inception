@@ -18,6 +18,7 @@ import { MaterialModule } from "./MaterialModule";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { DomainNameService } from "./Home/DomainNameService";
 import { OverlaySettingsService } from "./OverlaySettingsService";
+import { SiteTestResultService } from "./Home/SiteTestResultService";
 import { RemoveScheme } from "./Home/RemoveSchemeService";
 @NgModule
     (
@@ -58,7 +59,8 @@ import { RemoveScheme } from "./Home/RemoveSchemeService";
             Resolver,
             TestingService,
             DomainNameService,
-            OverlaySettingsService
+            OverlaySettingsService,
+            SiteTestResultService
         ]
     }
     )

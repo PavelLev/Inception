@@ -3,6 +3,7 @@ using DryIoc;
 using HtmlAgilityPack;
 using Inception.Repository.Utility.Extensions;
 using Inception.Testing;
+using Inception.Testing.Results;
 using Inception.Utility;
 using Inception.Utility.Exceptions;
 using Inception.Utility.ModelBinding;
@@ -102,5 +103,6 @@ namespace Inception
         {
             container.Register<IDomainNameService, DomainNameService>(Reuse.InWebRequest);
         }
+
     }
 }
