@@ -29,8 +29,7 @@ namespace Inception.Testing
                 .GetAll()
                 .Select(siteTestResult => siteTestResult.DomainName)
                 .Where(domainName => domainName.Contains(filter))
-                .Take(_domainNameConfiguration.DomainNamesNumber)
-                .Select(domainName => domainName.Contains("//") ? domainName.Split("//", StringSplitOptions.None)[1] : domainName)
+                .Take(_domainNameConfiguration.DomainNamesNumber)                
                 .Distinct()
                 .OrderByDescending(domainName => domainName)
                 .ToList();
