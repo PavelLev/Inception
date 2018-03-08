@@ -13,27 +13,25 @@ namespace Inception.Testing.Results
     {
         private readonly IGenericRepository<SiteTestResult> _siteTestResultRepository;
         private readonly IMapper _mapper;
-        private readonly ISiteTestResultService _siteTestResultService;
 
 
 
         public SiteTestResultController
             (
             IGenericRepository<SiteTestResult> siteTestResultRepository,
-            IMapper mapper,
-            ISiteTestResultService siteTestResultService
+            IMapper mapper
             )
         {
             _siteTestResultRepository = siteTestResultRepository;
             _mapper = mapper;
-            _siteTestResultService = siteTestResultService;
         }
 
 
 
         public IActionResult GetAll(string filter)
         {
-            var siteTestResults = _siteTestResultService.GetAll();
+            var siteTestResults = _siteTestResultRepository.GetAll()
+                .Include(siteTestResult => siteTestResult.LinkTestResults);
 
             var siteTestResultDtos = siteTestResults.Select(x => ToDto(x));
 
@@ -43,8 +41,14 @@ namespace Inception.Testing.Results
 
 
         public IActionResult GetById(int id)
-        {
-            var specifiedSiteTestResult = _siteTestResultService.GetById(id);
+        {            
+            var specifiedSiteTestResult = _siteTestResultRepository.GetById
+                (
+                id,
+                new Expression<Func<SiteTestResult, object>>[]
+                {
+                    siteTestResult => siteTestResult.LinkTestResults
+                }).Result;
 
             var siteTestResultDto = ToDto(specifiedSiteTestResult);
 
@@ -55,7 +59,7 @@ namespace Inception.Testing.Results
 
         public IActionResult GetSiteResults(string domainName)
         {
-            var SiteTestResults = _siteTestResultService.GetAll().Where(siteTestResult => siteTestResult.DomainName.Equals(domainName));
+            var SiteTestResults = _siteTestResultRepository.GetAll().Where(siteTestResult => siteTestResult.DomainName.Equals(domainName));
 
             var SiteTestResultThumbnails = SiteTestResults.Select(siteTestResult => ToSiteTestResultThumbnail(siteTestResult));
 
