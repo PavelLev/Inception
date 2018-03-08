@@ -26,8 +26,6 @@ namespace Inception
             RegisterTesting(container);
 
             RegisterDomainName(container);
-
-            RegisterSiteTestResult(container);
         }
 
 
@@ -106,9 +104,5 @@ namespace Inception
             container.Register<IDomainNameService, DomainNameService>(Reuse.InWebRequest);
         }
 
-        private void RegisterSiteTestResult(IContainer container)
-        {
-            container.Register<ISiteTestResultService, SiteTestResultService>(Reuse.InWebRequest);
-        }
     }
 }
