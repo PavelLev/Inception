@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit
 
     public ShowTestResultHistoryList(): void
     {
-        this._siteTestResultService.GetSiteResults(this.DomainName).subscribe(
+        this._siteTestResultService.GetSiteTestResultThumbnails(this.DomainName).subscribe(
             SiteTestResultThumbnails => 
             {
                 this.SiteTestResultThumbnails = SiteTestResultThumbnails

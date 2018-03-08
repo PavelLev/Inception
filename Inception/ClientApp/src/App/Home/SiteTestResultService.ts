@@ -19,14 +19,14 @@ export class SiteTestResultService
 
     constructor(private httpClient: HttpClient) { }
 
-    public GetSiteResults(domainName: string): Observable<SiteTestResultThumbnail[]>
+    public GetSiteTestResultThumbnails(domainName: string): Observable<SiteTestResultThumbnail[]>
     {
         let Params = 
         {
             "domainName" : domainName
         };
 
-        let Url = "api/SiteTestResult/GetSiteResults";
+        let Url = "api/SiteTestResult/GetSiteTestResultThumbnails";
 
         return this.httpClient.post<SiteTestResultThumbnail[]>(Url, Params, this._httpClientOptions);
     }

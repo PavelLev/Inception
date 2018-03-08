@@ -57,7 +57,7 @@ namespace Inception.Testing.Results
 
 
 
-        public IActionResult GetSiteResults(string domainName)
+        public IActionResult GetSiteTestResultThumbnails(string domainName)
         {
             var SiteTestResults = _siteTestResultRepository.GetAll().Where(siteTestResult => siteTestResult.DomainName.Equals(domainName));
 
