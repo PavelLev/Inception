@@ -25,8 +25,8 @@
                     <mat-autocomplete                        
                         (optionSelected)="ShowOverlay();ShowTestResultHistoryList()"
                         #auto="matAutocomplete" >
-                        <mat-option  *ngFor="let domainName of FilteredDomainNames | async" [value]="domainName" >
-                        {{ domainName }}
+                        <mat-option  *ngFor="let domainName of FilteredDomainNames | async " [value]="domainName" >
+                        {{ domainName | RemoveScheme}}
                         </mat-option>
                     </mat-autocomplete>
             </mat-form-field>
