@@ -10,11 +10,15 @@ namespace Inception.Utility.ModelBinding
 {
     public class PostActionModelDeserializer : IPostActionModelDeserializer
     {
+        private readonly JsonSerializer _jsonSerializer;
         private readonly Dictionary<HttpRequest, JObject> _jObjectByHttpRequest = new Dictionary<HttpRequest, JObject>();
         
         private readonly Dictionary<HttpRequest, object> _objectByHttpRequest = new Dictionary<HttpRequest, object>();
 
-
+        public PostActionModelDeserializer(JsonSerializer jsonSerializer)
+        {
+            _jsonSerializer = jsonSerializer;
+        }
 
         public void ParseBody(HttpRequest httpRequest, Type type)
         {
@@ -38,13 +42,7 @@ namespace Inception.Utility.ModelBinding
             
             if (!_objectByHttpRequest.ContainsKey(httpRequest))
             {
-                var jsonSerialiser = new JsonSerializer
-                {
-                    MissingMemberHandling = MissingMemberHandling.Error,
-                    ContractResolver = new RequireObjectPropertiesContractResolver()
-                };
-
-                var @object = jObject.ToObject(type, jsonSerialiser);
+                var @object = jObject.ToObject(type, _jsonSerializer);
 
                 _objectByHttpRequest[httpRequest] = @object;
             }

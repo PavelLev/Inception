@@ -8,8 +8,11 @@ using Inception.Utility;
 using Inception.Utility.Exceptions;
 using Inception.Utility.ModelBinding;
 using Inception.Utility.ModelBinding.ActionConstraint;
+using Inception.Utility.Serialization;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Inception
 {
@@ -73,6 +76,31 @@ namespace Inception
             container.Register<IPostActionModelDeserializer, PostActionModelDeserializer>(Reuse.Singleton);
 
 
+            container.Register<IContractResolver, RequireObjectPropertiesContractResolver>
+                (
+                Reuse.Singleton,
+                setup: Setup.With(condition: IsParentIPostActionModelDeserializer)
+                );
+
+            container.Register<JsonSerializer>
+                (
+                Reuse.Singleton, 
+                Made.Of
+                    (
+                    () => new JsonSerializer
+                    {
+                        ContractResolver = Arg.Of<IContractResolver>(),
+                        MissingMemberHandling = MissingMemberHandling.Error
+                    }
+                    ),
+                Setup.With(condition: IsParentIPostActionModelDeserializer)
+                );
+
+
+            bool IsParentIPostActionModelDeserializer(Request request) =>
+                request.Parent.ServiceType == typeof(IPostActionModelDeserializer);
+
+
             container.Register<HttpClient>(Reuse.Singleton, Made.Of(() => new HttpClient()));
 
             container.Register<HtmlDocument>();
@@ -103,6 +131,5 @@ namespace Inception
         {
             container.Register<IDomainNameService, DomainNameService>(Reuse.InWebRequest);
         }
-
     }
 }
