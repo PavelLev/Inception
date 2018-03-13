@@ -39,7 +39,6 @@ export class TestingService {
 
     public GetSiteTestResult(id: string): Observable<SiteTestResult>
     {
-        //return TestSiteTestResult.find(x => x.Id === id);
         let Params = 
         {
             "id" : id
