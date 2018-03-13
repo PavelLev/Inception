@@ -27,7 +27,6 @@ export class TestResultHistoryComponent implements OnInit
 
     public ngOnInit(): void
     {
-        this._testingService.GetSiteTestResult(this._activatedRoute.snapshot.params["id"]).subscribe(SiteTestResult => {this.SiteTestResult = SiteTestResult;console.log(this.SiteTestResult)});
-        
+        this._testingService.GetSiteTestResult(this._activatedRoute.snapshot.params["id"]).subscribe(SiteTestResult => this.SiteTestResult = SiteTestResult);        
     }
 }
