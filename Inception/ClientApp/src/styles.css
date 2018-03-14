@@ -9,13 +9,14 @@ body
 
 body 
 {
-  background: linear-gradient(#4F6D93, #AD9D86);
-  background-size: cover;
   font-family: Roboto, Arial, sans-serif;
-  margin: 0;
+  background-size: cover;
   -moz-background-size: cover;
   -webkit-background-size: cover;
-  -o-background-size: cover;    
+  -o-background-size: cover; 
+  background: linear-gradient(#4F6D93, #AD9D86);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .float-left

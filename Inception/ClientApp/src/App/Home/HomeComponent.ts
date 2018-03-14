@@ -1,5 +1,5 @@
 import { OnInit, Component } from "@angular/core";
-import { TestingService } from "../Services";
+import { TestingService } from "../TestingService";
 import { SiteTestResult } from "./SiteTestResult";
 import { DomainNameService } from "./DomainNameService";
 import { FormControl } from "@angular/forms";

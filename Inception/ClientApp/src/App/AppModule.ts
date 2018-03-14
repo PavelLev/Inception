@@ -2,7 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
-import { RouterModule } from "@angular/router";
+import { RouterModule, RouteReuseStrategy } from "@angular/router";
 import { AppComponent } from "./AppComponent";
 import { HomeComponent } from "./Home/HomeComponent";
 
@@ -10,7 +10,7 @@ import { AppRouting } from "./AppRouting";
 import { AlertModule, ButtonsModule } from "ngx-bootstrap";
 import { TestResultHistoryListComponent } from "./Home/TestResultHistoryListComponent";
 import { Resolver } from "./Resolver";
-import { TestingService } from "./Services";
+import { TestingService } from "./TestingService";
 import { TestResultHistoryComponent } from "./Home/TestResultHistoryComponent";
 import { LinkTestResultComponent } from "./Home/LinkTestResultComponent";
 import { SiteTestOverviewComponent } from "./Home/SiteTestOverviewComponent";
@@ -20,6 +20,7 @@ import { DomainNameService } from "./Home/DomainNameService";
 import { OverlaySettingsService } from "./OverlaySettingsService";
 import { SiteTestResultService } from "./Home/SiteTestResultService";
 import { RemoveScheme } from "./Home/RemoveSchemeService";
+import { InceptionRouteReuseStrategy } from "./Home/InceptionRouteReuseStrategy";
 @NgModule
     (
     {
@@ -56,11 +57,12 @@ import { RemoveScheme } from "./Home/RemoveSchemeService";
         ],
         providers:
         [
-            Resolver,
+            //Resolver,
             TestingService,
             DomainNameService,
             OverlaySettingsService,
-            SiteTestResultService
+            SiteTestResultService,
+            {provide: RouteReuseStrategy, useClass: InceptionRouteReuseStrategy}
         ]
     }
     )

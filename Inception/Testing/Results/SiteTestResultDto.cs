@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Inception.Repository.Testing;
+using System;
 using System.Collections.Generic;
 
 namespace Inception.Testing.Results
@@ -23,7 +24,7 @@ namespace Inception.Testing.Results
             set;
         }
 
-        public List<int> LinkTestResultIds
+        public List<LinkTestResultDto> LinkTestResults
         {
             get;
             set;
