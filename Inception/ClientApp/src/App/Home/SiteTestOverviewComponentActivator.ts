@@ -7,7 +7,8 @@ export class SiteTestOverviewComponentActivator implements CanActivate
 {
     public canActivate(route: ActivatedRouteSnapshot): boolean
     {
-       return false; // return  canActivateRoute = route.params["DomainName"] === undefined ? true : false;
+       let canActivateRoute = route.params["DomainName"] === undefined ? true : false;
+       return  canActivateRoute;
     }
 
 }

@@ -6,14 +6,13 @@ import { SiteTestOverviewComponent } from "./Home/SiteTestOverviewComponent";
 
 const Routes: Routes = [
     {
-        component: TestResultHistoryComponent,
-        path: ":id"
+        component: SiteTestOverviewComponent,
+        path: "overview/:domain",
+        pathMatch: "full"
     },
     {
-        // component: SiteTestOverviewComponent,
-        path: ":domain",
-        pathMatch: "full",
-        redirectTo: "/overview"
+        component: TestResultHistoryComponent,
+        path: ":id"
     },
     {
         component: HomeComponent,
