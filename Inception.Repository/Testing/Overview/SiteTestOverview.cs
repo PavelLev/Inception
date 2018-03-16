@@ -11,6 +11,12 @@ namespace Inception.Repository.Testing.Overview
             set;
         }
 
+        public string DomainName
+        {
+            get;
+            set;
+        }
+
         public DateTime FirstTestedOn
         {
             get;
