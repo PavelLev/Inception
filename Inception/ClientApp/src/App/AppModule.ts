@@ -21,6 +21,7 @@ import { OverlaySettingsService } from "./OverlaySettingsService";
 import { SiteTestResultService } from "./Home/SiteTestResultService";
 import { RemoveScheme } from "./Home/RemoveSchemeService";
 import { InceptionRouteReuseStrategy } from "./Home/InceptionRouteReuseStrategy";
+import { SiteTestOverviewService } from "./Home/SiteTestOverviewService";
 @NgModule
     (
     {
@@ -62,6 +63,7 @@ import { InceptionRouteReuseStrategy } from "./Home/InceptionRouteReuseStrategy"
             DomainNameService,
             OverlaySettingsService,
             SiteTestResultService,
+            SiteTestOverviewService,
             {provide: RouteReuseStrategy, useClass: InceptionRouteReuseStrategy}
         ]
     }
