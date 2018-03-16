@@ -7,5 +7,11 @@
             get;
             set;
         }
+
+        public int DegreeOfParallelism
+        {
+            get;
+            set;
+        }
     }
 }

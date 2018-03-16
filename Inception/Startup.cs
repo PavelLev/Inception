@@ -1,5 +1,4 @@
 using System;
-using System.Net;
 using System.Text;
 using AutoMapper;
 using DryIoc;
@@ -31,8 +30,6 @@ namespace Inception
         private void ConfigureMiscellaneous()
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
-            ServicePointManager.DefaultConnectionLimit = 1;
         }
 
 

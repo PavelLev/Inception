@@ -8,6 +8,7 @@ using Inception.Utility;
 using Inception.Utility.Exceptions;
 using Inception.Utility.ModelBinding;
 using Inception.Utility.ModelBinding.ActionConstraint;
+using Inception.Utility.Parallel;
 using Inception.Utility.Serialization;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Configuration;
@@ -76,6 +77,9 @@ namespace Inception
             container.Register<IPostActionModelDeserializer, PostActionModelDeserializer>(Reuse.Singleton);
 
 
+            container.Register(typeof(ICluster<>), typeof(Cluster<>));
+
+
             container.Register<IContractResolver, RequireObjectPropertiesContractResolver>
                 (
                 Reuse.Singleton,
@@ -122,7 +126,9 @@ namespace Inception
 
         private void RegisterTesting(IContainer container)
         {
-            container.Register<ITestingService, TestingService>(Reuse.Singleton);
+            container.Register<ISiteTestingService, ClusterSiteTestingService>(Reuse.Singleton);
+
+            container.Register<ILinkTestingService, ClusterLinkTestingService>(Reuse.Singleton);
         }
 
 
