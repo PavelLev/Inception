@@ -15,7 +15,12 @@ namespace Inception.Testing
 
 
 
-        public ClusterSiteTestingService(ILinkTestingService linkTestingService, Func<ClusterOptions, ICluster<HttpClient>> clusterFunc, TestingConfiguration testingConfiguration)
+        public ClusterSiteTestingService
+            (
+            ILinkTestingService linkTestingService, 
+            Func<ClusterOptions, ICluster<HttpClient>> clusterFunc, 
+            TestingConfiguration testingConfiguration
+            )
         {
             _linkTestingService = linkTestingService;
 

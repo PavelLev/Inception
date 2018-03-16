@@ -20,7 +20,15 @@ namespace Inception.Testing
         private readonly IGenericRepository<SiteTestResult> _siteTestResultRepository;
         private readonly IHtmlParser _htmlParser;
 
-        public ClusterLinkTestingService(IUriService uriService, TestingConfiguration testingConfiguration, HttpClient httpClient, AutoResetEvent dbAutoResetEvent, IGenericRepository<SiteTestResult> siteTestResultRepository, IHtmlParser htmlParser)
+        public ClusterLinkTestingService
+            (
+            IUriService uriService, 
+            TestingConfiguration testingConfiguration, 
+            HttpClient httpClient, 
+            AutoResetEvent dbAutoResetEvent, 
+            IGenericRepository<SiteTestResult> siteTestResultRepository, 
+            IHtmlParser htmlParser
+            )
         {
             _uriService = uriService;
             _testingConfiguration = testingConfiguration;
