@@ -12,7 +12,7 @@ namespace Inception.Testing
 {
     public class TestingController : Controller
     {
-        private readonly ITestingService _testingService;
+        private readonly ISiteTestingService _testingService;
         private readonly IGenericRepository<SiteTestResult> _siteTestResultRepository;
         private readonly IGenericRepository<SiteTestOverview> _siteTestOverviewRepository;
         private readonly IBusinessExceptionProvider _businessExceptionProvider;
@@ -21,7 +21,7 @@ namespace Inception.Testing
 
         public TestingController
             (
-            ITestingService testingService,
+            ISiteTestingService testingService,
             IGenericRepository<SiteTestResult> siteTestResultRepository,
             IBusinessExceptionProvider businessExceptionProvider,
             IGenericRepository<SiteTestOverview> siteTestOverviewRepository

@@ -4,14 +4,14 @@ using Inception.Repository.Testing;
 
 namespace Inception.Testing
 {
-    public interface ITestingService
+    public interface ISiteTestingService
     {
         bool IsProcessing
             (
             SiteTestResult siteTestResult
             );
 
-        Task<SiteTestResult> Process
+        Task Process
             (
             SiteTestResult siteTestResult
             );

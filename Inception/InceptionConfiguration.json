@@ -1,7 +1,8 @@
 ﻿{
-    "Testing": 
+    "Testing":
     {
-        "LinkTestResultLimit": 30
+        "LinkTestResultLimit": 30,
+        "DegreeOfParallelism": 2 
     },
     "DomainName": 
     {
