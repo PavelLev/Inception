@@ -11,7 +11,7 @@ using Inception.Utility.Extensions;
 
 namespace Inception.Testing
 {
-    public class TestingService : ITestingService
+    public class TaskSiteTestingService : ISiteTestingService
     {
         private readonly HttpClient _httpClient;
         private readonly TestingConfiguration _testingConfiguration;
@@ -24,7 +24,7 @@ namespace Inception.Testing
 
 
 
-        public TestingService
+        public TaskSiteTestingService
             (
             HttpClient httpClient,
             TestingConfiguration testingConfiguration,
@@ -55,7 +55,7 @@ namespace Inception.Testing
 
 
 
-        public async Task<SiteTestResult> Process
+        public async Task Process
             (
             SiteTestResult siteTestResult
             )
@@ -77,8 +77,6 @@ namespace Inception.Testing
             {
                 _processingSiteTestResults.Remove(siteTestResult);
             }
-
-            return siteTestResult;
         }
 
 
