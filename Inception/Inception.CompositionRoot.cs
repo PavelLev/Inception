@@ -1,9 +1,9 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using DryIoc;
 using HtmlAgilityPack;
 using Inception.Repository.Utility.Extensions;
 using Inception.Testing;
-using Inception.Testing.Results;
 using Inception.Utility;
 using Inception.Utility.Exceptions;
 using Inception.Utility.ModelBinding;
@@ -17,6 +17,11 @@ using Newtonsoft.Json.Serialization;
 
 namespace Inception
 {
+    /// <summary>
+    /// This class is used to manage registrations of DryIoc container
+    /// All registrations should be in constructor or called by constructor methods
+    /// To apply registrations use <see cref="ContainerExtensions.LoadCompositionRoot{T}(IContainer)"/>
+    /// </summary>
     public class CompositionRoot
     {
         public CompositionRoot(IContainer container)
@@ -25,7 +30,7 @@ namespace Inception
 
             RegisterUtility(container);
 
-            RegisterReporitory(container);
+            RegisterRepository(container);
 
             RegisterTesting(container);
 
@@ -37,7 +42,7 @@ namespace Inception
         private void RegisterConfiguration(IContainer container)
         {
             var builder = new ConfigurationBuilder()
-                .AddJsonFile("InceptionConfiguration.json");
+                .AddJsonFile("Inception.Configuration.json");
 
             var configuration = builder.Build();
 
@@ -117,9 +122,9 @@ namespace Inception
 
 
 
-        private void RegisterReporitory(IContainer container)
+        private void RegisterRepository(IContainer container)
         {
-            container.RegisterCompositionRoot<Repository.CompositionRoot>();
+            container.LoadCompositionRoot<Repository.CompositionRootToken>();
         }
 
 

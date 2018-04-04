@@ -1,5 +1,8 @@
-﻿using DryIoc;
+﻿using System.Collections.Generic;
+using DryIoc;
 using Inception.Repository.Utility.Extensions;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 
 namespace Inception.Repository
 {
@@ -15,7 +18,11 @@ namespace Inception.Repository
                 {
                     var container = new Container();
 
-                    container.RegisterCompositionRoot<CompositionRoot>();
+                    container.Register<ILoggerFactory, LoggerFactory>(Made.Of(() => new LoggerFactory(Arg.Of<IEnumerable<ILoggerProvider>>())), Reuse.Singleton);
+
+                    container.UseInstance<ILoggerProvider>(new ConsoleLoggerProvider((_, __) => true, true));
+
+                    container.LoadCompositionRoot<CompositionRootToken>();
 
                     _instance = container.OpenScope(Reuse.WebRequestScopeName);
                 }

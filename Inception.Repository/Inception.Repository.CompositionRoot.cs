@@ -1,20 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using DryIoc;
+using Inception.Repository.Utility;
 using Inception.Repository.Utility.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
 
 namespace Inception.Repository
 {
+    /// <summary>
+    /// This class is used to manage registrations of DryIoc container
+    /// All registrations should be in constructor or called by constructor methods
+    /// To apply registrations use <see cref="ContainerExtensions.LoadCompositionRoot{T}(IContainer)"/>
+    /// </summary>
     public class CompositionRoot
     {
         public CompositionRoot(IContainer container)
         {
             RegisterConfiguration(container);
-
-            RegisterDbContextLogging(container);
 
             RegisterInceptionDbContext(container);
 
@@ -26,21 +28,12 @@ namespace Inception.Repository
         private void RegisterConfiguration(IContainer container)
         {
             var builder = new ConfigurationBuilder()
-                .AddJsonFile("InceptionRepositoryConfiguration.json");
+                .AddJsonFile("Inception.Repository.Configuration.json");
 
             var configuration = builder.Build();
 
 
             container.Configure<DbContextConfiguration>(configuration.GetSection("DbContext"));
-        }
-
-
-
-        private void RegisterDbContextLogging(IContainer container)
-        {
-            container.Register(Made.Of(() => new LoggerFactory(Arg.Of<IEnumerable<ILoggerProvider>>())), Reuse.Singleton);
-
-            container.UseInstance<ILoggerProvider>(new ConsoleLoggerProvider((_, __) => true, true));
         }
 
 
@@ -54,10 +47,10 @@ namespace Inception.Repository
                 optionsBuilder.UseSqlServer(connectionString);
 
 
-                optionsBuilder.UseLoggerFactory
-                    (
-                    resolverContext.Resolve<LoggerFactory>()
-                    );
+                //optionsBuilder.UseLoggerFactory
+                //    (
+                //    resolverContext.Resolve<LoggerFactory>()
+                //    );
             });
         }
 
