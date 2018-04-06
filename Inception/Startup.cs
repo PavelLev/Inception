@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
 using DryIoc;
 using DryIoc.Microsoft.DependencyInjection;
 using Inception.Repository.Utility.Extensions;
+using Inception.Utility.Extensions;
 using Inception.Utility.ModelBinding;
 using Inception.Utility.ModelBinding.ActionConstraint;
 using Microsoft.AspNetCore.Builder;
@@ -12,6 +14,8 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using Newtonsoft.Json.Serialization;
 
 namespace Inception
@@ -48,7 +52,10 @@ namespace Inception
                     throwIfUnresolved: type => true
                 );
 
-            container.RegisterCompositionRoot<CompositionRoot>();
+            container.Register<ILoggerFactory, LoggerFactory>(Made.Of(() => new LoggerFactory(Arg.Of<IEnumerable<ILoggerProvider>>())), Reuse.Singleton);
+
+
+            container.LoadCompositionRoot<CompositionRootToken>();
 
             services.AddMvc(mvcOptions =>
                 {

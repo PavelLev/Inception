@@ -43,7 +43,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="InceptionConfiguration.json">
+    <Compile Update="Inception.CompositionRoot.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Inception.Configuration.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
