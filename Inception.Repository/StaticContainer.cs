@@ -20,8 +20,6 @@ namespace Inception.Repository
 
                     container.Register<ILoggerFactory, LoggerFactory>(Made.Of(() => new LoggerFactory(Arg.Of<IEnumerable<ILoggerProvider>>())), Reuse.Singleton);
 
-                    container.UseInstance<ILoggerProvider>(new ConsoleLoggerProvider((_, __) => true, true));
-
                     container.LoadCompositionRoot<CompositionRootToken>();
 
                     _instance = container.OpenScope(Reuse.WebRequestScopeName);

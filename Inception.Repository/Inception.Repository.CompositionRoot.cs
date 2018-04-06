@@ -1,9 +1,8 @@
-﻿using System;
-using DryIoc;
-using Inception.Repository.Utility;
+﻿using DryIoc;
 using Inception.Repository.Utility.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace Inception.Repository
 {
@@ -16,6 +15,8 @@ namespace Inception.Repository
     {
         public CompositionRoot(IContainer container)
         {
+
+
             RegisterConfiguration(container);
 
             RegisterInceptionDbContext(container);
@@ -47,10 +48,10 @@ namespace Inception.Repository
                 optionsBuilder.UseSqlServer(connectionString);
 
 
-                //optionsBuilder.UseLoggerFactory
-                //    (
-                //    resolverContext.Resolve<LoggerFactory>()
-                //    );
+                optionsBuilder.UseLoggerFactory
+                    (
+                    resolverContext.Resolve<ILoggerFactory>()
+                    );
             });
         }
 
