@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Inception.Repository.Utility.Extensions
 {
-    internal static class DbContextContainerExtensions
+    public static class DbContextContainerExtensions
     {
         public static void RegisterDbContext<TDbContext>(this IContainer container, Action<IResolver, DbContextOptionsBuilder<TDbContext>> optionsAction)
             where TDbContext : DbContext

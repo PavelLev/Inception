@@ -4,11 +4,14 @@ namespace Inception.Repository.Utility.Extensions
 {
     public static class ContainerExtensions
     {
-        public static void RegisterCompositionRoot<TCompositionRoot>(this IContainer container)
+        public static void LoadCompositionRoot<T>(this IContainer container)
         {
-            container.Register<TCompositionRoot>(Reuse.Singleton);
+            container.Register<ICompositionRootLoader, CompositionRootLoader>(Reuse.Singleton, ifAlreadyRegistered:IfAlreadyRegistered.Keep);
 
-            container.Resolve<TCompositionRoot>();
+
+            var compositionRootLoader = container.Resolve<ICompositionRootLoader>();
+
+            compositionRootLoader.Load<T>();
         }
     }
 }
