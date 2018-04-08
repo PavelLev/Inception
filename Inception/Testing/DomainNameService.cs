@@ -28,9 +28,9 @@ namespace Inception.Testing
             return _siteTestResultRepository
                 .GetAll()
                 .Select(siteTestResult => siteTestResult.DomainName)
-                .Where(domainName => domainName.Contains(filter))
-                .Take(_domainNameConfiguration.DomainNamesNumber)                
+                .Where(domainName => domainName.Contains(filter))              
                 .Distinct()
+                .Take(_domainNameConfiguration.DomainNamesNumber)
                 .OrderByDescending(domainName => domainName)
                 .ToList();
         }

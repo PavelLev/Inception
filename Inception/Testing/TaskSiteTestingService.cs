@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Inception.Repository;
 using Inception.Repository.Testing;
+using Inception.Testing.Overview;
 using Inception.Utility;
 using Inception.Utility.Extensions;
 
@@ -21,6 +22,7 @@ namespace Inception.Testing
         private readonly List<SiteTestResult> _processingSiteTestResults;
         private readonly AutoResetEvent _processAutoResetEvent = new AutoResetEvent(true);
         private readonly AutoResetEvent _dbAutoResetEvent = new AutoResetEvent(true);
+        private readonly SiteTestOverviewService _siteTestOverviewService;
 
 
 
@@ -30,7 +32,8 @@ namespace Inception.Testing
             TestingConfiguration testingConfiguration,
             IUriService uriService,
             IHtmlParser htmlParser,
-            IGenericRepository<SiteTestResult> siteTestResultRepository
+            IGenericRepository<SiteTestResult> siteTestResultRepository,
+            SiteTestOverviewService siteTestOverviewService
             )
         {
             _httpClient = httpClient;
@@ -39,6 +42,7 @@ namespace Inception.Testing
             _htmlParser = htmlParser;
             _siteTestResultRepository = siteTestResultRepository;
             _processingSiteTestResults = new List<SiteTestResult>();
+            _siteTestOverviewService = siteTestOverviewService;
         }
 
 
@@ -73,9 +77,11 @@ namespace Inception.Testing
                 );
 
 
+
             if (!siteTestResult.LinkTestResults.Any())
             {
                 _processingSiteTestResults.Remove(siteTestResult);
+                _siteTestOverviewService.DeleteSiteTestOverView(siteTestResult);
             }
         }
 

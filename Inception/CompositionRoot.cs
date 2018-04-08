@@ -3,7 +3,7 @@ using DryIoc;
 using HtmlAgilityPack;
 using Inception.Repository.Utility.Extensions;
 using Inception.Testing;
-using Inception.Testing.Results;
+using Inception.Testing.Overview;
 using Inception.Utility;
 using Inception.Utility.Exceptions;
 using Inception.Utility.ModelBinding;
@@ -129,6 +129,8 @@ namespace Inception
             container.Register<ISiteTestingService, ClusterSiteTestingService>(Reuse.Singleton);
 
             container.Register<ILinkTestingService, ClusterLinkTestingService>(Reuse.Singleton);
+
+            container.Register<ISiteTestOverviewService, SiteTestOverviewService>(Reuse.Singleton);
         }
 
 
