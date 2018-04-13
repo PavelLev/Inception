@@ -21,6 +21,9 @@ import { OverlaySettingsService } from "./OverlaySettingsService";
 import { SiteTestResultService } from "./Home/SiteTestResultService";
 import { RemoveScheme } from "./Home/RemoveSchemeService";
 import { InceptionRouteReuseStrategy } from "./Home/InceptionRouteReuseStrategy";
+import { ToastrModule } from 'ngx-toastr';
+
+
 @NgModule
     (
     {
@@ -53,7 +56,8 @@ import { InceptionRouteReuseStrategy } from "./Home/InceptionRouteReuseStrategy"
             AppRouting,
             MaterialModule,
             ReactiveFormsModule,
-            BrowserAnimationsModule
+            BrowserAnimationsModule,
+            ToastrModule.forRoot()
         ],
         providers:
         [
