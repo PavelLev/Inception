@@ -59,7 +59,13 @@ import { ToastHttpInterceptor } from "./ToastHttpInterceptor";
             MaterialModule,
             ReactiveFormsModule,
             BrowserAnimationsModule,
-            ToastrModule.forRoot()
+            ToastrModule.forRoot    
+                (
+                {
+                    positionClass: 'toast-bottom-right',
+                    toastClass: "InceptionToast"
+                }
+                )
         ],
         providers:
         [

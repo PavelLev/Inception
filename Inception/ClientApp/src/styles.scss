@@ -85,3 +85,28 @@ body
     z-index: 10;
     background-color: rgba(0,0,0,0.3); 
 }
+
+.toast-container .InceptionToast
+{
+    position: relative;
+    overflow: hidden;
+    margin: 0 0 6px;
+    padding: 15px 15px 15px 50px;
+    width: 300px;
+    border-radius: 3px 3px 3px 3px;
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    background-size: 24px;
+    background-color: initial;
+    box-sizing: initial;
+    box-shadow: none;
+    pointer-events: all;
+    color: #FFFFFF;
+
+    &:hover
+    {
+        box-shadow: 0 0 12px #000000;
+        opacity: 1;
+        cursor: pointer;
+    }
+}
