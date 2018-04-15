@@ -7,7 +7,7 @@ import { LinkTestResult } from "./LinkTestResult";
         selector: "LinkTestResult",
         styleUrls: 
         [
-            "LinkTestResultComponent.css"
+            "LinkTestResultComponent.scss"
         ],
         templateUrl: "LinkTestResultComponent.html"
     }

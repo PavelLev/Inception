@@ -7,7 +7,7 @@ import { OverlaySettingsService } from "./OverlaySettingsService";
         selector: "App",
         styleUrls: 
         [
-            "./AppComponent.css"
+            "./AppComponent.scss"
         ],
         templateUrl: "./AppComponent.html"
     }

@@ -15,7 +15,7 @@ import { SiteTestResultThumbnail } from "./SiteTestResultThumbnail";
         selector: "Home",
         styleUrls:
         [
-            "HomeController.css"
+            "HomeController.scss"
         ],
         templateUrl: "./HomeComponent.html",
     }
