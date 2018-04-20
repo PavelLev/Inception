@@ -10,7 +10,7 @@ export class ToastErrorHandler extends ErrorHandler
     {
         if (this._toastrService == null)
         {
-            this._toastrService = <ToastrService>this._injector.get(ToastrService);
+            this._toastrService = this._injector.get<ToastrService>(ToastrService);
         }
 
         return this._toastrService;
