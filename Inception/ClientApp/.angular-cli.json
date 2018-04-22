@@ -19,8 +19,9 @@
             "tsconfig": "tsconfig.app.json",
             "styles": 
             [
-                "styles.css",
-                "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+                "styles.scss",
+                "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+                "../node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [],
             "environmentSource": "environments/environment.ts",
@@ -40,7 +41,7 @@
     ],
     "defaults": 
     {
-        "styleExt": "css",
+        "styleExt": "scss",
         "component": {},
         "build": 
         {

@@ -1,7 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { NgModule, ErrorHandler } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule, RouteReuseStrategy } from "@angular/router";
 import { AppComponent } from "./AppComponent";
 import { HomeComponent } from "./Home/HomeComponent";
@@ -22,6 +22,11 @@ import { SiteTestResultService } from "./Home/SiteTestResultService";
 import { RemoveScheme } from "./Home/RemoveSchemeService";
 import { InceptionRouteReuseStrategy } from "./Home/InceptionRouteReuseStrategy";
 import { SiteTestOverviewService } from "./Home/SiteTestOverviewService";
+import { ToastErrorHandler } from "./ToastErrorHandler";
+import { ToastHttpInterceptor } from "./ToastHttpInterceptor";
+import { ToastrModule } from "ngx-toastr";
+
+
 @NgModule
     (
     {
@@ -54,17 +59,26 @@ import { SiteTestOverviewService } from "./Home/SiteTestOverviewService";
             AppRouting,
             MaterialModule,
             ReactiveFormsModule,
-            BrowserAnimationsModule
+            BrowserAnimationsModule,
+            ToastrModule.forRoot    
+                (
+                {
+                    positionClass: "toast-bottom-right",
+                    toastClass: "InceptionToast"
+                }
+                )
         ],
         providers:
         [
-            //Resolver,
+            // Resolver,
             TestingService,
             DomainNameService,
             OverlaySettingsService,
             SiteTestResultService,
             SiteTestOverviewService,
-            {provide: RouteReuseStrategy, useClass: InceptionRouteReuseStrategy}
+            { provide: RouteReuseStrategy, useClass: InceptionRouteReuseStrategy },
+            { provide: ErrorHandler, useClass: ToastErrorHandler },
+            { provide: HTTP_INTERCEPTORS, useClass: ToastHttpInterceptor, multi: true }
         ]
     }
     )

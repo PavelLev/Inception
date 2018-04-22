@@ -9,7 +9,7 @@ import { SiteTestResultThumbnail } from "./SiteTestResultThumbnail";
         selector: "TestResultHistoryList",
         styleUrls:
         [
-            "TestResultHistoryListComponent.css"
+            "TestResultHistoryListComponent.scss"
         ],
         templateUrl: "TestResultHistoryListComponent.html"
     }

@@ -8,7 +8,10 @@ import { ActivatedRoute, Params } from "@angular/router";
     (
     {
         selector: "SiteTestOverview",
-        styleUrls: ["SiteTestOverviewComponent.css"],
+        styleUrls: 
+        [
+            "SiteTestOverviewComponent.scss"
+        ],
         templateUrl: "SiteTestOverviewComponent.html"
     }
     )

@@ -1,0 +1,29 @@
+*
+{
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+#DomainName 
+{
+    border-bottom-left-radius: 4px;
+}
+
+.TestButton 
+{
+    border: 0.5px solid rgba(0,0,0,.42);
+    color:rgba(0,0,0,.42);
+    font-size:14px;
+    text-transform: uppercase;
+    border: 0.5px solid #e5daf7;
+    color: #e5daf7;
+}
+
+.ProjectName
+{
+    font-size: 25px;
+    color: rgba(255,255,255,.75);
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;             
+}
