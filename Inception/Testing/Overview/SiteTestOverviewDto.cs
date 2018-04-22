@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Inception.Repository.Testing.Overview
 {
-    public class SiteTestOverview
+    public class SiteTestOverviewDto
     {
         public int Id
         {
@@ -30,7 +30,7 @@ namespace Inception.Repository.Testing.Overview
         }
 
 
-        public List<LinkTestOverview> LinkTestOverviews
+        public List<LinkTestOverviewDto> LinkTestOverviews
         {
             get;
             set;

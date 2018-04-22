@@ -1,4 +1,8 @@
 import { Component, OnInit } from "@angular/core";
+import { SiteTestOverviewService } from "./SiteTestOverviewService";
+import { SiteTestOverview } from "./SiteTestOverview";
+import { Observable } from "rxjs/Observable";
+import { ActivatedRoute, Params } from "@angular/router";
 
 @Component
     (
@@ -13,13 +17,24 @@ import { Component, OnInit } from "@angular/core";
     )
 export class SiteTestOverviewComponent implements OnInit
 {
-    constructor()
+    public DomainName: string = "";
+    public SiteTestOverview: SiteTestOverview;
+    
+    constructor(
+        private _siteTestOverviewService: SiteTestOverviewService,
+        private _activatedRoute: ActivatedRoute
+    )
     {
-
+        this.DomainName =  this._activatedRoute.snapshot.params.domain;
     }
 
     public ngOnInit(): void
     {
 
+        this._siteTestOverviewService.GetSiteTestOverview(this.DomainName)
+            .subscribe
+            (
+            siteTestOverview => this.SiteTestOverview = siteTestOverview
+            );
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Inception.Repository.Testing;
+using Inception.Repository.Testing.Overview;
 using Inception.Testing.Results;
 
 namespace Inception.Utility.AutoMapper
@@ -13,6 +14,10 @@ namespace Inception.Utility.AutoMapper
             CreateMap<LinkTestResult, LinkTestResultDto>();
 
             CreateMap<SiteTestResult, SiteTestResultThumbnail>();
+
+            CreateMap<SiteTestOverview, SiteTestOverviewDto>();
+
+            CreateMap<LinkTestOverview, LinkTestOverviewDto>();
         }
     }
 }

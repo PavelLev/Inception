@@ -21,7 +21,8 @@ namespace Inception.Testing
 
         public List<string> GetTestedSiteDomainNames(string filter)
         {
-            return _domainNameService.GetTestedSiteDomainNames(filter);
+            var testedSiteDomainNames = _domainNameService.GetTestedSiteDomainNames(filter);
+            return testedSiteDomainNames; 
         }
     }
 }

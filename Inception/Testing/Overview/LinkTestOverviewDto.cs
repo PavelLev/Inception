@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Inception.Repository.Testing.Overview
+﻿namespace Inception.Repository.Testing.Overview
 {
-    public class SiteTestOverview
+    public class LinkTestOverviewDto
     {
         public int Id
         {
@@ -11,29 +8,30 @@ namespace Inception.Repository.Testing.Overview
             set;
         }
 
-        public string DomainName
+        public string Url
         {
             get;
             set;
         }
 
-        public DateTime FirstTestedOn
+        public int MinimumResponseTime
         {
             get;
             set;
         }
 
-        public DateTime LastTestedOn
+        public int MaximumResponseTime
         {
             get;
             set;
         }
 
 
-        public List<LinkTestOverview> LinkTestOverviews
+        public int SiteTestOverviewId
         {
             get;
             set;
         }
+
     }
 }

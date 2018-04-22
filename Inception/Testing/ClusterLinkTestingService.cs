@@ -6,6 +6,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Inception.Repository;
 using Inception.Repository.Testing;
+using Inception.Repository.Testing.Overview;
+using Inception.Testing.Overview;
 using Inception.Utility;
 using Inception.Utility.Extensions;
 
@@ -16,26 +18,27 @@ namespace Inception.Testing
         private readonly IUriService _uriService;
         private readonly TestingConfiguration _testingConfiguration;
         private readonly HttpClient _httpClient;
-        private readonly AutoResetEvent _dbAutoResetEvent;
+        private readonly AutoResetEvent _dbAutoResetEvent = new AutoResetEvent(true);
         private readonly IGenericRepository<SiteTestResult> _siteTestResultRepository;
         private readonly IHtmlParser _htmlParser;
+        private ISiteTestOverviewService _siteTestOverViewService;
 
         public ClusterLinkTestingService
             (
             IUriService uriService, 
             TestingConfiguration testingConfiguration, 
             HttpClient httpClient, 
-            AutoResetEvent dbAutoResetEvent, 
             IGenericRepository<SiteTestResult> siteTestResultRepository, 
-            IHtmlParser htmlParser
+            IHtmlParser htmlParser,
+            ISiteTestOverviewService siteTestOverViewService
             )
         {
             _uriService = uriService;
             _testingConfiguration = testingConfiguration;
             _httpClient = httpClient;
-            _dbAutoResetEvent = dbAutoResetEvent;
             _siteTestResultRepository = siteTestResultRepository;
             _htmlParser = htmlParser;
+            _siteTestOverViewService = siteTestOverViewService;
         }
 
 
@@ -101,6 +104,8 @@ namespace Inception.Testing
                 _dbAutoResetEvent.WaitOne();
 
                 await _siteTestResultRepository.Update(siteTestResult);
+
+                _siteTestOverViewService.UpdateLinkTestOverviews(siteTestResult);
 
                 _dbAutoResetEvent.Set();
             }

@@ -21,9 +21,10 @@ import { OverlaySettingsService } from "./OverlaySettingsService";
 import { SiteTestResultService } from "./Home/SiteTestResultService";
 import { RemoveScheme } from "./Home/RemoveSchemeService";
 import { InceptionRouteReuseStrategy } from "./Home/InceptionRouteReuseStrategy";
-import { ToastrModule } from 'ngx-toastr';
+import { SiteTestOverviewService } from "./Home/SiteTestOverviewService";
 import { ToastErrorHandler } from "./ToastErrorHandler";
 import { ToastHttpInterceptor } from "./ToastHttpInterceptor";
+import { ToastrModule } from "ngx-toastr";
 
 
 @NgModule
@@ -62,19 +63,20 @@ import { ToastHttpInterceptor } from "./ToastHttpInterceptor";
             ToastrModule.forRoot    
                 (
                 {
-                    positionClass: 'toast-bottom-right',
+                    positionClass: "toast-bottom-right",
                     toastClass: "InceptionToast"
                 }
                 )
         ],
         providers:
         [
-            //Resolver,
+            // Resolver,
             TestingService,
             DomainNameService,
             OverlaySettingsService,
             SiteTestResultService,
-            {provide: RouteReuseStrategy, useClass: InceptionRouteReuseStrategy},
+            SiteTestOverviewService,
+            { provide: RouteReuseStrategy, useClass: InceptionRouteReuseStrategy },
             { provide: ErrorHandler, useClass: ToastErrorHandler },
             { provide: HTTP_INTERCEPTORS, useClass: ToastHttpInterceptor, multi: true }
         ]
