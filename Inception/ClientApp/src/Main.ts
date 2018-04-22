@@ -1,6 +1,6 @@
 import { AppModule } from "./App/AppModule";
 import { enableProdMode, NgModuleRef } from "@angular/core";
-import { Environment } from "./Environments/environment";
+import { Environment } from "./Environments/Environment";
 import { HmrBootstrap } from "./HmrBootstrap";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 

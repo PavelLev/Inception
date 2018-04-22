@@ -24,11 +24,11 @@
                 "../node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [],
-            "environmentSource": "environments/environment.ts",
+            "environmentSource": "Environments/Environment.ts",
             "environments": 
             {
-                "dev": "environments/environment.ts",
-                "prod": "environments/environment.prod.ts"
+                "dev": "Environments/Environment.ts",
+                "prod": "Environments/Environment.prod.ts"
             }
         }
     ],
