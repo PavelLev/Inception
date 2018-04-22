@@ -47,5 +47,9 @@
         {
             "progress": true
         }
+    },
+    "warnings": 
+    {
+        "hmrWarning": false
     }
 }
