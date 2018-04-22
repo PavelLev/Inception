@@ -32,8 +32,8 @@ namespace Inception.Utility.Exceptions
                 {
                     context.Result = new BadRequestObjectResult(new
                     {
-                        ErrorDescription = businessException.Description,
-                        BusinessError = businessException.Error
+                        businessException.Description,
+                        businessException.Error
                     });
 
                     break;

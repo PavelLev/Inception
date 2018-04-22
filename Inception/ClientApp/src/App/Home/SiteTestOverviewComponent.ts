@@ -4,7 +4,10 @@ import { Component, OnInit } from "@angular/core";
     (
     {
         selector: "SiteTestOverview",
-        styleUrls: ["SiteTestOverviewComponent.css"],
+        styleUrls: 
+        [
+            "SiteTestOverviewComponent.scss"
+        ],
         templateUrl: "SiteTestOverviewComponent.html"
     }
     )

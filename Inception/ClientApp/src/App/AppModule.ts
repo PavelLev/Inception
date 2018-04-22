@@ -1,7 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { NgModule, ErrorHandler } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule, RouteReuseStrategy } from "@angular/router";
 import { AppComponent } from "./AppComponent";
 import { HomeComponent } from "./Home/HomeComponent";
@@ -21,6 +21,11 @@ import { OverlaySettingsService } from "./OverlaySettingsService";
 import { SiteTestResultService } from "./Home/SiteTestResultService";
 import { RemoveScheme } from "./Home/RemoveSchemeService";
 import { InceptionRouteReuseStrategy } from "./Home/InceptionRouteReuseStrategy";
+import { ToastrModule } from 'ngx-toastr';
+import { ToastErrorHandler } from "./ToastErrorHandler";
+import { ToastHttpInterceptor } from "./ToastHttpInterceptor";
+
+
 @NgModule
     (
     {
@@ -53,7 +58,14 @@ import { InceptionRouteReuseStrategy } from "./Home/InceptionRouteReuseStrategy"
             AppRouting,
             MaterialModule,
             ReactiveFormsModule,
-            BrowserAnimationsModule
+            BrowserAnimationsModule,
+            ToastrModule.forRoot    
+                (
+                {
+                    positionClass: 'toast-bottom-right',
+                    toastClass: "InceptionToast"
+                }
+                )
         ],
         providers:
         [
@@ -62,7 +74,9 @@ import { InceptionRouteReuseStrategy } from "./Home/InceptionRouteReuseStrategy"
             DomainNameService,
             OverlaySettingsService,
             SiteTestResultService,
-            {provide: RouteReuseStrategy, useClass: InceptionRouteReuseStrategy}
+            {provide: RouteReuseStrategy, useClass: InceptionRouteReuseStrategy},
+            { provide: ErrorHandler, useClass: ToastErrorHandler },
+            { provide: HTTP_INTERCEPTORS, useClass: ToastHttpInterceptor, multi: true }
         ]
     }
     )

@@ -3,17 +3,17 @@
     "version": "0.0.0",
     "license": "MIT",
     "scripts": {
-        "ng": ".\\node_modules\\.bin\\ng",
-        "start": ".\\node_modules\\.bin\\ng serve --hmr --extract-css",
-        "build": ".\\node_modules\\.bin\\ng build --extract-css",
+        "ng": "npx --no-install ng",
+        "start": "npx --no-install ng serve --hmr",
+        "build": "npx --no-install ng build",
         "build:ssr": "npm run build -- --app=ssr --output-hashing=media",
-        "lint": ".\\node_modules\\.bin\\ng lint"
+        "lint": "npx --no-install ng lint"
     },
     "private": true,
     "dependencies": {
         "@angular-devkit/core": "0.0.22",
         "@angular-devkit/schematics": "0.0.40",
-        "@angular/animations": "^5.0.0",
+        "@angular/animations": "^5.2.9",
         "@angular/cdk": "5.1.1",
         "@angular/common": "^5.0.0",
         "@angular/compiler": "^5.0.0",
@@ -30,6 +30,7 @@
         "bootstrap": "^3.3.7",
         "core-js": "^2.4.1",
         "ngx-bootstrap": "^2.0.0-rc.0",
+        "ngx-toastr": "^8.4.0",
         "rxjs": "5.5.2",
         "web-animations-js": "^2.3.1",
         "zone.js": "^0.8.14"
