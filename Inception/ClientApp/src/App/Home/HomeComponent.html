@@ -31,10 +31,13 @@
                     </mat-autocomplete>
             </mat-form-field>
             <button mat-button class="TestButton" (click)="ShowTestResultHistoryList()">Test me!</button>
-            <button mat-button class="TestButton"
+            <button 
+                mat-button 
+                class="TestButton"
                 *ngIf="SiteTestResultThumbnails != null" 
-                [routerLink]="['/overview', DomainName]" 
-                >Site overview</button>
+                [routerLink]="['/overview', DomainName]">
+                Site overview
+            </button>
         </form>
     </div>
 </div>

@@ -18,7 +18,7 @@ export class SiteTestOverviewComponent implements OnInit
     public SiteTestOverview: SiteTestOverview;
     
     constructor(
-        private _siteTestOverviewService : SiteTestOverviewService,
+        private _siteTestOverviewService: SiteTestOverviewService,
         private _activatedRoute: ActivatedRoute
     )
     {
@@ -28,6 +28,10 @@ export class SiteTestOverviewComponent implements OnInit
     public ngOnInit(): void
     {
 
-        this._siteTestOverviewService.GetSiteTestOverview(this.DomainName).subscribe(SiteTestOverview => this.SiteTestOverview = SiteTestOverview);
+        this._siteTestOverviewService.GetSiteTestOverview(this.DomainName)
+            .subscribe
+            (
+            siteTestOverview => this.SiteTestOverview = siteTestOverview
+            );
     }
 }
