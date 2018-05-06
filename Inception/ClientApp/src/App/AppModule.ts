@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule, RouteReuseStrategy } from "@angular/router";
 import { AppComponent } from "./AppComponent";
 import { HomeComponent } from "./Home/HomeComponent";
+import { ChartsModule } from 'ng2-charts';
 
 import { AppRouting } from "./AppRouting";
 import { AlertModule, ButtonsModule } from "ngx-bootstrap";
@@ -66,7 +67,8 @@ import { ToastrModule } from "ngx-toastr";
                     positionClass: "toast-bottom-right",
                     toastClass: "InceptionToast"
                 }
-                )
+                ),
+            ChartsModule
         ],
         providers:
         [

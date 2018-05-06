@@ -23,7 +23,10 @@
                 "../node_modules/bootstrap/dist/css/bootstrap.min.css",
                 "../node_modules/ngx-toastr/toastr.css"
             ],
-            "scripts": [],
+            "scripts": 
+            [
+                "../node_modules/chart.js/src/chart.js"
+            ],
             "environmentSource": "Environments/Environment.ts",
             "environments": 
             {
