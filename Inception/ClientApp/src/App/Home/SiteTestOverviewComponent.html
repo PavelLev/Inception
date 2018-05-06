@@ -1,19 +1,20 @@
-   <table class="table table-hover">
-      <thead>
-          <tr>
-            <th scope="col">Link</th>
-            <th scope="col">Min</th>
-            <th scope="col">Max</th>
-          </tr>
-        </thead>
-        <tbody>
-          <ng-template let-linkTestOverview ngFor [ngForOf]="SiteTestOverview?.LinkTestOverviews">
-            <tr>
-                <td>{{linkTestOverview.Url}}</td>
-                <td>{{linkTestOverview.MinimumResponseTime}}</td>
-                <td>{{linkTestOverview.MaximumResponseTime}}</td>
-            </tr>
-          </ng-template>
-        </tbody>
-      </table>
+<BarChart [SiteTestOverview]="SiteTestOverview"></BarChart>
+<table class="table table-hover">
+    <thead>
+        <tr>
+        <th scope="col">Link</th>
+        <th scope="col">Min</th>
+        <th scope="col">Max</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template let-linkTestOverview ngFor [ngForOf]="SiteTestOverview?.LinkTestOverviews">
+        <tr>
+            <td>{{linkTestOverview.Url}}</td>
+            <td>{{linkTestOverview.MinimumResponseTime}}</td>
+            <td>{{linkTestOverview.MaximumResponseTime}}</td>
+        </tr>
+        </ng-template>
+    </tbody>
+</table>
 

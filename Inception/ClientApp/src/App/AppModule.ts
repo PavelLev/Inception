@@ -26,6 +26,7 @@ import { SiteTestOverviewService } from "./Home/SiteTestOverviewService";
 import { ToastErrorHandler } from "./ToastErrorHandler";
 import { ToastHttpInterceptor } from "./ToastHttpInterceptor";
 import { ToastrModule } from "ngx-toastr";
+import { BarChartComponent } from "./Home/charts/BarChart/BarChartComponent";
 
 
 @NgModule
@@ -43,7 +44,8 @@ import { ToastrModule } from "ngx-toastr";
             TestResultHistoryComponent,
             LinkTestResultComponent,
             SiteTestOverviewComponent,
-            RemoveScheme
+            RemoveScheme,
+            BarChartComponent
         ],
         imports:
         [
