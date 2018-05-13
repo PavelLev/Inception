@@ -1,5 +1,4 @@
-import { Observable } from "rxjs/Observable";
-import { Subject } from "rxjs/Subject";
+import { Observable, Subject } from "rxjs";
 import { Injectable } from "@angular/core";
 import { LinkTestResult } from "./Home/LinkTestResult";
 import { SiteTestResult } from "./Home/SiteTestResult";
