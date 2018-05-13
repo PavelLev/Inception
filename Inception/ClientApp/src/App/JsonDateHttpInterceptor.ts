@@ -63,8 +63,7 @@ export class JsonDateHttpInterceptor implements HttpInterceptor
                     JSON.parse
                         (
                         body,
-                        (key: any, value: any) =>
-                            this.reviveUtcDate(key, value)
+                        this.reviveUtcDate
                         )
                     :
                     null;
