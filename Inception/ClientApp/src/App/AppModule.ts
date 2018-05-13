@@ -18,6 +18,7 @@ import { SiteTestOverviewService } from "./Home/SiteTestOverviewService";
 import { SiteTestResultService } from "./Home/SiteTestResultService";
 import { TestResultHistoryComponent } from "./Home/TestResultHistoryComponent";
 import { TestResultHistoryListComponent } from "./Home/TestResultHistoryListComponent";
+import { JsonInterceptor } from "./JsonDateHttpInterceptor";
 import { MaterialModule } from "./MaterialModule";
 import { OverlaySettingsService } from "./OverlaySettingsService";
 import { TestingService } from "./TestingService";
@@ -75,9 +76,24 @@ import { ToastHttpInterceptor } from "./ToastHttpInterceptor";
             OverlaySettingsService,
             SiteTestResultService,
             SiteTestOverviewService,
-            { provide: RouteReuseStrategy, useClass: InceptionRouteReuseStrategy },
-            { provide: ErrorHandler, useClass: ToastErrorHandler },
-            { provide: HTTP_INTERCEPTORS, useClass: ToastHttpInterceptor, multi: true }
+            {
+                provide: RouteReuseStrategy,
+                useClass: InceptionRouteReuseStrategy
+            },
+            {
+                provide: ErrorHandler,
+                useClass: ToastErrorHandler
+            },
+            { 
+                provide: HTTP_INTERCEPTORS,
+                useClass: ToastHttpInterceptor,
+                multi: true
+            },
+            {
+                provide: HTTP_INTERCEPTORS,
+                useClass: JsonInterceptor,
+                multi: true
+            }
         ]
     }
     )
