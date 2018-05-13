@@ -18,7 +18,7 @@ import { SiteTestOverviewService } from "./Home/SiteTestOverviewService";
 import { SiteTestResultService } from "./Home/SiteTestResultService";
 import { TestResultHistoryComponent } from "./Home/TestResultHistoryComponent";
 import { TestResultHistoryListComponent } from "./Home/TestResultHistoryListComponent";
-import { JsonInterceptor } from "./JsonDateHttpInterceptor";
+import { JsonDateHttpInterceptor } from "./JsonDateHttpInterceptor";
 import { MaterialModule } from "./MaterialModule";
 import { OverlaySettingsService } from "./OverlaySettingsService";
 import { TestingService } from "./TestingService";
@@ -91,7 +91,7 @@ import { ToastHttpInterceptor } from "./ToastHttpInterceptor";
             },
             {
                 provide: HTTP_INTERCEPTORS,
-                useClass: JsonInterceptor,
+                useClass: JsonDateHttpInterceptor,
                 multi: true
             }
         ]

@@ -9,7 +9,7 @@ import { map } from "rxjs/operators";
 const XSSI_PREFIX = /^\)\]\}',?\n/;
 
 @Injectable()
-export class JsonInterceptor implements HttpInterceptor
+export class JsonDateHttpInterceptor implements HttpInterceptor
 {
     public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>
     {
