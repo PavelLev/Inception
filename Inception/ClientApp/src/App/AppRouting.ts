@@ -4,7 +4,7 @@ import { NgModule } from "@angular/core";
 import { TestResultHistoryComponent } from "./Home/TestResultHistoryComponent";
 import { SiteTestOverviewComponent } from "./Home/SiteTestOverviewComponent";
 
-const Routes: Routes = [
+const AppRoutes: Routes = [
     {
         component: SiteTestOverviewComponent,
         path: "overview/:domain",
@@ -30,7 +30,7 @@ const Routes: Routes = [
         ],
         imports:
         [
-            RouterModule.forRoot(Routes)
+            RouterModule.forRoot(AppRoutes)
         ]
     }
     )

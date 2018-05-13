@@ -1,11 +1,10 @@
-import { OnInit, Component } from "@angular/core";
-import { TestingService } from "../TestingService";
-import { SiteTestResult } from "./SiteTestResult";
-import { DomainNameService } from "./DomainNameService";
+import { Component, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
-import { Observable } from "rxjs/Observable";
-import {startWith, map} from "rxjs/operators";
+import { Observable } from "rxjs";
+import { map, startWith } from "rxjs/operators";
 import { OverlaySettingsService } from "../OverlaySettingsService";
+import { TestingService } from "../TestingService";
+import { DomainNameService } from "./DomainNameService";
 import { SiteTestResultService } from "./SiteTestResultService";
 import { SiteTestResultThumbnail } from "./SiteTestResultThumbnail";
 
@@ -32,7 +31,7 @@ export class HomeComponent implements OnInit
 
     constructor
         (
-        private _testingService: TestingService, 
+        private _testingService: TestingService,
         private _domainNameService: DomainNameService, 
         private _overlaySettingsService: OverlaySettingsService,
         private _siteTestResultService: SiteTestResultService
