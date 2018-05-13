@@ -1,8 +1,8 @@
 // inspired by https://stackoverflow.com/questions/46559268/parse-date-with-angular-4-3-httpclient
 
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
 // https://github.com/angular/angular/blob/master/packages/common/http/src/xhr.ts#L18
@@ -13,7 +13,7 @@ export class JsonDateHttpInterceptor implements HttpInterceptor
 {
     public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>
     {
-        if (request.responseType !== 'json')
+        if (request.responseType !== "json")
         {
             return next.handle(request);
         }
@@ -22,7 +22,7 @@ export class JsonDateHttpInterceptor implements HttpInterceptor
         request = request.clone
             (
             {
-                responseType: 'text'
+                responseType: "text"
             }
             );
 
@@ -50,15 +50,15 @@ export class JsonDateHttpInterceptor implements HttpInterceptor
     {
         let body = response.body;
     
-        if (typeof body === 'string')
+        if (typeof body === "string")
         {
             const originalBody = body;
 
-            body = body.replace(XSSI_PREFIX, '');
+            body = body.replace(XSSI_PREFIX, "");
 
             try
             {
-                body = body !== ''
+                body = body !== ""
                     ?
                     JSON.parse
                         (
@@ -95,12 +95,12 @@ export class JsonDateHttpInterceptor implements HttpInterceptor
 
     private reviveUtcDate(_, value: any): any
     {
-        if (typeof value !== 'string')
+        if (typeof value !== "string")
         {
             return value;
         }
 
-        if (value === '0001-01-01T00:00:00')
+        if (value === "0001-01-01T00:00:00")
         {
             return null;
         }
