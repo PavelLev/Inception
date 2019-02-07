@@ -5,7 +5,7 @@
     "scripts": {
         "start": "ng serve --hmr --aot --progress=false",
         "build": "ng build --stats-json --aot",
-        "build:prod": "ng build --stats-json --prod",
+        "build:prod": "ng build --prod",
         "build:ssr": "npm run build -- --app=ssr --output-hashing=media",
         "lint": "ng lint",
         "bundle-report": "npx --no-install webpack-bundle-analyzer dist/stats.json"
