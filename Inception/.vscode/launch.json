@@ -3,29 +3,29 @@
    // Use hover for the description of the existing attributes
    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
    "version": "0.2.0",
-   "compounds": 
+   "compounds":
    [
         {
             "name": "Web + client debug",
-            "configurations": 
-            [ 
-                ".NET Core Launch (web)", 
-                "Launch Chrome" 
+            "configurations":
+            [
+                ".NET Core Launch (web)",
+                "Launch Chrome"
             ]
         }
     ],
-   "configurations": 
+   "configurations":
    [
         {
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome",
             "url": "http://localhost:5000",
-            "webRoot": "${workspaceRoot}/wwwroot",
+            "webRoot": "${workspaceRoot}/ClientApp",
             "sourceMaps": true,
-            "sourceMapPathOverrides": 
+            "sourceMapPathOverrides":
             {
-                "/Views": "${workspaceRoot}/Views"
+                "webpack:///./*":   "${webRoot}/*",                    // Example: "webpack:///./src/app.js" -> "/Users/me/project/src/app.js"
             }
         },
         {
@@ -34,34 +34,34 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.0/Inception.dll",
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.2/Inception.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
-            "launchBrowser": 
+            "launchBrowser":
             {
                 "enabled": false,
                 "args": "${auto-detect-url}",
-                "windows": 
+                "windows":
                 {
                     "command": "cmd.exe",
                     "args": "/C start ${auto-detect-url}"
                 },
-                "osx": 
+                "osx":
                 {
                     "command": "open"
                 },
-                "linux": 
+                "linux":
                 {
                     "command": "xdg-open"
                 }
             },
-            "env": 
+            "env":
             {
                 "ASPNETCORE_ENVIRONMENT": "Development"
             },
-            "sourceFileMap": 
+            "sourceFileMap":
             {
                 "/Views": "${workspaceFolder}/Views"
             }
